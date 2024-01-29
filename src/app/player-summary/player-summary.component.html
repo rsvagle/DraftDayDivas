@@ -1,0 +1,25 @@
+<div *ngIf="player" class="player-summary">
+    <div class="player-header">
+      <img [src]="player.photo_url" alt="{{player.first_name}} {{player.last_name}}">
+      <div class="player-info">
+        <h2>{{player.first_name}} {{player.last_name}}</h2>
+        <p>{{player.team.name}} - #{{player.number}} - {{player.position}}</p>
+      </div>
+    </div>
+    <div class="player-details">
+      <div class="player-stats">
+        <h3>2023 SEASON STATS</h3>
+        <ul>
+          <li>YDS: {{player.season_passing_yards}}</li>
+          <li>TD: {{player.season_passing_tds}}</li>
+          <!-- Add other stats as needed based on position -->
+        </ul>
+      </div>
+      <div class="player-meta">
+        <p>HT/WT: {{player.height}}", {{player.weight}} lbs</p>
+        <p>BIRTHDATE: {{player.date_of_birth | date:'MM/dd/yyyy'}}</p>
+        <!-- Add other meta information as needed -->
+      </div>
+    </div>
+  </div>
+  

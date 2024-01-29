@@ -1,62 +1,27 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, inject } from '@angular/core';
+import { NewsArticle } from '../news/news.article.model';
+import { NewsService } from '../news/news.service';
+import { PrimeNgLightModule } from '../primeng.light.module';
+import { PlayerSummaryComponent } from '../player-summary/player-summary.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PrimeNgLightModule, PlayerSummaryComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+  newsService = inject(NewsService);
   title = 'DraftDayDivas';
-
-  // Sample news data. In a real-world scenario, this could come from an API.
-  articles = [
-    {
-        title: "Football Match Highlights",
-        author: "Jane Smith",
-        date: "October 10, 2023",
-        description: "A detailed look at the recent football match and its major highlights...",
-        preview_image: "../../assets/images/luis-santoyo-lI0JXf4MRDM-unsplash.jpg"
-    },
-    {
-        title: "Player Injuries Update",
-        author: "John Doe",
-        date: "October 12, 2023",
-        description: "A summary of recent injuries among top-tier players...",
-        preview_image: "../../assets/images/rafik-wahba-z43NxQB68EQ-unsplash.jpg"
-    },
-    {
-        title: "Transfer News",
-        author: "Alice Johnson",
-        date: "October 14, 2023",
-        description: "Latest updates on player transfers for the upcoming season...",
-        preview_image: "../../assets/images/myron-mott-PY_5cDlKvM8-unsplash.jpg"
-    },
-    {
-        title: "Article 4",
-        author: "Alice Johnson",
-        date: "October 14, 2023",
-        description: "Latest updates on player transfers for the upcoming season...",
-        preview_image: "../../assets/images/ashton-clark-02bN29Dz9Sg-unsplash.jpg"
-    }
-  ];
+  articles: NewsArticle[] = [];
 
   ngOnInit(): void {
-    this.shuffleArray(this.articles);
-  }
-
-  shuffleArray(array: any[]) {
-    for (let i = array.length - 1; i > 0; i--) {
-        // Generate a random index from 0 to i
-        const j = Math.floor(Math.random() * (i + 1));
-
-        // Swap elements at indices i and j
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-
-    return array;
+    // pull from backend
+    this.newsService.getNews().subscribe({
+      next: (data) => this.articles = data,
+      error: (error) => console.error('There was an error!', error)
+    });
   }
 }

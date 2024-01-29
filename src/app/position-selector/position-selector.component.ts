@@ -1,0 +1,33 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FootballPosition } from '../globals';
+import { CommonModule } from '@angular/common';
+import { PrimeNgLightModule } from '../primeng.light.module';
+
+@Component({
+  selector: 'position-selector',
+  standalone: true,
+  imports: [CommonModule, PrimeNgLightModule],
+  styleUrl: './position-selector.component.scss',
+  templateUrl: './position-selector.component.html'
+})
+export class PositionSelectorComponent implements OnInit {
+  @Input() includeKicker: boolean = true;
+  @Input() includeDefense: boolean = true;
+  @Output() positionSelected = new EventEmitter<FootballPosition[]>();
+
+  positions: FootballPosition[] = [FootballPosition.QB, FootballPosition.RB, FootballPosition.WR, FootballPosition.TE];
+  selectedPositions: FootballPosition[] = [];
+
+  ngOnInit(): void {
+    if (this.includeKicker) {
+      this.positions.push(FootballPosition.K);
+    }
+    if (this.includeDefense) {
+      this.positions.push(FootballPosition.D);
+    }
+  }
+
+  onPositionChange(): void {
+    this.positionSelected.emit(this.selectedPositions);
+  }
+}

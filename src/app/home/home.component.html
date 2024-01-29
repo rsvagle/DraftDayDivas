@@ -185,7 +185,7 @@
         <ng-container *ngFor="let article of articles.slice(0,3)">
             <div class="col-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{article.preview_image}}" alt="Card image cap">
+                    <img class="card-img-top" src="../../assets/images/{{article.image_url}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{article.title}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{article.author}} - {{article.date}}</h6>
@@ -199,6 +199,7 @@
 
   <div class="container py-5">
     <h4>Player Profile</h4>
+    <player-summary [playerId]="1"></player-summary>
   </div>
 
   <main class="main">
