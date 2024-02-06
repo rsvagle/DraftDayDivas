@@ -1,0 +1,21 @@
+.boxes {
+    display: flex; /* Use flex layout for the container */
+    gap: 10px; /* Optional: adds some space between the boxes */
+}
+
+.box {
+    flex: 1; /* Makes each box take up equal space */
+    display: flex;
+    flex-direction: column; /* Stack the image and player info vertically */
+    align-items: center; /* Center-align the items horizontally */
+    justify-content: center; /* Center-align the items vertically */
+    text-align: center; /* Center-align the text */
+    padding: 10px; /* Optional: adds some padding inside the boxes */
+}
+
+/* Additional styles for responsiveness */
+@media (max-width: 768px) {
+    .boxes {
+        flex-direction: column; /* Stack the boxes vertically on smaller screens */
+    }
+}

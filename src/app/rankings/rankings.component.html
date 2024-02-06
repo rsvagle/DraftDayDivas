@@ -1,1 +1,69 @@
-<p>rankings works!</p>
+
+<!-- Do a "LEADERS" component here [QB] [RB] [WR] [TE] [K]-->
+
+<!-- Position, Name, Image, Total Yards and Touchdowns (Kicker should be FGs and Total points) -->
+<div class="container">
+    <h1>Positional Leaders</h1>
+
+    <!-- 5 equally sized boxes -->
+    <div class="boxes">
+        <!-- QB -->
+        <div class="box">
+            <img  src="../../assets/images/avatars/{{topQB.photo_url}}" alt="{{topQB.first_name}} {{topQB.last_name}}">
+            <div class="player-info">
+                <h2>{{topQB.first_name}} {{topQB.last_name}}</h2>
+                <p>{{topQB.position}}</p>
+                <p>Yards {{topQB.season_passing_yards}}</p>
+                <p>Touchdowns {{topQB.season_passing_tds }}</p>
+                <p>Points: {{topQB.season_fantasy_points}}</p>
+            </div>            
+        </div>
+        <!-- RB -->
+        <div class="box">
+            <img src="../../assets/images/avatars/{{topRB.photo_url}}" alt="{{topRB.first_name}} {{topRB.last_name}}">
+            <div class="player-info">
+                <h2>{{topRB.first_name}} {{topRB.last_name}}</h2>
+                <p>{{topRB.position}}</p>
+                <p>Yards {{topRB.season_rushing_yards}}</p>
+                <p>Touchdowns {{topRB.season_rushing_tds }}</p>
+                <p>Points: {{topRB.season_fantasy_points}}</p>
+            </div>            
+        </div>
+        <!-- WR -->
+        <div class="box">
+            <img src="../../assets/images/avatars/{{topWR.photo_url}}" alt="{{topWR.first_name}} {{topWR.last_name}}">
+            <div class="player-info">
+                <h2>{{topWR.first_name}} {{topWR.last_name}}</h2>
+                <p>{{topWR.position}}</p>
+                <p>Yards {{topWR.season_receiving_yards}}</p>
+                <p>Touchdowns {{topWR.season_receiving_tds }}</p>
+                <p>Points: {{topWR.season_fantasy_points}}</p>
+            </div>            
+        </div>
+
+        <!-- TE -->
+        <div class="box">
+            <img  src="../../assets/images/avatars/{{topTE.photo_url}}" alt="{{topTE.first_name}} {{topTE.last_name}}">
+            <div class="player-info">
+                <h2>{{topTE.first_name}} {{topTE.last_name}}</h2>
+                <p>{{topTE.position}}</p>
+                <p>Yards {{topTE.season_receiving_yards}}</p>
+                <p>Touchdowns {{topTE.season_receiving_tds }}</p>
+                <p>Points: {{topTE.season_fantasy_points}}</p>
+            </div>                
+        </div>
+
+        <!-- Kicker -->
+        <div class="box">
+            <img  src="../../assets/images/avatars/{{topK.photo_url}}" alt="{{topK.first_name}} {{topK.last_name}}">
+            <div class="player-info">
+                <h2>{{topK.first_name}} {{topK.last_name}}</h2>
+                <p>{{topK.position}}</p>
+                <p>Yards {{topK.season_field_goals_made}}</p>
+                <p>Touchdowns {{topK.season_field_goals_attempted }}</p>
+                <p>Points: {{topK.season_fantasy_points}}</p>
+            </div>            
+        </div>
+    </div>
+
+</div>
