@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { PlayerService } from '../player/player.service';
+import { PlayersService } from '../players/players.service';
 
 @Component({
   selector: 'app-rankings',
@@ -9,7 +9,7 @@ import { PlayerService } from '../player/player.service';
   styleUrl: './rankings.component.scss'
 })
 export class RankingsComponent {
-  playersService = inject(PlayerService);
+  playersService = inject(PlayersService);
   topQB: any;
   topRB: any;
   topWR: any;
