@@ -13,7 +13,6 @@ import { MultiSelectModule } from 'primeng/multiselect'
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [],
   imports: [
     ButtonModule,
     TableModule,

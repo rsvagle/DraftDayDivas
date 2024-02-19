@@ -10,6 +10,7 @@ import { PlayersComponent } from './players/players.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
+import { AuthGuard } from './auth/auth.gaurd';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -25,3 +26,85 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent },
     { path: 'players/player-details/:player_id', component: PlayerDetailsComponent}
 ];
+
+export const routes2: Routes = [
+    {
+      path: '',
+      loadComponent: () => import('./app-layout/app-layout.component').then(res => res.AppLayoutComponent),
+      children: [
+        {
+            path: '',
+            loadComponent: () => import('./home/home.component').then(res => res.HomeComponent),
+            title: ''
+        },
+        {
+          path: 'home',
+          loadComponent: () => import('./home/home.component').then(res => res.HomeComponent),
+          title: 'Home'
+        },
+        {
+          path: 'about',
+          loadComponent: () => import('./about/about.component').then(res => res.AboutComponent),
+          title: 'About'
+        },
+        {
+            path: 'injury-report',
+            loadComponent: () => import('./injury-report/injury-report.component').then(res => res.InjuryReportComponent),
+            title: 'Injury Report'
+        },
+        {
+            path: 'news',
+            loadComponent: () => import('./news/news.component').then(res => res.NewsComponent),
+            title: 'News'
+        },
+        {
+            path: 'players',
+            loadComponent: () => import('./players/players.component').then(res => res.PlayersComponent),
+            canActivate: [AuthGuard],
+            title: 'Players'
+        },
+        {
+            path: 'stats',
+            loadComponent: () => import('./stats/stats.component').then(res => res.StatsComponent),
+            title: 'statst'
+        },
+        {
+            path: 'rankings',
+            loadComponent: () => import('./rankings/rankings.component').then(res => res.RankingsComponent),
+            title: 'rankings'
+        },
+        {
+            path: 'draft',
+            loadComponent: () => import('./draft/draft.component').then(res => res.DraftComponent),
+            canActivate: [AuthGuard],
+            title: 'Draft'
+        },
+        {
+          path: 'profile',
+          loadComponent: () => import('./profile/profile.component').then(res => res.ProfileComponent),
+          canActivate: [AuthGuard],
+          title: 'Profile'
+        },
+      ]
+    },
+    {
+      path: 'login',
+      loadComponent: () => import('./login/login.component').then(res => res.LoginComponent),
+      title: 'Login'
+    },
+    {
+        path: 'signup',
+        loadComponent: () => import('./signup/signup.component').then(res => res.SignupComponent),
+        title: 'Signup'
+    },
+    {
+      path: 'logout',
+      loadComponent: () => import('./logout/logout.component').then(res => res.LogoutComponent),
+      title: 'Logout'
+    },
+    {
+      path: '404',
+      loadComponent: () => import('./four-oh-four/404.component').then(res => res.FourOhFourComponent),
+      title: '404'
+    },
+  ];
