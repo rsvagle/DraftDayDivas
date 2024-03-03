@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { AuthGuard } from './auth/auth.gaurd';
+import { LogoutComponent } from './logout/logout.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -23,6 +24,7 @@ export const routes: Routes = [
     { path: 'stats', component: StatsComponent },
     { path: 'players', component: PlayersComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'logout', component: LogoutComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'players/player-details/:player_id', component: PlayerDetailsComponent}
 ];

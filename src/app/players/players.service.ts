@@ -12,7 +12,7 @@ export class PlayersService {
   constructor(private http: HttpClient) {}
   
   getPlayerSummaryFE(player_id: number) {
-    return this.genericPlayers.filter((player: { player_id: number; }) => player.player_id === player_id);
+    return this.genericPlayers.find((player: { player_id: number; }) => player.player_id === player_id);
   }
   
   getPlayerSummary(player_id: number): Observable<any> {

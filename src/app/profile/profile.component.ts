@@ -15,16 +15,23 @@ import { CommonModule } from '@angular/common';
 })
 export class ProfileComponent implements OnInit {
   model: any;
-
-  constructor(private http: HttpClient,
+  
+  constructor(
+    private http: HttpClient,
     private profileService: ProfileService
   ) { }
-
+    
   ngOnInit(): void {
     this.model = this.profileService.getProfile().subscribe({
-      next: (data: any) => this.model = JSON.stringify(data),
+      next: (data: any) => this.model = data,
       error: (error: any) => console.error('There was an error!', error)
     });
   }
-
+  
+  saveProfile(): void {    
+    this.profileService.postSaveProfile(this.model).subscribe({
+      next: (data: any) => console.log('Success!'),
+      error: (error: any) => console.error('There was an error!', error)
+    });
+  }
 }

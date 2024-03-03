@@ -14,6 +14,7 @@ import { PlayerSummaryComponent } from '../player-summary/player-summary.compone
 })
 export class HomeComponent implements OnInit {
   newsService = inject(NewsService);
+
   title = 'DraftDayDivas';
   articles: NewsArticle[] = [];
 

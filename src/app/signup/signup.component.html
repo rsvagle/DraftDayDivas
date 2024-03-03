@@ -1,5 +1,8 @@
+<p-toast key="toast1"></p-toast>
+<p-toast key="toast2"></p-toast>
 <div class="signup-container">
     <div class="signup-box">
+      <h2>Sign up</h2>
       <img src="../assets/images/logos/DDD_logo1_small.png" alt="logo" class="logo">
         <div class="form-group">
           <label for="username">Username</label>
@@ -18,7 +21,7 @@
           <input type="password" id="confirm-password" class="form-control" [(ngModel)]="confirmPassword" placeholder="Confirm password">
         </div>
         <p-button type="button" class="btn btn-primary" (onClick)="signup()">Sign Up</p-button>
-        <p class="login-link">Already have an account? <a href="#">Login here</a></p>
+        <p class="login-link">Already have an account? <a routerLink="/login">Login here</a></p>
     </div>
   </div>
   

@@ -2,12 +2,15 @@ import { Component, inject } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { UserCredentials } from '../auth/auth.models';
-import { Route, Router } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [PrimeNgLightModule], // Make sure to import FormsModule and ReactiveFormsModule for form handling
+  imports: [PrimeNgLightModule, RouterLink], // Make sure to import FormsModule and ReactiveFormsModule for form handling
+  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'] // Corrected from 'styleUrl' to 'styleUrls'
 })
@@ -18,7 +21,9 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit() { }
 
@@ -31,14 +36,15 @@ export class LoginComponent {
 
       this.authService.login(credentials).subscribe({
         next: (response) => {
-          console.log('Login successful', response);
+          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: 'Login Successful' });
+
           // Handle successful login here (e.g., navigate to dashboard)
           this.router.navigateByUrl('/profile');
         },
         error: (error) => {
-          console.error('Login failed', error);
+          this.messageService.add({ key: 'toast2', severity: 'error', summary: 'Error', detail: error.error.detail });
+
           // Handle login error here (e.g., show error message)
-          this.username = '';
           this.password = '';
         }
       });

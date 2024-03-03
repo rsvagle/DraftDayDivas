@@ -12,6 +12,7 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 })
 export class PlayerSummaryComponent implements OnInit {
   @Input() player_id: number = 0;
+
   player: any; // You should create an interface to type this properly
 
   constructor(private playersService: PlayersService) {}

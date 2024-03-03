@@ -184,11 +184,16 @@
   </div>
 
   <div class="container py-5">
+    <h4>Player Profile</h4>
+    <player-summary [player_id]="1"></player-summary>
+  </div>
+
+  <div class="container py-5">
     <h4>Top Stories</h4>
     <div class="row">
         <ng-container *ngFor="let article of articles.slice(0,3)">
             <div class="col-4">
-                <div class="card">
+                <div class="card h-100">
                     <img class="card-img-top" src="../../assets/images/{{article.image_url}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{article.title}}</h5>
@@ -201,7 +206,3 @@
     </div>
   </div>
 
-  <div class="container py-5">
-    <h4>Player Profile</h4>
-    <player-summary [player_id]="1"></player-summary>
-  </div>

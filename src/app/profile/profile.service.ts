@@ -14,4 +14,8 @@ export class ProfileService {
   getProfile(): Observable<any> {
     return this.http.get(this.apiUrl);
   }
+
+  postSaveProfile(data: any): Observable<any>{
+    return this.http.post("http://localhost:8000/api/save_profile/", data);
+  }
 }

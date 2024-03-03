@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { PrimeNgLightModule } from '../primeng.light.module';
+import { Router, RouterLink } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [PrimeNgLightModule],
+  imports: [PrimeNgLightModule, RouterLink],
+  providers: [MessageService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -16,7 +20,7 @@ export class SignupComponent {
   password: string = '';
   confirmPassword: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, private messageService: MessageService) { }
 
   // Function to verify if the passwords match
   private passwordsMatch(): boolean {
@@ -34,11 +38,20 @@ export class SignupComponent {
 
       this.http.post('http://localhost:8000/api/signup/', user).subscribe({
         next: (response) => {
-          console.log('Signup successful', response);
+          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: 'Signup Successful' });
           // Handle successful signup, e.g., navigate to the login page or home page
+          this.router.navigateByUrl('/login');
         },
         error: (error) => {
-          console.error('Signup failed', error);
+          
+          let errorMessage = '';
+
+          if(error.error.username){
+            errorMessage = error.error.username[0];
+          }
+
+          this.messageService.add({ key: 'toast2', severity: 'error', summary: 'Error', detail: 'Signup Unsuccessful' + errorMessage });
+          console.log(error);
           // Handle signup error, e.g., show error message to the user
         }
       });

@@ -6,63 +6,85 @@
     <h1>Positional Leaders</h1>
 
     <!-- 5 equally sized boxes -->
-    <div class="boxes">
+    <div class="row top-players-container">
         <!-- QB -->
-        <div class="box">
-            <img  src="../../assets/images/avatars/{{topQB.photo_url}}" alt="{{topQB.first_name}} {{topQB.last_name}}">
-            <div class="player-info">
-                <h2>{{topQB.first_name}} {{topQB.last_name}}</h2>
+        <div class="col top-player-container">
+            <div class="player-info-container">
                 <p>{{topQB.position}}</p>
-                <p>Yards {{topQB.season_passing_yards}}</p>
-                <p>Touchdowns {{topQB.season_passing_tds }}</p>
-                <p>Points: {{topQB.season_fantasy_points}}</p>
-            </div>            
+                <img src="../../assets/images/avatars/{{topQB.photo_url}}" class="img-fluid" alt="{{topQB.first_name}} {{topQB.last_name}}">
+            </div>
+            <div  class="player-info-container">
+                <div class="player-info">
+                    <h2>{{topQB.first_name}} {{topQB.last_name}}</h2>
+                    <p>Yards {{topQB.season_passing_yards}}</p>
+                    <p>Touchdowns {{topQB.season_passing_tds }}</p>
+                    <p>Points: {{topQB.season_fantasy_points}}</p>
+                </div>            
+            </div>
         </div>
         <!-- RB -->
-        <div class="box">
-            <img src="../../assets/images/avatars/{{topRB.photo_url}}" alt="{{topRB.first_name}} {{topRB.last_name}}">
-            <div class="player-info">
-                <h2>{{topRB.first_name}} {{topRB.last_name}}</h2>
+        <div class="col top-player-container">
+            <div class="player-info-container">
                 <p>{{topRB.position}}</p>
-                <p>Yards {{topRB.season_rushing_yards}}</p>
-                <p>Touchdowns {{topRB.season_rushing_tds }}</p>
-                <p>Points: {{topRB.season_fantasy_points}}</p>
-            </div>            
+                <img src="../../assets/images/avatars/{{topRB.photo_url}}" class="img-fluid" alt="{{topRB.first_name}} {{topRB.last_name}}">
+            </div>
+            <div class="player-info-container">
+                <div class="player-info">
+                    <h2>{{topRB.first_name}} {{topRB.last_name}}</h2>
+                    <p>Yards {{topRB.season_rushing_yards}}</p>
+                    <p>Touchdowns {{topRB.season_rushing_tds }}</p>
+                    <p>Points: {{topRB.season_fantasy_points}}</p>
+                </div>            
+                
+            </div>
         </div>
         <!-- WR -->
-        <div class="box">
-            <img src="../../assets/images/avatars/{{topWR.photo_url}}" alt="{{topWR.first_name}} {{topWR.last_name}}">
-            <div class="player-info">
-                <h2>{{topWR.first_name}} {{topWR.last_name}}</h2>
+        <div class="col top-player-container">
+            <div class="player-info-container">
                 <p>{{topWR.position}}</p>
-                <p>Yards {{topWR.season_receiving_yards}}</p>
-                <p>Touchdowns {{topWR.season_receiving_tds }}</p>
-                <p>Points: {{topWR.season_fantasy_points}}</p>
-            </div>            
+                <img src="../../assets/images/avatars/{{topWR.photo_url}}" class="img-fluid" alt="{{topWR.first_name}} {{topWR.last_name}}">
+            </div>
+            <div class="player-info-container">                
+                <div class="player-info">
+                    <h2>{{topWR.first_name}} {{topWR.last_name}}</h2>
+                    <p>Yards {{topWR.season_receiving_yards}}</p>
+                    <p>Touchdowns {{topWR.season_receiving_tds }}</p>
+                    <p>Points: {{topWR.season_fantasy_points}}</p>
+                </div>            
+            </div>
         </div>
 
         <!-- TE -->
-        <div class="box">
-            <img  src="../../assets/images/avatars/{{topTE.photo_url}}" alt="{{topTE.first_name}} {{topTE.last_name}}">
-            <div class="player-info">
-                <h2>{{topTE.first_name}} {{topTE.last_name}}</h2>
+        <div class="col top-player-container">
+            <div class="player-info-container">
                 <p>{{topTE.position}}</p>
-                <p>Yards {{topTE.season_receiving_yards}}</p>
-                <p>Touchdowns {{topTE.season_receiving_tds }}</p>
-                <p>Points: {{topTE.season_fantasy_points}}</p>
-            </div>                
+                <img src="../../assets/images/avatars/{{topTE.photo_url}}" class="img-fluid" alt="{{topTE.first_name}} {{topTE.last_name}}">
+            </div>
+            <div class="player-info-container">
+                <div class="player-info">
+                    <h2>{{topTE.first_name}} {{topTE.last_name}}</h2>
+                    <p>Yards {{topTE.season_receiving_yards}}</p>
+                    <p>Touchdowns {{topTE.season_receiving_tds }}</p>
+                    <p>Points: {{topTE.season_fantasy_points}}</p>
+                </div>                
+                
+            </div>
         </div>
 
         <!-- Kicker -->
-        <div class="box">
-            <img  src="../../assets/images/avatars/{{topK.photo_url}}" alt="{{topK.first_name}} {{topK.last_name}}">
-            <div class="player-info">
-                <h2>{{topK.first_name}} {{topK.last_name}}</h2>
+        <div class="col top-player-container">
+            <div class="player-info-container">
                 <p>{{topK.position}}</p>
-                <p>Yards {{topK.season_field_goals_made}}</p>
-                <p>Touchdowns {{topK.season_field_goals_attempted }}</p>
-                <p>Points: {{topK.season_fantasy_points}}</p>
-            </div>            
+                <img  src="../../assets/images/avatars/{{topK.photo_url}}" class="img-fluid" alt="{{topK.first_name}} {{topK.last_name}}">                
+            </div>
+            <div class="player-info-container">                
+                <div class="player-info">
+                    <h2>{{topK.first_name}} {{topK.last_name}}</h2>
+                    <p>Yards {{topK.season_field_goals_made}}</p>
+                    <p>Touchdowns {{topK.season_field_goals_attempted }}</p>
+                    <p>Points: {{topK.season_fantasy_points}}</p>
+                </div>            
+            </div>
         </div>
     </div>
 

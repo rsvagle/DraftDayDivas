@@ -1,7 +1,7 @@
 <div *ngIf="player" class="card">
   <div class="player-summary">
     <div class="player-header">
-      <img [src]="player.photo_url" alt="{{player.first_name}} {{player.last_name}}">
+      <img src="../../assets/images/avatars/{{player.photo_url}}" alt="{{player.first_name}} {{player.last_name}}">
       <div class="player-info">
         <h2>{{player.first_name}} {{player.last_name}}</h2>
         <p>{{player.team_name}} - #{{player.number}} - {{player.position}}</p>
