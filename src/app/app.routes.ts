@@ -12,6 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { PlayerDetailsComponent } from './player-details/player-details.component';
 import { AuthGuard } from './auth/auth.gaurd';
 import { LogoutComponent } from './logout/logout.component';
+import { TeamsComponent } from './teams/teams.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'signup', component: SignupComponent },
+    { path: 'teams', component: TeamsComponent },
     { path: 'players/player-details/:player_id', component: PlayerDetailsComponent}
 ];
 
@@ -68,7 +70,12 @@ export const routes2: Routes = [
         {
             path: 'stats',
             loadComponent: () => import('./stats/stats.component').then(res => res.StatsComponent),
-            title: 'statst'
+            title: 'stats'
+        },
+        {
+          path: 'teams',
+          loadComponent: () => import('./teams/teams.component').then(res => res.TeamsComponent),
+          title: 'teams'
         },
         {
             path: 'rankings',
