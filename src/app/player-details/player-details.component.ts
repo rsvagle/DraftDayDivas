@@ -14,9 +14,10 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 })
 export class PlayerDetailsComponent {
   player_id: number;
-  player_summary: any;
+  player: any;
   player_seasons: any;
   cols: any = [];
+  jsonPlayer: any;
 
   constructor(
       private route: ActivatedRoute,
@@ -25,41 +26,35 @@ export class PlayerDetailsComponent {
     this.player_id = +this.route.snapshot.paramMap.get('player_id')!;
 
     this.cols = [
-      { field: 'first_name', header: 'First Name' },
-      { field: 'last_name', header: 'Last Name' },
-      { field: 'position', header: 'Position' },
-      { field: 'team_name', header: 'Team Name' },
+      { field: 'year', header: 'Year' },
+      { field: 'team.abbreviation', header: 'Team' },
       { field: 'games_played', header: 'GP' },
-      { field: 'games_started', header: 'GS' },
       { field: 'passing_yards', header: 'Passing Yards' },
       { field: 'passing_tds', header: 'Passing TDs' },
       { field: 'rushing_yards', header: 'Rushing Yards' },
       { field: 'rushing_tds', header: 'Rushing TDs' },
+      { field: 'receptions', header: 'Receptions' },
       { field: 'receiving_yards', header: 'Receiving Yards' },
       { field: 'receiving_tds', header: 'Receiving TDs' },
-      { field: 'field_goals_made', header: 'Field Goals Made' },
-      { field: 'field_goals_attempted', header: 'Field Goals Attempted' },
-      { field: 'fantasy_points', header: 'Fantasy Points' }
+      { field: 'fgm', header: 'Field Goals Made' },
+      { field: 'fga', header: 'Field Goals Attempted' },
     ];    
   }
 
   ngOnInit() {
     // Get the player season list
-    // if (this.player_id) {
-    //   this.playersService.getPlayerSeasons(this.player_id).subscribe(
-    //     data => {
-    //       this.player_seasons = data;
-    //     },
-    //     error => {
-    //       console.error('Error fetching player data!', error);
-    //     }
-    //   );
-    // }
-
-    if (this.player_id){
-      this.player_seasons = this.playersService.getPlayerSeasonsFE(this.player_id);
+    if (this.player_id) {
+      this.playersService.getPlayerAllSeasons(this.player_id).subscribe(
+        data => {
+          this.player = data
+          this.player_seasons = data.seasons;
+          this.jsonPlayer = JSON.stringify(data)
+        },
+        error => {
+          console.error('Error fetching player data!', error);
+        }
+      );
     }
-
     // Get the player recent gamelogs
 
     // Get any news or injury reports related to this player

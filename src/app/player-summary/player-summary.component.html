@@ -4,23 +4,51 @@
       <img src="../../assets/images/avatars/{{player.photo_url}}" alt="{{player.first_name}} {{player.last_name}}">
       <div class="player-info">
         <h2>{{player.first_name}} {{player.last_name}}</h2>
-        <p>{{player.team_name}} - #{{player.number}} - {{player.position}}</p>
+        <p>{{player.team.team_name}} - #{{player.number}} - {{player.position}}</p>
         <p>HT/WT: {{player.height}}", {{player.weight}} lbs</p>
         <p>Birthdate: {{player.date_of_birth | date:'MM/dd/yyyy'}}</p>
       </div>
     </div>
     <div class="flex flex-grow-1 justify-content-center">
       <!-- Put and center team logo here -->
+      <img src="../../assets/images/logos/nfl_logos/{{player.team.logo_url}}" class="team-logo-img" alt="{{player.team.team_name}}">
     </div>
     <div class="p-3">
       <div class="player-details">
         <div class="player-stats">
           <h3>2023 SEASON STATS</h3>
-          <ul>
-            <li>Passing Yards: {{player.season_passing_yards}}</li>
-            <li>Passing TDs: {{player.season_passing_tds}}</li>
-            <!-- Add other stats as needed based on position -->
-          </ul>
+          @switch (player.position) {
+            @case ("QB") {
+              <ul>
+                <li>Passing Yards: {{player.season_stats.passing_yards}}</li>
+                <li>Passing TDs: {{player.season_stats.passing_tds}}</li>
+              </ul>
+            }
+            @case ("RB") {
+              <ul>
+                <li>Rushing Yards: {{player.season_stats.rushing_yards}}</li>
+                <li>Rushing TDs: {{player.season_stats.rushing_tds}}</li>
+              </ul>
+            }
+            @case ("WR") {
+              <ul>
+                <li>Recieving Yards: {{player.season_stats.receiving_yards}}</li>
+                <li>Recieving TDs: {{player.season_stats.receiving_tds}}</li>
+              </ul>
+            }
+            @case ("TE") {
+              <ul>
+                <li>Recieving Yards: {{player.season_stats.receiving_yards}}</li>
+                <li>Recieving TDs: {{player.season_stats.receiving_tds}}</li>
+              </ul>
+            }
+            @case ("K") {
+              <ul>
+                <li>Field Goals: {{player.season_stats.fgm}}</li>
+                <li>Extra Points: {{player.season_stats.xpm}}</li>
+              </ul>
+            }
+        }
         </div>
       </div>
     </div>

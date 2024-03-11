@@ -1,12 +1,12 @@
-<div class="container">
+<div class="container mb-5">
     <!-- Player Summary -->
     <div class="mt-3">
         <player-summary [player_id]="player_id"></player-summary>
     </div>
-    
+
     <!-- Player Seasons -->
-    <h3 class="mt-3">Season Stats</h3>
-    <div class="mt-3">
+    <h3 class="mt-5">Season Stats</h3>
+    <div>
         <p-table [columns]="cols" [value]="player_seasons" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -18,7 +18,8 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns">
-                        {{ rowData[col.field] }}
+                        <ng-container *ngIf="col.field == 'team.abbreviation'; else normal">{{rowData.team.abbreviation}}</ng-container>
+                        <ng-template #normal>{{ rowData[col.field] }}</ng-template>
                     </td>
                 </tr>
             </ng-template>
@@ -26,5 +27,7 @@
     </div>
 
     <h3 class="mt-3">News and Injury Report</h3>
-
+    <div>
+        No news for this player.
+    </div>
 </div>

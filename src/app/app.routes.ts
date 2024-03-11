@@ -68,6 +68,11 @@ export const routes2: Routes = [
             title: 'Players'
         },
         {
+          path: 'player-details/:player_id',
+          loadComponent: () => import('./player-details/player-details.component').then(res => res.PlayerDetailsComponent),
+          title: 'Players'
+        },
+        {
             path: 'stats',
             loadComponent: () => import('./stats/stats.component').then(res => res.StatsComponent),
             title: 'stats'

@@ -18,19 +18,15 @@ export class PlayerSummaryComponent implements OnInit {
   constructor(private playersService: PlayersService) {}
 
   ngOnInit() {
-    // if (this.player_id) {
-    //   this.playersService.getPlayerSummary(this.player_id).subscribe(
-    //     data => {
-    //       this.player = data;
-    //     },
-    //     error => {
-    //       console.error('Error fetching player data!', error);
-    //     }
-    //   );
-    // }
-
-    if (this.player_id){
-      this.player = this.playersService.getPlayerSummaryFE(this.player_id);
+    if (this.player_id) {
+      this.playersService.getPlayerSummary(this.player_id).subscribe(
+        data => {
+          this.player = data;
+        },
+        error => {
+          console.error('Error fetching player data!', error);
+        }
+      );
     }
   }
 }

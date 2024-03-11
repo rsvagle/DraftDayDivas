@@ -1,19 +1,27 @@
 <!-- news.component.html -->
-<div class="container mt-4">
+<div class="container my-4">
     <!-- Top News Section -->
     <div class="row mb-4">
-      <div class="col-lg-12">
-        <img src="../../assets/images/big-football-huddle.jpg" class="img-fluid mb-3" alt="Top News Banner">
-        <h2>Top News</h2>
+      <h2>Latest News</h2>
+      <div class="col-lg-8">
         <div *ngFor="let article of articles | slice:0:2">
           <div class="card mb-3">
-            <img src="../../assets/images/{{article.image_url}}" class="card-img-top" alt="...">
+            <img src="../../assets/images/{{article.image_url}}" class="card-img-top" alt="..." style="max-height: 300px; background-size: cover;">
             <div class="card-body">
               <h5 class="card-title">{{ article.title }}</h5>
               <p class="card-text">{{ article.description }}</p>
               <a href="#" class="btn btn-primary">Read More</a>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card p-3">
+          <h5>Top Headlines</h5>
+          <hr/>
+          <ng-container *ngFor="let article of articles | slice:0:6">
+            <a class="link">{{ article.title }}</a>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -23,7 +31,7 @@
       <div class="col-lg-12">
         <h3>Other Articles</h3>
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let article of articles | slice:2">
+          <li class="list-group-item mb-3" *ngFor="let article of articles">
             <img src="../../assets/images/{{article.image_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
             <h5>{{ article.title }}</h5>
             <p>{{ article.description | slice:0:150 }}...</p>
