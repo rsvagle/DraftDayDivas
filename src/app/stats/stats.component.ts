@@ -12,29 +12,36 @@ import { PlayersService } from '../players/players.service';
   styleUrl: './stats.component.scss'
 })
 export class StatsComponent {
-  players!: any[];
+  season_stats: any[];
 
   cols!: any[];
 
-  constructor(private playersService: PlayersService) {}
+  constructor(private playersService: PlayersService) {
+    this.cols = [
+      { field: 'year', header: 'Year' },
+      { field: 'team.abbreviation', header: 'Team' },
+      { field: 'player.name', header: 'Player' },
+      { field: 'games_played', header: 'GP' },
+      { field: 'passing_yards', header: 'Passing Yards' },
+      { field: 'passing_tds', header: 'Passing TDs' },
+      { field: 'rushing_yards', header: 'Rushing Yards' },
+      { field: 'rushing_tds', header: 'Rushing TDs' },
+      { field: 'receptions', header: 'Receptions' },
+      { field: 'receiving_yards', header: 'Receiving Yards' },
+      { field: 'receiving_tds', header: 'Receiving TDs' },
+      { field: 'fgm', header: 'Field Goals Made' },
+      { field: 'fga', header: 'Field Goals Attempted' },
+    ];   
+  }
 
   ngOnInit() {
-      this.players = this.playersService.genericPlayers;
-
-      this.cols = [
-        { field: 'first_name', header: 'First Name' },
-        { field: 'last_name', header: 'Last Name' },
-        { field: 'position', header: 'Position' },
-        { field: 'team_name', header: 'Team Name' },
-        { field: 'season_passing_yards', header: 'Season Passing Yards' },
-        { field: 'season_passing_tds', header: 'Season Passing TDs' },
-        { field: 'season_rushing_yards', header: 'Season Rushing Yards' },
-        { field: 'season_rushing_tds', header: 'Season Rushing TDs' },
-        { field: 'season_receiving_yards', header: 'Season Receiving Yards' },
-        { field: 'season_receiving_tds', header: 'Season Receiving TDs' },
-        { field: 'season_field_goals_made', header: 'Season Field Goals Made' },
-        { field: 'season_field_goals_attempted', header: 'Season Field Goals Attempted' },
-        { field: 'season_fantasy_points', header: 'Season Fantasy Points' }
-    ];    
+    this.playersService.getSeasonStats("2024").subscribe(
+      data => {
+        this.season_stats = data
+      },
+      error => {
+        console.error('Error fetching player data!', error);
+      }
+    );
   }
 }

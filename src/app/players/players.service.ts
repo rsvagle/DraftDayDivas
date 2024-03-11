@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class PlayersService {
   
   private apiUrlPlayer = 'http://localhost:8000/api/player';
-
+  
   constructor(private http: HttpClient) {}
   
   getPlayerSummaryFE(player_id: number) {
@@ -18,7 +18,7 @@ export class PlayersService {
   getPlayerSummary(player_id: number): Observable<any> {
     return this.http.get(`${this.apiUrlPlayer}/player-summary/${player_id}`);
   }
-
+  
   getPlayerAllSeasons(player_id: number): Observable<any> {
     return this.http.get(`${this.apiUrlPlayer}/all-seasons/${player_id}`);
   }
@@ -26,17 +26,21 @@ export class PlayersService {
   getPlayerSeasonsFE(player_id: number) {
     return this.player_seasons.filter((player: { player_id: number; }) => player.player_id === player_id);
   }
-
+  
   getPlayerSeasons(player_id: number): Observable<any> {
     return this.http.get(`${this.apiUrlPlayer}/player-seasons/${player_id}`);
   }
-
+  
   getAllPlayers(): Observable<any> {
     return this.http.get("http://localhost:8000/api/players/");
   }
-
+  
   filterByPosition(players: any, position: string) {
     return players.filter((player: { position: string; }) => player.position === position);
+  }
+  
+  getSeasonStats(year: string): Observable<any>  {
+    return this.http.get(`http://localhost:8000/api/stats/${year}`);
   }
 
   genericPlayers = [
