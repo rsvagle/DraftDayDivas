@@ -17,6 +17,9 @@ export class PlayerDetailsComponent {
   player: any;
   player_seasons: any;
   cols: any = [];
+  kickerCols: any = [];
+  positionPlayerCols: any = [];
+
   jsonPlayer: any;
 
   constructor(
@@ -25,7 +28,7 @@ export class PlayerDetailsComponent {
     ) {
     this.player_id = +this.route.snapshot.paramMap.get('player_id')!;
 
-    this.cols = [
+    this.positionPlayerCols = [
       { field: 'year', header: 'Year' },
       { field: 'team.abbreviation', header: 'Team' },
       { field: 'games_played', header: 'GP' },
@@ -36,9 +39,17 @@ export class PlayerDetailsComponent {
       { field: 'receptions', header: 'Receptions' },
       { field: 'receiving_yards', header: 'Receiving Yards' },
       { field: 'receiving_tds', header: 'Receiving TDs' },
-      { field: 'fgm', header: 'Field Goals Made' },
-      { field: 'fga', header: 'Field Goals Attempted' },
-    ];    
+    ];
+
+    this.kickerCols = [
+      { field: 'year', header: 'Year' },
+      { field: 'team.abbreviation', header: 'Team' },
+      { field: 'games_played', header: 'GP' },
+      { field: 'fgm', header: 'FGs Made' },
+      { field: 'fga', header: 'FGs Attempted' },
+      { field: 'xpm', header: 'XPs Made' },
+      { field: 'xpa', header: 'XPs Attempted' },
+    ];
   }
 
   ngOnInit() {
@@ -49,6 +60,13 @@ export class PlayerDetailsComponent {
           this.player = data
           this.player_seasons = data.seasons;
           this.jsonPlayer = JSON.stringify(data)
+
+          if(this.player.position == "K"){
+            this.cols = this.kickerCols;
+          }
+          else{
+            this.cols = this.positionPlayerCols;
+          }
         },
         error => {
           console.error('Error fetching player data!', error);
