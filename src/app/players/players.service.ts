@@ -26,6 +26,10 @@ export class PlayersService {
   getAllPlayers(): Observable<any> {
     return this.http.get("http://localhost:8000/api/players/");
   }
+
+  getTopPerformers(): Observable<any> {
+    return this.http.get("http://localhost:8000/api/top-performers/");
+  }
   
   filterByPosition(players: any, position: string) {
     return players.filter((player: { position: string; }) => player.position === position);

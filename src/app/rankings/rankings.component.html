@@ -1,7 +1,4 @@
-
 <!-- Do a "LEADERS" component here [QB] [RB] [WR] [TE] [K]-->
-
-<!-- Position, Name, Image, Total Yards and Touchdowns (Kicker should be FGs and Total points) -->
 <div class="container">
     <h1>Positional Leaders</h1>
 
@@ -16,9 +13,9 @@
             <div  class="player-info-container">
                 <div class="player-info">
                     <h2>{{topQB.first_name}} {{topQB.last_name}}</h2>
-                    <p>Yards {{topQB.season_passing_yards}}</p>
-                    <p>Touchdowns {{topQB.season_passing_tds }}</p>
-                    <p>Points: {{topQB.season_fantasy_points}}</p>
+                    <p>Yards {{topQB.season_stats.passing_yards}}</p>
+                    <p>Touchdowns {{topQB.season_stats.passing_tds }}</p>
+                    <p>Points: {{topQB.season_stats.fantasy_points}}</p>
                 </div>            
             </div>
         </div>
@@ -31,9 +28,9 @@
             <div class="player-info-container">
                 <div class="player-info">
                     <h2>{{topRB.first_name}} {{topRB.last_name}}</h2>
-                    <p>Yards {{topRB.season_rushing_yards}}</p>
-                    <p>Touchdowns {{topRB.season_rushing_tds }}</p>
-                    <p>Points: {{topRB.season_fantasy_points}}</p>
+                    <p>Yards {{topRB.season_stats.rushing_yards}}</p>
+                    <p>Touchdowns {{topRB.season_stats.rushing_tds }}</p>
+                    <p>Points: {{topRB.season_stats.fantasy_points}}</p>
                 </div>            
                 
             </div>
@@ -47,9 +44,9 @@
             <div class="player-info-container">                
                 <div class="player-info">
                     <h2>{{topWR.first_name}} {{topWR.last_name}}</h2>
-                    <p>Yards {{topWR.season_receiving_yards}}</p>
-                    <p>Touchdowns {{topWR.season_receiving_tds }}</p>
-                    <p>Points: {{topWR.season_fantasy_points}}</p>
+                    <p>Yards {{topWR.season_stats.receiving_yards}}</p>
+                    <p>Touchdowns {{topWR.season_stats.receiving_tds }}</p>
+                    <p>Points: {{topWR.season_stats.fantasy_points}}</p>
                 </div>            
             </div>
         </div>
@@ -63,9 +60,9 @@
             <div class="player-info-container">
                 <div class="player-info">
                     <h2>{{topTE.first_name}} {{topTE.last_name}}</h2>
-                    <p>Yards {{topTE.season_receiving_yards}}</p>
-                    <p>Touchdowns {{topTE.season_receiving_tds }}</p>
-                    <p>Points: {{topTE.season_fantasy_points}}</p>
+                    <p>Yards {{topTE.season_stats.receiving_yards}}</p>
+                    <p>Touchdowns {{topTE.season_stats.receiving_tds }}</p>
+                    <p>Points: {{topTE.season_stats.fantasy_points}}</p>
                 </div>                
                 
             </div>
@@ -80,10 +77,10 @@
             <div class="player-info-container">                
                 <div class="player-info">
                     <h2>{{topK.first_name}} {{topK.last_name}}</h2>
-                    <p>Yards {{topK.season_field_goals_made}}</p>
-                    <p>Touchdowns {{topK.season_field_goals_attempted }}</p>
-                    <p>Points: {{topK.season_fantasy_points}}</p>
-                </div>            
+                    <p>FG Made {{topK.season_stats.fgm}}</p>
+                    <p>FG Attempted {{topK.season_stats.fga }}</p>
+                    <p>Points: {{topK.season_stats.fantasy_points}}</p>
+                </div>
             </div>
         </div>
     </div>
