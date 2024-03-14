@@ -1,0 +1,41 @@
+.top-players-container {
+    flex: 1;
+    display: flex; /* Use flex layout for the container */
+    gap: 10px; /* Optional: adds some space between the boxes */
+    background-color: bisque;
+    border: 2px solid black;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-player-container {
+    display: flex;
+    flex-direction: column; /* Stack the image and player info vertically */
+    align-items: center; /* Center-align the items horizontally */
+    justify-content: center; /* Center-align the items vertically */
+    text-align: center; /* Center-align the text */
+    padding: 10px; /* Optional: adds some padding inside the boxes */
+}
+
+.player-info-container {
+    height: 200px;
+    display: flex;
+    flex-direction: column; /* Stack the image and player info vertically */
+    align-items: center; /* Center-align the items horizontally */
+    justify-content: center; /* Center-align the items vertically */
+    text-align: center; /* Center-align the text */
+    padding: 10px; /* Optional: adds some padding inside the boxes */
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+
+/* Additional styles for responsiveness */
+@media (max-width: 768px) {
+    .boxes {
+        flex-direction: column; /* Stack the boxes vertically on smaller screens */
+    }
+}

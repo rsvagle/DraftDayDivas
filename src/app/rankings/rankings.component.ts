@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { PlayersService } from '../players/players.service';
+import { TopPlayersComponent } from '../top-players/top-players.component';
 
 @Component({
   selector: 'app-rankings',
   standalone: true,
-  imports: [],
+  imports: [TopPlayersComponent],
   templateUrl: './rankings.component.html',
   styleUrl: './rankings.component.scss'
 })

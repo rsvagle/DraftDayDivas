@@ -3,11 +3,12 @@ import { InjuryReportService } from './injury-report-service';
 import { InjuryReportArticle } from './injury-report-article.model';
 import { CommonModule } from '@angular/common';
 import { PrimeNgLightModule } from '../primeng.light.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule],
+  imports: [CommonModule, PrimeNgLightModule, RouterLink],
   templateUrl: './injury-report.component.html',
   styleUrl: './injury-report.component.scss'
 })

@@ -2,35 +2,33 @@
     <h2>Injury Report</h2>
     <hr />
     <!-- news.component.html -->
-    <div class="container mt-4">
-        <!-- Top News Section -->
-        <div class="row mb-4">
-        <div class="col-lg-12">
-            <img src="../../assets/images/big-football-huddle.jpg" class="img-fluid mb-3" alt="Top News Banner">
-            <h2>Top News</h2>
-            <div *ngFor="let article of articles | slice:0:2">
-            <div class="card mb-3">
-                <img src="../../assets/images/{{article.image_url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">{{ article.title }}</h5>
-                <p class="card-text">{{ article.description }}</p>
-                <a href="#" class="btn btn-primary">Read More</a>
-                </div>
-            </div>
-            </div>
-        </div>
-        </div>
-    
+    <div class="container mt-4">  
         <!-- Other Articles Section -->
         <div class="row">
         <div class="col-lg-12">
-            <h3>Other Articles</h3>
             <ul class="list-group">
-            <li class="list-group-item" *ngFor="let article of articles | slice:2">
-                <img src="../../assets/images/{{article.image_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
-                <h5>{{ article.title }}</h5>
-                <p>{{ article.description | slice:0:150 }}...</p>
-                <a href="#" class="btn btn-secondary btn-sm">Read More</a>
+            <li class="list-group-item mb-3" *ngFor="let article of articles | slice:2">
+                <div class="d-flex">
+                    <div>
+                        <ng-container *ngIf="article.player; else noPlayer">
+                            <img src="../../assets/images/avatars/{{article.player.photo_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
+                        </ng-container>
+                        <ng-template #noPlayer>
+                            <img src="../../assets/images/{{article.image_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
+                        </ng-template>
+                    </div>
+                    <div class="vr mx-4"></div>
+                    <div>
+                        <h5>{{ article.title }}</h5>
+                        <p>{{ article.description | slice:0:150 }}...</p>
+                        <a href="#" class="btn btn-secondary btn-sm">Read More</a>
+                    </div>
+                    <div class="d-flex align-items-end ms-auto">
+                        <ng-container *ngIf="article.player">
+                            <a routerLink="/player-details/{{article.player.id}}" class="text-black">{{article.player.first_name }} {{article.player.last_name }}</a>
+                        </ng-container>
+                    </div>
+                </div>
             </li>
             </ul>
         </div>

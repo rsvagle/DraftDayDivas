@@ -3,11 +3,12 @@ import { NewsService } from './news.service';
 import { NewsArticle } from './news.article.model';
 import { CommonModule } from '@angular/common';
 import { PrimeNgLightModule } from '../primeng.light.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule],
+  imports: [CommonModule, PrimeNgLightModule, RouterLink],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss'
 })

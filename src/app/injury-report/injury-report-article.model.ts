@@ -8,4 +8,5 @@ export class InjuryReportArticle {
     article_content: string | undefined;
     image_url: string | undefined;
     created_at: Date | undefined;
+    player: any;
 }

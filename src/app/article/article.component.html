@@ -1,0 +1,12 @@
+<div class="container">
+  <div *ngIf="article; else loading">
+      <h2>{{ article.title }}</h2>
+      <p>By {{ article.author }} on {{ article.date | date }}</p>
+      <img src="./../assets/images/news-images/{{article.image_url}}" alt="{{ article.title }}" style="max-width: 100%;">
+      <p>{{ article.description }}</p>
+      <div>{{ article.article_content }}</div>
+  </div>
+  <ng-template #loading>
+    <p>Loading article...</p>
+  </ng-template>
+</div>

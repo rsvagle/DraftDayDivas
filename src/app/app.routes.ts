@@ -62,6 +62,11 @@ export const routes2: Routes = [
             title: 'News'
         },
         {
+          path: 'news/article/:id',
+          loadComponent: () => import('./article/article.component').then(res => res.ArticleComponent),
+          title: 'News Article'
+        },
+        {
             path: 'players',
             loadComponent: () => import('./players/players.component').then(res => res.PlayersComponent),
             canActivate: [AuthGuard],
