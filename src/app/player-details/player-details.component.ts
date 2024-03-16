@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { PlayersService } from '../players/players.service';
 import { PlayerSummaryComponent } from '../player-summary/player-summary.component';
 import { PrimeNgLightModule } from '../primeng.light.module';
+import { NewsService } from '../news/news.service';
+import { InjuryReportService } from '../injury-report/injury-report-service';
 
 @Component({
   selector: 'app-player-details',
@@ -13,6 +15,9 @@ import { PrimeNgLightModule } from '../primeng.light.module';
   styleUrl: './player-details.component.scss'
 })
 export class PlayerDetailsComponent {
+  newsService = inject(NewsService);
+  injuryService = inject(InjuryReportService);
+
   player_id: number;
   player: any;
   player_seasons: any;
@@ -21,6 +26,9 @@ export class PlayerDetailsComponent {
   positionPlayerCols: any = [];
 
   jsonPlayer: any;
+
+  injuryReports: any;
+  newsItems: any;
 
   constructor(
       private route: ActivatedRoute,
@@ -31,6 +39,7 @@ export class PlayerDetailsComponent {
     this.positionPlayerCols = [
       { field: 'year', header: 'Year' },
       { field: 'team.abbreviation', header: 'Team' },
+      { field: 'player.position', header: 'Position' },
       { field: 'games_played', header: 'GP' },
       { field: 'passing_yards', header: 'Passing Yards' },
       { field: 'passing_tds', header: 'Passing TDs' },
@@ -44,8 +53,12 @@ export class PlayerDetailsComponent {
     this.kickerCols = [
       { field: 'year', header: 'Year' },
       { field: 'team.abbreviation', header: 'Team' },
+      { field: 'player.position', header: 'Position' },
       { field: 'games_played', header: 'GP' },
-      { field: 'fgm', header: 'FGs Made' },
+      { field: 'fgm0_19', header: 'FG 0-19' },
+      { field: 'fgm20_39', header: 'FG 20-39' },
+      { field: 'fgm40_49', header: 'FG 40-49' },
+      { field: 'fgm50_plus', header: 'FG 50+' },
       { field: 'fga', header: 'FGs Attempted' },
       { field: 'xpm', header: 'XPs Made' },
       { field: 'xpa', header: 'XPs Attempted' },
@@ -76,6 +89,26 @@ export class PlayerDetailsComponent {
     // Get the player recent gamelogs
 
     // Get any news or injury reports related to this player
+    if(this.player_id) {
+      this.injuryService.getAllInjuryReports(this.player_id).subscribe(
+        data => {
+          this.injuryReports = data
+        },
+        error => {
+          console.error('Error fetching injury report data!', error);
+        }
+      );
+    }
 
+    if(this.player_id) {
+      this.newsService.getPlayerNewsArticles(this.player_id).subscribe(
+        data => {
+          this.newsItems = data
+        },
+        error => {
+          console.error('Error fetching news data!', error);
+        }
+      );
+    }
   }
 }

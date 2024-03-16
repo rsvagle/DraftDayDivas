@@ -15,4 +15,8 @@ export class InjuryReportService {
   getInjuryReport(): Observable<InjuryReportArticle[]> {
     return this.http.get<InjuryReportArticle[]>(this.apiUrl);
   }
+
+  getAllInjuryReports(playerId: number): Observable<InjuryReportArticle[]> {
+    return this.http.get<InjuryReportArticle[]>(this.apiUrl + playerId + "/all/");
+  }
 }

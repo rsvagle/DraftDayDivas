@@ -1,82 +1,42 @@
-    <!-- 5 equally sized boxes -->
-    <div class="row top-players-container">
-        <!-- QB -->
+<div *ngIf="show" class="row mt-3">
+    <ng-container *ngFor="let player of players">
         <div class="col top-player-container">
-            <div class="player-info-container">
-                <p>{{topQB.position}}</p>
-                <img src="../../assets/images/avatars/{{topQB.photo_url}}" class="img-fluid" alt="{{topQB.first_name}} {{topQB.last_name}}">
+            <div class="player-av-container" [ngStyle]="{'background-image': 'url(../../assets/images/logos/nfl_logos/' + player.team.logo_url + ')'}">
+                <img  src="../../assets/images/avatars/{{player.photo_url}}" class="img-fluid" alt="{{player.first_name}} {{player.last_name}}">                
             </div>
-            <div  class="player-info-container">
+            <div class="player-info-container" [ngStyle]="{'background-color': player.team.team_color_primary}">                
                 <div class="player-info">
-                    <h2>{{topQB.first_name}} {{topQB.last_name}}</h2>
-                    <p>Yards {{topQB.season_stats.passing_yards}}</p>
-                    <p>Touchdowns {{topQB.season_stats.passing_tds }}</p>
-                    <p>Points: {{topQB.season_stats.fantasy_points}}</p>
-                </div>            
-            </div>
-        </div>
-        <!-- RB -->
-        <div class="col top-player-container">
-            <div class="player-info-container">
-                <p>{{topRB.position}}</p>
-                <img src="../../assets/images/avatars/{{topRB.photo_url}}" class="img-fluid" alt="{{topRB.first_name}} {{topRB.last_name}}">
-            </div>
-            <div class="player-info-container">
-                <div class="player-info">
-                    <h2>{{topRB.first_name}} {{topRB.last_name}}</h2>
-                    <p>Yards {{topRB.season_stats.rushing_yards}}</p>
-                    <p>Touchdowns {{topRB.season_stats.rushing_tds }}</p>
-                    <p>Points: {{topRB.season_stats.fantasy_points}}</p>
-                </div>            
-                
-            </div>
-        </div>
-        <!-- WR -->
-        <div class="col top-player-container">
-            <div class="player-info-container">
-                <p>{{topWR.position}}</p>
-                <img src="../../assets/images/avatars/{{topWR.photo_url}}" class="img-fluid" alt="{{topWR.first_name}} {{topWR.last_name}}">
-            </div>
-            <div class="player-info-container">                
-                <div class="player-info">
-                    <h2>{{topWR.first_name}} {{topWR.last_name}}</h2>
-                    <p>Yards {{topWR.season_stats.receiving_yards}}</p>
-                    <p>Touchdowns {{topWR.season_stats.receiving_tds }}</p>
-                    <p>Points: {{topWR.season_stats.fantasy_points}}</p>
-                </div>            
-            </div>
-        </div>
-
-        <!-- TE -->
-        <div class="col top-player-container">
-            <div class="player-info-container">
-                <p>{{topTE.position}}</p>
-                <img src="../../assets/images/avatars/{{topTE.photo_url}}" class="img-fluid" alt="{{topTE.first_name}} {{topTE.last_name}}">
-            </div>
-            <div class="player-info-container">
-                <div class="player-info">
-                    <h2>{{topTE.first_name}} {{topTE.last_name}}</h2>
-                    <p>Yards {{topTE.season_stats.receiving_yards}}</p>
-                    <p>Touchdowns {{topTE.season_stats.receiving_tds }}</p>
-                    <p>Points: {{topTE.season_stats.fantasy_points}}</p>
-                </div>                
-                
-            </div>
-        </div>
-
-        <!-- Kicker -->
-        <div class="col top-player-container">
-            <div class="player-info-container">
-                <p>{{topK.position}}</p>
-                <img  src="../../assets/images/avatars/{{topK.photo_url}}" class="img-fluid" alt="{{topK.first_name}} {{topK.last_name}}">                
-            </div>
-            <div class="player-info-container">                
-                <div class="player-info">
-                    <h2>{{topK.first_name}} {{topK.last_name}}</h2>
-                    <p>FG Made {{topK.season_stats.fgm}}</p>
-                    <p>FG Attempted {{topK.season_stats.fga }}</p>
-                    <p>Points: {{topK.season_stats.fantasy_points}}</p>
+                    <h4>{{player.first_name}} {{player.last_name}}</h4>
+                    <p>{{player.position}}</p>
+                    @switch (player.position) {
+                        @case ("QB") {
+                            <p>Passing Yards {{topQB.season_stats.passing_yards}}</p>
+                            <p>Passing TDs {{topQB.season_stats.passing_tds }}</p>
+                            <p>Points: {{topQB.season_stats.fantasy_points}}</p>
+                        }
+                        @case ("RB") {
+                            <p>Rushing Yards {{topRB.season_stats.rushing_yards}}</p>
+                            <p>Rushing TDs {{topRB.season_stats.rushing_tds }}</p>
+                            <p>Points: {{topRB.season_stats.fantasy_points}}</p>
+                        }
+                        @case ("WR") {
+                            <p>Receiving Yards {{topTE.season_stats.receiving_yards}}</p>
+                            <p>Receiving TDs {{topTE.season_stats.receiving_tds }}</p>
+                            <p>Points: {{topTE.season_stats.fantasy_points}}</p>
+                        }
+                        @case ("TE") {
+                            <p>Receiving Yards {{topTE.season_stats.receiving_yards}}</p>
+                            <p>Receiving TDs {{topTE.season_stats.receiving_tds }}</p>
+                            <p>Points: {{topTE.season_stats.fantasy_points}}</p>
+                        }
+                        @case ("K") {
+                            <p>FG Made {{player.season_stats.fgm}}</p>
+                            <p>FG Attempted {{player.season_stats.fga }}</p>
+                            <p>Points: {{player.season_stats.fantasy_points}}</p>                            
+                        }
+                    }
                 </div>
             </div>
         </div>
-    </div>
+    </ng-container>
+</div>

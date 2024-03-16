@@ -22,6 +22,9 @@
                             @case ("player.name") {
                                 {{rowData.player.first_name}} {{rowData.player.last_name}}
                             }
+                            @case ("player.position") {
+                                {{rowData.player.position}}
+                            }
                             @default {
                                 {{ rowData[col.field] }}
                             }

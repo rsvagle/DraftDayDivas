@@ -14,9 +14,14 @@ import { PlayerSummaryComponent } from '../player-summary/player-summary.compone
 })
 export class HomeComponent implements OnInit {
   newsService = inject(NewsService);
+  randomPlayer: number;
 
   title = 'DraftDayDivas';
   articles: NewsArticle[] = [];
+
+  constructor(){
+    this.randomPlayer = Math.floor(Math.random() * 100) + 1;
+  }
 
   ngOnInit(): void {
     // pull from backend
@@ -24,5 +29,6 @@ export class HomeComponent implements OnInit {
       next: (data) => this.articles = data,
       error: (error) => console.error('There was an error!', error)
     });
+
   }
 }

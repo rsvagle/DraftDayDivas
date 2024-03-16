@@ -1,13 +1,18 @@
 <div class="container">
     <h2>Players</h2>
     <hr />
-    <div class="row">
-        <ng-container *ngIf="players.length > 0">
-            <ng-container *ngFor="let player of players">
-                <div class="col-3">
-                    <a routerLink="/player-details/{{player.id}}">{{player.first_name}} {{player.last_name}} - {{player.position}}</a> 
-                </div>        
-            </ng-container>
+    <ng-container *ngIf="playersDict">
+        <ng-container *ngFor="let item of playersDict | keyvalue">
+            <h3>{{item.key}}</h3>
+            <div class="row mb-3">
+                <ng-container *ngFor="let player of item.value">
+                    <div class="col-3 mb-1">
+                        <a routerLink="/player-details/{{player.id}}" class="text-black no-decoration">
+                            {{player.first_name}} {{player.last_name}} - {{player.position}}
+                        </a>
+                    </div>
+                </ng-container>
+            </div>
         </ng-container>
-    </div>
+    </ng-container>
 </div>

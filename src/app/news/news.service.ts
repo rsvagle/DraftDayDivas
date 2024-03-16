@@ -19,4 +19,8 @@ export class NewsService {
   getNewsArticle(id: number): Observable<NewsArticle> {
     return this.http.get<NewsArticle>(this.apiUrl + 'article/' + id);
   }
+
+  getPlayerNewsArticles(player_id: number): Observable<NewsArticle> {
+    return this.http.get<NewsArticle>(this.apiUrl + 'player/' + player_id + "/all/");
+  }
 }

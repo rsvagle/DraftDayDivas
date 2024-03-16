@@ -1,16 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { PlayersService } from '../players/players.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'top-players',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './top-players.component.html',
   styleUrl: './top-players.component.scss'
 })
 export class TopPlayersComponent {
   playersService = inject(PlayersService);
   players: any;
+  show: boolean = false;
 
   topQB: any;
   topRB: any;
@@ -27,6 +29,10 @@ export class TopPlayersComponent {
         this.topWR = data["WR"]
         this.topTE = data["TE"]
         this.topK = data["K"]
+
+        this.players = [this.topQB, this.topRB, this.topWR, this.topTE, this.topK]
+
+        this.show = true;
       },
       error => {
         console.error('Error fetching player data!', error);

@@ -1,8 +1,8 @@
 .top-players-container {
     flex: 1;
     display: flex; /* Use flex layout for the container */
-    gap: 10px; /* Optional: adds some space between the boxes */
-    background-color: bisque;
+    gap: 0px; /* Optional: adds some space between the boxes */
+    background-color: rgb(211, 211, 211);
     border: 2px solid black;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -13,17 +13,32 @@
     align-items: center; /* Center-align the items horizontally */
     justify-content: center; /* Center-align the items vertically */
     text-align: center; /* Center-align the text */
-    padding: 10px; /* Optional: adds some padding inside the boxes */
+    padding: 0px; /* Optional: adds some padding inside the boxes */
 }
 
 .player-info-container {
-    height: 200px;
+    height: 250px;
+    width: 100%;
     display: flex;
     flex-direction: column; /* Stack the image and player info vertically */
     align-items: center; /* Center-align the items horizontally */
     justify-content: center; /* Center-align the items vertically */
     text-align: center; /* Center-align the text */
-    padding: 10px; /* Optional: adds some padding inside the boxes */
+    padding: 20px; /* Optional: adds some padding inside the boxes */
+}
+
+.player-av-container {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    background-size: cover;
+    background-position: -50px;
+    background-repeat: no-repeat;
+    flex-direction: column; /* Stack the image and player info vertically */
+    align-items: center; /* Center-align the items horizontally */
+    justify-content: center; /* Center-align the items vertically */
+    text-align: center; /* Center-align the text */
+    padding-top: 10px; /* Optional: adds some padding inside the boxes */
 }
 
 .img-fluid {
@@ -32,6 +47,9 @@
     max-height: 100%;
 }
 
+.player-info {
+    color:#ffffff;
+}
 
 /* Additional styles for responsiveness */
 @media (max-width: 768px) {
