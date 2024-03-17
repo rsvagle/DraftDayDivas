@@ -19,7 +19,10 @@ export class PlayersComponent {
 
   playersDict: PlayersPositionDictionary = {
     QB: [],
-    RB: [],    
+    RB: [],
+    WR: [],    
+    TE: [],    
+    K: [],
   };
 
   ngOnInit() {
@@ -27,7 +30,7 @@ export class PlayersComponent {
     
     this.playersService.getAllPlayers().subscribe(
       data => {
-        this.playersDict = this.createPositionDictionary(data);
+        this.createPositionDictionary(data);
       },
       error => {
         console.error('Error fetching player data!', error);
@@ -35,15 +38,7 @@ export class PlayersComponent {
     );
   }
 
-  createPositionDictionary(players: Player[]): PlayersPositionDictionary {
-    return players.reduce((acc: PlayersPositionDictionary, current: Player) => {
-      // Initialize the position array if it does not exist
-      if (!acc[current.position]) {
-        acc[current.position] = [];
-      }
-      // Push the current player into the appropriate position array
-      acc[current.position].push(current);
-      return acc;
-    }, {});
+  createPositionDictionary(players: Player[]): void {
+    players.forEach(x => this.playersDict[x.position].push(x));
   }
 }

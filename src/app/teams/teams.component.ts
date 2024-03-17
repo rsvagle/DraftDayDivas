@@ -3,11 +3,12 @@ import { Component, inject } from '@angular/core';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { TeamsService } from './teams.service';
 import { FootballTeam } from './team.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-teams',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule],
+  imports: [CommonModule, PrimeNgLightModule, RouterLink],
   templateUrl: './teams.component.html',
   styleUrl: './teams.component.scss'
 })

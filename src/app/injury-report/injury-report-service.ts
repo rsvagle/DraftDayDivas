@@ -12,11 +12,15 @@ export class InjuryReportService {
 
   constructor(private http: HttpClient) { }
 
-  getInjuryReport(): Observable<InjuryReportArticle[]> {
+  getInjuryReports(): Observable<InjuryReportArticle[]> {
     return this.http.get<InjuryReportArticle[]>(this.apiUrl);
   }
 
   getAllInjuryReports(playerId: number): Observable<InjuryReportArticle[]> {
     return this.http.get<InjuryReportArticle[]>(this.apiUrl + playerId + "/all/");
+  }
+  
+  getInjuryReport(article_id: number): Observable<InjuryReportArticle> {
+    return this.http.get<InjuryReportArticle>(this.apiUrl + article_id);
   }
 }

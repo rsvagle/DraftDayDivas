@@ -57,6 +57,11 @@ export const routes2: Routes = [
             title: 'Injury Report'
         },
         {
+            path: 'injury-report/:id',
+            loadComponent: () => import('./injury-report-article/injury-report-article.component').then(res => res.InjuryReportArticleComponent),
+            title: 'Injury Report'
+        },
+        {
             path: 'news',
             loadComponent: () => import('./news/news.component').then(res => res.NewsComponent),
             title: 'News'
@@ -80,17 +85,22 @@ export const routes2: Routes = [
         {
             path: 'stats',
             loadComponent: () => import('./stats/stats.component').then(res => res.StatsComponent),
-            title: 'stats'
+            title: 'Stats'
         },
         {
           path: 'teams',
           loadComponent: () => import('./teams/teams.component').then(res => res.TeamsComponent),
-          title: 'teams'
+          title: 'Teams'
+        },
+        {
+          path: 'teams/:team_id',
+          loadComponent: () => import('./team-summary/team-summary.component').then(res => res.TeamSummaryComponent),
+          title: 'Team Summary'
         },
         {
             path: 'rankings',
             loadComponent: () => import('./rankings/rankings.component').then(res => res.RankingsComponent),
-            title: 'rankings'
+            title: 'Rankings'
         },
         {
             path: 'draft',

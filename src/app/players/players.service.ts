@@ -38,6 +38,10 @@ export class PlayersService {
   getSeasonStats(year: string): Observable<any>  {
     return this.http.get(`http://localhost:8000/api/stats/${year}`);
   }
+
+  getAllTeamPlayers(team_id: number): Observable<any>  {
+    return this.http.get(`http://localhost:8000/api/teams/players/${team_id}`);
+  }
 }
 
 

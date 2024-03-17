@@ -7,8 +7,8 @@
             <div class="row mb-3">
                 <ng-container *ngFor="let player of item.value">
                     <div class="col-3 mb-1">
-                        <a routerLink="/player-details/{{player.id}}" class="text-black no-decoration">
-                            {{player.first_name}} {{player.last_name}} - {{player.position}}
+                        <a routerLink="/player-details/{{player.id}}" class="text-black text-decoration-none">
+                            {{player.first_name}} {{player.last_name}} - {{player.team.abbreviation}}
                         </a>
                     </div>
                 </ng-container>

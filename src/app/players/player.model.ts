@@ -4,6 +4,7 @@ export class Player{
     last_name: string;
     position: string;
     team_id: number;
+    team: any; // TODO Put in team model
     number: number;
     height: string;
     weight: number;

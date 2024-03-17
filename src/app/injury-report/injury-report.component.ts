@@ -18,7 +18,7 @@ export class InjuryReportComponent implements OnInit{
 
   ngOnInit(): void {
     // pull from backend
-    this.injuryReportService.getInjuryReport().subscribe({
+    this.injuryReportService.getInjuryReports().subscribe({
       next: (data) => this.articles = data,
       error: (error) => console.error('There was an error!', error)
     });

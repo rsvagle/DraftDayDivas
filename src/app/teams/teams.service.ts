@@ -15,4 +15,8 @@ export class TeamsService {
   getTeams(): Observable<FootballTeam[]> {
     return this.http.get<FootballTeam[]>(this.apiUrl);
   }
+
+  getTeamSummary(teamId: number): Observable<FootballTeam> {
+    return this.http.get<FootballTeam>(this.apiUrl + teamId);
+  }
 }

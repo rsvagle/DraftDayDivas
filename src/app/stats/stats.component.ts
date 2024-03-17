@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { PositionSelectorComponent } from '../position-selector/position-selector.component';
 import { PlayersService } from '../players/players.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule, PositionSelectorComponent],
+  imports: [CommonModule, PrimeNgLightModule, PositionSelectorComponent, RouterLink],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })

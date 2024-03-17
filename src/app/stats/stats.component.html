@@ -4,12 +4,17 @@
         <position-selector [includeKicker]="true" [includeDefense]="true"></position-selector>
     </div>
     <div class="mt-3">
-        <p-table [columns]="cols" [value]="season_stats" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [columns]="cols" [value]="season_stats" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-gridlines">
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns">
                         {{ col.header }}
                     </th>
+                </tr>
+                <tr>
+                    <ng-container *ngFor="let col of columns">
+                        <th [pSortableColumn]="col.field"><p-sortIcon [field]="col.field"></p-sortIcon></th>
+                    </ng-container>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
@@ -20,7 +25,7 @@
                                 {{rowData.team.abbreviation}}
                             }
                             @case ("player.name") {
-                                {{rowData.player.first_name}} {{rowData.player.last_name}}
+                                <a routerLink="/player-details/{{rowData.player.id}}">{{rowData.player.first_name}} {{rowData.player.last_name}}</a>
                             }
                             @case ("player.position") {
                                 {{rowData.player.position}}

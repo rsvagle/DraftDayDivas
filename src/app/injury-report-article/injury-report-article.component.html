@@ -1,0 +1,8 @@
+<div class="container">
+    <ng-container *ngIf="article != null; else notFound">
+        <h1>{{article.title}}</h1>
+    </ng-container>
+    <ng-template #notFound>
+        <p>Sorry, the article was not found.</p>
+    </ng-template>
+</div>
