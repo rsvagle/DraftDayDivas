@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { NewsService } from '../news/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { NewsArticle } from '../news/news.article.model';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'article',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './article.component.html',
   styleUrl: './article.component.scss'
 })

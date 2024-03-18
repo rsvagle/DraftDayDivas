@@ -12,22 +12,19 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 })
 export class PositionSelectorComponent implements OnInit {
   @Input() includeKicker: boolean = true;
-  @Input() includeDefense: boolean = true;
-  @Output() positionSelected = new EventEmitter<FootballPosition[]>();
+
+  @Input() selectedPositions: FootballPosition[] = [];
+  @Output() selectedPositionsChange = new EventEmitter<FootballPosition[]>();
 
   positions: FootballPosition[] = [FootballPosition.QB, FootballPosition.RB, FootballPosition.WR, FootballPosition.TE];
-  selectedPositions: FootballPosition[] = [];
 
   ngOnInit(): void {
     if (this.includeKicker) {
       this.positions.push(FootballPosition.K);
     }
-    if (this.includeDefense) {
-      this.positions.push(FootballPosition.D);
-    }
   }
 
   onPositionChange(): void {
-    this.positionSelected.emit(this.selectedPositions);
+    this.selectedPositionsChange.emit(this.selectedPositions);
   }
 }

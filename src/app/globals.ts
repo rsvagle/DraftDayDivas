@@ -3,6 +3,5 @@ export enum FootballPosition {
     RB = 'RB',
     WR = 'WR',
     TE = 'TE',
-    K = 'K',
-    D = 'D'
+    K = 'K'
   }

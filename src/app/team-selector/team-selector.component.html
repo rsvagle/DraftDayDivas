@@ -1,0 +1,25 @@
+<p-multiSelect 
+  [options]="teams" 
+  [(ngModel)]="selectedTeams" 
+  defaultLabel="Select Teams" 
+  (onChange)="onTeamChange()"
+  optionLabel="team_name"
+  optionValue="id">
+
+  <ng-template let-value pTemplate="selectedItems">
+    <ng-container *ngIf="value && value.length <= 2">
+        <div class="d-inline-flex align-items-center gap-2 px-1" *ngFor="let option of value">
+            <img src="../../assets/images/logos/nfl_logos/{{option.logo_url}}" style="width: 20px" />
+            <div>{{ option.team_name }},</div>
+        </div>
+    </ng-container>
+    <div *ngIf="value && value.length > 2">{{value.length}} Teams</div>
+    <div *ngIf="!value || value.length === 0">Select Teams</div>
+    </ng-template>
+    <ng-template let-team pTemplate="item">
+        <div class="d-flex align-items-center gap-2">
+            <img src="../../assets/images/logos/nfl_logos/{{team.logo_url}}" style="width: 20px" />
+            <div>{{ team.team_name }}</div>
+        </div>
+    </ng-template>
+</p-multiSelect>

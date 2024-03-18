@@ -6,11 +6,12 @@ import { PlayerSummaryComponent } from '../player-summary/player-summary.compone
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { NewsService } from '../news/news.service';
 import { InjuryReportService } from '../injury-report/injury-report-service';
+import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
 
 @Component({
   selector: 'app-player-details',
   standalone: true,
-  imports: [PlayerSummaryComponent, PrimeNgLightModule, CommonModule],
+  imports: [PlayerSummaryComponent, PrimeNgLightModule, CommonModule, PlayerStatsDisplayComponent],
   templateUrl: './player-details.component.html',
   styleUrl: './player-details.component.scss'
 })

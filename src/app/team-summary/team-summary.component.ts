@@ -6,11 +6,12 @@ import { PlayersService } from '../players/players.service';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { CommonModule } from '@angular/common';
 import { TeamsService } from '../teams/teams.service';
+import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
 
 @Component({
   selector: 'app-team-summary',
   standalone: true,
-  imports: [PrimeNgLightModule, CommonModule, RouterLink],
+  imports: [PrimeNgLightModule, CommonModule, RouterLink, PlayerStatsDisplayComponent],
   templateUrl: './team-summary.component.html',
   styleUrl: './team-summary.component.scss'
 })
