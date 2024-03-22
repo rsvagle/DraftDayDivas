@@ -6,7 +6,7 @@ import { FootballTeam } from './team.model';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-teams',
+  selector: 'teams',
   standalone: true,
   imports: [CommonModule, PrimeNgLightModule, RouterLink],
   templateUrl: './teams.component.html',
@@ -17,7 +17,6 @@ export class TeamsComponent {
   teams: FootballTeam[] = [];
 
   ngOnInit(): void {
-    // pull from backend
     this.teamsService.getTeams().subscribe({
       next: (data) => this.teams = data,
       error: (error) => console.error('There was an error!', error)

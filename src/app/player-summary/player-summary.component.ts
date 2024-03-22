@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PlayersService } from '../players/players.service';
 import { CommonModule } from '@angular/common';
 import { PrimeNgLightModule } from '../primeng.light.module';
+import { Player } from '../players/player.model';
 
 @Component({
   selector: 'player-summary',
@@ -13,9 +14,11 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 export class PlayerSummaryComponent implements OnInit {
   @Input() player_id: number = 0;
 
-  player: any; // You should create an interface to type this properly
+  player: Player;
 
-  constructor(private playersService: PlayersService) {}
+  constructor(
+    private playersService: PlayersService
+  ) {}
 
   ngOnInit() {
     if (this.player_id) {

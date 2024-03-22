@@ -7,6 +7,7 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { CommonModule } from '@angular/common';
 import { TeamsService } from '../teams/teams.service';
 import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
+import { FootballTeam } from '../teams/team.model';
 
 @Component({
   selector: 'app-team-summary',
@@ -21,7 +22,7 @@ export class TeamSummaryComponent {
   playersService = inject(PlayersService);
   teamsService = inject(TeamsService);
 
-  team: any;
+  team: FootballTeam;
   team_id: number;
   playersList: any;
   playerStats: any = [];

@@ -6,18 +6,15 @@ import { Router } from '@angular/router';
   selector: 'logout',
   standalone: true,
   templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss']
+  styleUrls: ['./logout.component.scss'],
 })
 export class LogoutComponent implements OnInit {
-
-  // Inject AuthService
   private authService = inject(AuthService);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.authService.logout();
     this.router.navigateByUrl('/home');
   }
-
 }

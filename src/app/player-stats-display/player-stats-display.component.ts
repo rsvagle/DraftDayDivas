@@ -13,8 +13,8 @@ import { RouterLink } from '@angular/router';
 export class PlayerStatsDisplayComponent {
   @Input() playerSeasons: any[];
 
-  positionPlayerCols: { field: string; header: string; }[];
-  kickerCols: { field: string; header: string; }[];
+  positionPlayerCols: any[];
+  kickerCols: any[];
   oPlayerSeasons: any[];
   kPlayerSeasons: any[];
 
@@ -59,7 +59,6 @@ export class PlayerStatsDisplayComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['playerSeasons']) {
       // Data in playerSeasons has changed
-      // Perform necessary actions
       this.playerSeasons = [...this.playerSeasons]
       this.oPlayerSeasons = this.playerSeasons.filter(x => x.fga == 0 && x.xpa == 0);
       this.kPlayerSeasons = this.playerSeasons.filter(x => x.fga > 0 || x.xpa > 0)

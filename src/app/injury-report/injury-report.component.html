@@ -1,45 +1,70 @@
 <div class="container">
-    <h2>Injury Report</h2>
-    <hr />
-    <!-- news.component.html -->
-    <div class="container mt-4">  
-        <!-- Other Articles Section -->
-        <div class="row">
-        <div class="col-lg-12">
-            <ul class="list-group">
-            <li class="list-group-item mb-3" *ngFor="let article of articles | slice:2">
-                <div class="d-flex p-2">
-                    <div>
-                        <ng-container *ngIf="article.player; else noPlayer">
-                            <a routerLink="/player-details/{{article.player.id}}" class="text-black text-decoration-none">
-                                <img src="../../assets/images/avatars/{{article.player.photo_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
-                            </a>
-                        </ng-container>
-                        <ng-template #noPlayer>
-                            <img src="../../assets/images/{{article.image_url}}" class="float-left mr-3" style="width: 100px; height: 100px; object-fit: cover;" alt="Article Image">
-                        </ng-template>
-                    </div>
-                    <div class="vr mx-4"></div>
-                    <div>
-                        <h5>{{ article.title }}</h5>
-                        <p>{{ article.description | slice:0:150 }}...</p>
-                        <a routerLink="/injury-report/{{article.id}}" class="btn btn-success btn-sm">Read More</a>
-                    </div>
-                    <div class="ms-auto d-flex flex-column">
-                        <div>
-                            <h6 class="text-end">{{ article.player.first_name }} {{ article.player.last_name }}</h6>
-                            <p class="text-end">{{ article.player.position }} #{{article.player.number}}</p>
-                        </div>
-                        <div class="mt-auto ms-auto">
-                            <i class="fa-brands fa-twitter fa-lg text-primary me-3"></i>
-                            <i class="fa-brands fa-facebook fa-lg text-primary me-3"></i>
-                            <i class="fa-solid fa-share fa-lg text-warning"></i>
-                        </div>
-                    </div>
+  <h2>Injury Report</h2>
+  <hr />
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="list-group">
+          <li
+            class="list-group-item mb-3"
+            *ngFor="let article of articles | slice : 2"
+          >
+            <div class="d-flex p-2">
+              <div>
+                <ng-container *ngIf="article.player; else noPlayer">
+                  <a
+                    routerLink="/player-details/{{ article.player.id }}"
+                    class="text-black text-decoration-none"
+                  >
+                    <img
+                      src="../../assets/images/avatars/{{
+                        article.player.photo_url
+                      }}"
+                      class="float-left mr-3"
+                      style="width: 100px; height: 100px; object-fit: cover"
+                      alt="Article Image"
+                    />
+                  </a>
+                </ng-container>
+                <ng-template #noPlayer>
+                  <img
+                    src="../../assets/images/{{ article.image_url }}"
+                    class="float-left mr-3"
+                    style="width: 100px; height: 100px; object-fit: cover"
+                    alt="Article Image"
+                  />
+                </ng-template>
+              </div>
+              <div class="vr mx-4"></div>
+              <div>
+                <h5>{{ article.title }}</h5>
+                <p>{{ article.description | slice : 0 : 150 }}...</p>
+                <a
+                  routerLink="/injury-report/{{ article.id }}"
+                  class="btn btn-success btn-sm"
+                  >Read More</a
+                >
+              </div>
+              <div class="ms-auto d-flex flex-column">
+                <div>
+                  <h6 class="text-end">
+                    {{ article.player.first_name }}
+                    {{ article.player.last_name }}
+                  </h6>
+                  <p class="text-end">
+                    {{ article.player.position }} #{{ article.player.number }}
+                  </p>
                 </div>
-            </li>
-            </ul>
-        </div>
-        </div>
-    </div>  
+                <div class="mt-auto ms-auto">
+                  <i class="fa-brands fa-twitter fa-lg text-primary me-3"></i>
+                  <i class="fa-brands fa-facebook fa-lg text-primary me-3"></i>
+                  <i class="fa-solid fa-share fa-lg text-warning"></i>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

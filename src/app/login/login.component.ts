@@ -7,12 +7,12 @@ import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   standalone: true,
-  imports: [PrimeNgLightModule, RouterLink], // Make sure to import FormsModule and ReactiveFormsModule for form handling
+  imports: [PrimeNgLightModule, RouterLink, ToastModule], // Make sure to import FormsModule and ReactiveFormsModule for form handling
   providers: [MessageService],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'] // Corrected from 'styleUrl' to 'styleUrls'
+  styleUrls: ['./login.component.scss'], // Corrected from 'styleUrl' to 'styleUrls'
 })
 export class LoginComponent {
   // Inject AuthService
@@ -21,32 +21,40 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  constructor(
-    private router: Router,
-    private messageService: MessageService) { }
+  constructor(private router: Router, private messageService: MessageService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  // Method to handle form submission
+  // Try login
   login() {
-      const credentials: UserCredentials = {
-        username: this.username,
-        password: this.password
-      };
+    const credentials: UserCredentials = {
+      username: this.username,
+      password: this.password,
+    };
 
-      this.authService.login(credentials).subscribe({
-        next: (response) => {
-          this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: 'Login Successful' });
+    this.authService.login(credentials).subscribe({
+      next: (response) => {
+        this.messageService.add({
+          key: 'toast1',
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Login Successful',
+        });
 
-          // Handle successful login here (e.g., navigate to dashboard)
-          this.router.navigateByUrl('/profile');
-        },
-        error: (error) => {
-          this.messageService.add({ key: 'toast2', severity: 'error', summary: 'Error', detail: error.error.detail });
+        // Handle successful login
+        this.router.navigateByUrl('/profile');
+      },
+      error: (error) => {
+        this.messageService.add({
+          key: 'toast1',
+          severity: 'error',
+          summary: 'Error',
+          detail: error.error.detail,
+        });
 
-          // Handle login error here (e.g., show error message)
-          this.password = '';
-        }
-      });
-   }
+        // Handle login error here (e.g., show error message)
+        this.password = '';
+      },
+    });
+  }
 }

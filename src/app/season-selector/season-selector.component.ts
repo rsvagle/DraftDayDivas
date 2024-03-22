@@ -18,17 +18,17 @@ export class SeasonSelectorComponent {
 
   seasons: number[] = []
 
-  constructor(){
-  }
+  constructor(){ }
   
   ngOnInit(): void{
+    // Generate a reverse order list of years based on inputs
     for (let year = this.startingYear; year <= this.endingYear; year++) {
       this.seasons.push(year);
     }
-  
     this.seasons.sort((a, b) => b - a);
   }
 
+  // Emit the selected seasons to parent component
   onSeasonChange(): void {
     this.selectedSeasonsChange.emit(this.selectedSeasons);
   }

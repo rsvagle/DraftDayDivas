@@ -7,29 +7,37 @@ import { PlayerSummaryComponent } from '../player-summary/player-summary.compone
 import { TopPlayersComponent } from '../top-players/top-players.component';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule, PlayerSummaryComponent, TopPlayersComponent],
+  imports: [
+    CommonModule,
+    PrimeNgLightModule,
+    PlayerSummaryComponent,
+    TopPlayersComponent,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
+  // Top news articles
   newsService = inject(NewsService);
-  randomPlayer: number;
-
-  title = 'DraftDayDivas';
   articles: NewsArticle[] = [];
 
-  constructor(){
+  title = 'DraftDayDivas';
+
+  // Random player for "Player Highlight"
+  randomPlayer: number;
+
+  constructor() {
+    // Generate a random player id to pass in
     this.randomPlayer = Math.floor(Math.random() * 100) + 1;
   }
 
   ngOnInit(): void {
-    // pull from backend
+    // Get the top 10 news articles
     this.newsService.getNews(10).subscribe({
-      next: (data) => this.articles = data,
-      error: (error) => console.error('There was an error!', error)
+      next: (data) => (this.articles = data),
+      error: (error) => console.error('There was an error!', error),
     });
-
   }
 }

@@ -20,7 +20,6 @@ export class TeamSelectorComponent {
   teams: FootballTeam[] = [];
 
   ngOnInit(): void {
-    // pull from backend
     this.teamsService.getTeams().subscribe({
       next: (data) => this.teams = data,
       error: (error) => console.error('There was an error!', error)

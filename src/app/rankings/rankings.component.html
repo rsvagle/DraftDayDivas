@@ -1,9 +1,9 @@
-<!-- Do a "LEADERS" component here [QB] [RB] [WR] [TE] [K]-->
 <div class="container">
     <div>
         <h1>Rankings</h1>
         <hr/>
         <div class="row">
+            <!-- Search and Filtering -->
             <div class="col-3 d-flex flex-column">
                 <label>Player Search</label>
                 <input type="text" pInputText placeholder="Search" class="w-100"
@@ -15,6 +15,7 @@
                     <position-selector [includeKicker]="true" [(selectedPositions)]="selectedPositions" (selectedPositionsChange)="selectedPositionsChange($event)"></position-selector>
                 </div>
             </div>
+            <!-- Rankings table -->
             <div class="col-9">
                 <p>Here are the rankings for week 18! Below are the PPR rankings for this week. To select other rankings, use the menu to the left.</p>
                 <ng-container *ngIf="playerRankings.length > 0">
@@ -26,15 +27,7 @@
                         [rowsPerPageOptions]="[25, 50, 100]"
                         dataKey="id"
                         [expandedRowKeys]="keys"
-                         #rankingsTable>
-                        
-                        <!-- <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th *ngFor="let col of columns">
-                                    {{ col.header }}
-                                </th>
-                            </tr>
-                        </ng-template> -->
+                        #rankingsTable>
                         <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
                             <tr>
                                 <td *ngFor="let col of columns" class="text-center" [hidden]="col.hidden">

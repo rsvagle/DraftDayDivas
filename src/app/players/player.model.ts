@@ -1,10 +1,11 @@
-export class Player{
+import { FootballTeam } from "../teams/team.model";
+
+export class Player {
     id: number;
     first_name: string;
     last_name: string;
     position: string;
     team_id: number;
-    team: any; // TODO Put in team model
     number: number;
     height: string;
     weight: number;
@@ -13,6 +14,8 @@ export class Player{
     college: string;
     photo_url: string;
     created_at: Date;
+    
+    team: FootballTeam;
 }
 
 export interface PlayersPositionDictionary {

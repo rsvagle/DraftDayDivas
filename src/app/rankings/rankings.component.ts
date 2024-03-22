@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild, inject } from '@angular/core';
 import { PlayersService } from '../players/players.service';
 import { TopPlayersComponent } from '../top-players/top-players.component';
 import { RankingsService } from './rankings.service';
@@ -17,30 +17,19 @@ import { FootballPosition } from '../globals';
   styleUrl: './rankings.component.scss'
 })
 export class RankingsComponent {
+  // Pull in table for filtering
   @ViewChild('rankingsTable') rankingsTable: Table;
   
   playersService = inject(PlayersService);
   rankingsService = inject(RankingsService);
-
-  selectedPositions: any;
-
-  playerRankings: any[] = [];
-
-  players: any;
-
+  
+  // table
   keys: any = {};
-
-  topQB: any;
-  topRB: any;
-  topWR: any;
-  topTE: any;
-  topK: any;
-
   rankingsCols: any[];
-
-  constructor(
-    private ref: ChangeDetectorRef
-  ){
+  playerRankings: any[] = [];
+  selectedPositions: any;
+  
+  constructor(){
     this.rankingsCols = [
       { field: 'ranking', header: 'Rank' },
       { field: 'name', header: 'Player' },
@@ -52,23 +41,9 @@ export class RankingsComponent {
   }
 
   ngOnInit(): void{
-    this.playersService.getTopPerformers().subscribe(
-      data => {
-        this.players = data;
-        this.topQB = data["QB"]
-        this.topRB = data["RB"]
-        this.topWR = data["WR"]
-        this.topTE = data["TE"]
-        this.topK = data["K"]
-      },
-      error => {
-        console.error('Error fetching player data!', error);
-      }
-    );
-
     this.rankingsService.getRankings().subscribe(
       data => {
-        
+        // Set up expanded row keys and open the first row
         data.forEach((player, index) => {
           if(index == 0){
             this.keys[player.id] = true;
@@ -87,10 +62,11 @@ export class RankingsComponent {
     );
   }  
 
+  // Player search filter
   filterGlobal(event: Event): void {
-    const element = event.target as HTMLInputElement; // Correctly type the event target
-    if (element) { // Check if element is present
-      const value = element.value || ''; // Use an empty string if the value is null or undefined
+    const element = event.target as HTMLInputElement;
+    if (element) {
+      const value = element.value || '';
       if (value === '') {
         this.rankingsTable.filterGlobal('', 'contains'); // This clears the global filter
       } else {
@@ -100,6 +76,7 @@ export class RankingsComponent {
     }
   }
   
+  // Position filter
   selectedPositionsChange(event: FootballPosition[]): void{
     this.selectedPositions = event;
     
@@ -111,6 +88,7 @@ export class RankingsComponent {
     }
   }
 
+  // Row expansion helper
   onItemClick(rowData:any, dt:any) {
     if(dt.expandedRowKeys[rowData.id]){
       dt.expandedRowKeys[rowData.id] = false;

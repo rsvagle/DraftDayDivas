@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { baseDevUrl } from '../globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
-
-  private apiUrl = 'http://localhost:8000/api/profile/';
+  private apiUrl = baseDevUrl + 'profile/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +16,6 @@ export class ProfileService {
   }
 
   postSaveProfile(data: any): Observable<any>{
-    return this.http.post("http://localhost:8000/api/save_profile/", data);
+    return this.http.post(baseDevUrl + "save_profile/", data);
   }
 }

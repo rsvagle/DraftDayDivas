@@ -16,7 +16,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 })
 export class PlayersComponent {
   playersService = inject(PlayersService);
-  players: any = [];
+  players: Player[] = [];
 
   loading: boolean = false;
 

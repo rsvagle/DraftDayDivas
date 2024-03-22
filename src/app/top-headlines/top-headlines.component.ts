@@ -17,7 +17,6 @@ export class TopHeadlinesComponent {
   articles: NewsArticle[] = [];
 
   ngOnInit(): void {
-    // pull from backend
     this.newsService.getNews(10).subscribe({
       next: (data) => this.articles = data,
       error: (error) => console.error('There was an error!', error)

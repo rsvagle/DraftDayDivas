@@ -8,32 +8,6 @@
     <h3 class="mt-5">Season Stats</h3>
     <div *ngIf="player_seasons != null">
         <player-stats-display [playerSeasons]="player_seasons"></player-stats-display>
-        <!-- <p-table [columns]="cols" [value]="player_seasons" [tableStyle]="{ 'min-width': '50rem' }">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns">
-                        {{ col.header }}
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                    <td *ngFor="let col of columns">
-                        @switch(col.field){
-                            @case('team.abbreviation'){
-                                {{rowData.team.abbreviation}}
-                            }
-                            @case('player.position'){
-                                {{rowData.player.position}}
-                            }
-                            @default {
-                                {{ rowData[col.field] }}
-                            }
-                        }
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table> -->
     </div>
 
     <!-- News -->

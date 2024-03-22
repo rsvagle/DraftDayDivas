@@ -1,20 +1,42 @@
 <p-toast key="toast1"></p-toast>
-<p-toast key="toast2"></p-toast>
 <div class="login-container">
-    <div class="login-box">
-      <h2>Login</h2>
-      <img src="../assets/images/logos/DDD_logo1_small.png" alt="logo" class="logo">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username"pInputText [(ngModel)]="username" class="form-control" placeholder="Enter username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" pInputText [(ngModel)]="password" class="form-control" placeholder="Enter password">
-        </div>
-        <p-button type="button" class="btn btn-primary" (onClick)="login()">Login</p-button>
-        <button type="button" class="btn btn-secondary" routerLink="/signup">Sign Up</button>
-        <button type="button" class="btn btn-link" routerLink="/reset-password">Reset Password</button>
+  <div class="login-box">
+    <h2>Login</h2>
+    <img
+      src="../assets/images/logos/DDD_logo1_small.png"
+      alt="logo"
+      class="logo"
+    />
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        pInputText
+        [(ngModel)]="username"
+        class="form-control"
+        placeholder="Enter username"
+      />
     </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        pInputText
+        [(ngModel)]="password"
+        class="form-control"
+        placeholder="Enter password"
+      />
+    </div>
+    <p-button type="button" class="btn btn-primary" (onClick)="login()">
+      Login</p-button
+    >
+    <button type="button" class="btn btn-secondary" routerLink="/signup">
+      Sign Up
+    </button>
+    <button type="button" class="btn btn-link" routerLink="/reset-password">
+      Reset Password
+    </button>
   </div>
-  
+</div>

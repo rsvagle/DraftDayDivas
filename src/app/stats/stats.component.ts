@@ -11,51 +11,25 @@ import { FootballPosition } from '../globals';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-stats',
+  selector: 'stats',
   standalone: true,
-  imports: [
-    CommonModule,
-    PrimeNgLightModule, 
-    PositionSelectorComponent, 
-    RouterLink, 
-    TeamSelectorComponent, 
-    SeasonSelectorComponent, 
-    PlayerStatsDisplayComponent
-  ],
+  imports: [CommonModule,PrimeNgLightModule, PositionSelectorComponent, RouterLink,
+    TeamSelectorComponent, SeasonSelectorComponent, PlayerStatsDisplayComponent],
   templateUrl: './stats.component.html',
   styleUrl: './stats.component.scss'
 })
 export class StatsComponent {
   season_stats: any[];
-  cols!: any[];
 
   // search params
   selectedPositions: FootballPosition[];
   selectedTeams: number[];
-  selectedSeasons: number[] = [2024];
+  selectedSeasons: number[] = [2024]; // default to selecting the current year
 
-  constructor(private playersService: PlayersService,
-    private http: HttpClient) {
-    this.cols = [
-      { field: 'year', header: 'Year' },
-      { field: 'team.abbreviation', header: 'Team' },
-      { field: 'player.name', header: 'Player' },
-      { field: 'player.position', header: 'POS' },
-      { field: 'games_played', header: 'GP' },
-      { field: 'passing_yards', header: 'Pass Yds' },
-      { field: 'passing_tds', header: 'Pass TDs' },
-      { field: 'rushing_yards', header: 'Rush Yds' },
-      { field: 'rushing_tds', header: 'Rush TDs' },
-      { field: 'receptions', header: 'Rec' },
-      { field: 'receiving_yards', header: 'Rec Yds' },
-      { field: 'receiving_tds', header: 'Rec TDs' },
-      { field: 'fgm0_19', header: 'FG 0-19 ' },
-      { field: 'fgm20_39', header: 'FG 20-39 ' },
-      { field: 'fgm40_49', header: 'FGM 40-49' },
-      { field: 'fgm50_plus', header: 'FGM 50+' },
-      { field: 'fga', header: 'FGA' },
-    ];   
-  }
+  constructor(
+    private playersService: PlayersService,
+    private http: HttpClient,
+  ) { }
 
   ngOnInit() {
     this.playersService.getSeasonStats("2024").subscribe(
@@ -69,7 +43,8 @@ export class StatsComponent {
   }
 
   search(): void {
-    const url = 'http://localhost:8000/api/stats/search/'; // The endpoint URL
+    const url = 'http://localhost:8000/api/stats/search/';
+
     const body = {
       selectedPositions: this.selectedPositions,
       selectedTeams: this.selectedTeams,

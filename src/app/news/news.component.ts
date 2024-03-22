@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 import { TopHeadlinesComponent } from '../top-headlines/top-headlines.component';
 
 @Component({
-  selector: 'app-news',
+  selector: 'news',
   standalone: true,
   imports: [CommonModule, PrimeNgLightModule, RouterLink, TopHeadlinesComponent],
   templateUrl: './news.component.html',
@@ -18,10 +18,9 @@ export class NewsComponent implements OnInit{
   articles: NewsArticle[] = [];
 
   ngOnInit(): void {
-    // pull from backend
     this.newsService.getNews(null).subscribe({
       next: (data) => this.articles = data,
-      error: (error) => console.error('There was an error!', error)
+      error: (error) => console.error('There was an error loading news articles!', error)
     });
   }  
 }
