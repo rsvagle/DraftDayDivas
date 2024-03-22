@@ -2,6 +2,8 @@
 <p-multiSelect 
   [options]="positions" 
   [(ngModel)]="selectedPositions" 
+  [filter]="false"
   defaultLabel="Select Positions" 
-  (onChange)="onPositionChange()">
+  (onChange)="onPositionChange()"
+  class="selector">
 </p-multiSelect>

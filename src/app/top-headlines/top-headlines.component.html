@@ -1,0 +1,7 @@
+<div class="card p-3" id="headlinesCard">
+    <h5>Top Headlines</h5>
+    <hr/>
+    <ng-container *ngFor="let article of articles | slice:0:6">
+      <a routerLink="/news/article/{{article.id}}" class="text-black text-decoration-none mb-2">{{ article.title }}</a>
+    </ng-container>
+</div>

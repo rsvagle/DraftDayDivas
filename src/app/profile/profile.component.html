@@ -3,23 +3,23 @@
         <h2>Profile</h2>
         <hr />
         <div class="mb-2">
-            <label class="bold">First Name</label><br/>
-            <input pInputText type="text" [(ngModel)]="model.first_name">
-        </div>
-        <div class="mb-2">
-            <label class="bold">Last Name</label><br/>
-            <input pInputText type="text" [(ngModel)]="model.last_name">
-        </div>
-        <div class="mb-2">
-            <label class="bold">Email</label><br/>
+            <label>Email</label><br/>
             <input pInputText type="text" [(ngModel)]="model.email">
         </div>
         <div class="mb-2">
-            <label class="bold">Username</label><br/>
+            <label>Username</label><br/>
             <input pInputText type="text" [(ngModel)]="model.username">
         </div>
-        <div>
-            <p-button type="button" label="Submit" class="p-button-success" (onClick)="saveProfile()"></p-button>
+        <div class="mb-2">
+            <label>First Name</label><br/>
+            <input pInputText type="text" [(ngModel)]="model.first_name">
+        </div>
+        <div class="mb-2">
+            <label>Last Name</label><br/>
+            <input pInputText type="text" [(ngModel)]="model.last_name">
+        </div>
+        <div class="mt-4">
+            <button pButton pRipple label="Submit" class="btn btn-success"></button>
         </div>
     </div>
 </div>

@@ -5,13 +5,35 @@
         <ng-container *ngFor="let item of playersDict | keyvalue">
             <h3>{{item.key}}</h3>
             <div class="row mb-3">
-                <ng-container *ngFor="let player of item.value">
-                    <div class="col-3 mb-1">
-                        <a routerLink="/player-details/{{player.id}}" class="text-black text-decoration-none">
-                            {{player.first_name}} {{player.last_name}} - {{player.team.abbreviation}}
-                        </a>
-                    </div>
+                <ng-container *ngIf="!loading; else loadingPlayers">
+                    <ng-container *ngFor="let player of item.value">
+                        <div class="col-3 mb-1">
+                            <a routerLink="/player-details/{{player.id}}" class="text-black text-decoration-none">
+                                {{player.first_name}} {{player.last_name}} - {{player.team.abbreviation}}
+                            </a>
+                        </div>
+                    </ng-container>
                 </ng-container>
+                <ng-template #loadingPlayers>
+                    <div class="col-3 mb-1">
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                    </div>
+                    <div class="col-3 mb-1">
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                    </div>
+                    <div class="col-3 mb-1">
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                        <p-skeleton width="100%" styleClass="mb-2"></p-skeleton>
+                    </div>
+                </ng-template>
             </div>
         </ng-container>
     </ng-container>

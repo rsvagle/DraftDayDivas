@@ -1,6 +1,72 @@
 <!-- Do a "LEADERS" component here [QB] [RB] [WR] [TE] [K]-->
 <div class="container">
-    <h1>Positional Leaders</h1>
-    <top-players></top-players>
-
+    <div>
+        <h1>Rankings</h1>
+        <hr/>
+        <div class="row">
+            <div class="col-3 d-flex flex-column">
+                <label>Player Search</label>
+                <input type="text" pInputText placeholder="Search" class="w-100"
+                    (input)="filterGlobal($event)" />
+                <div class="mt-2">
+                    <div>
+                        <label>Positions</label>
+                    </div>
+                    <position-selector [includeKicker]="true" [(selectedPositions)]="selectedPositions" (selectedPositionsChange)="selectedPositionsChange($event)"></position-selector>
+                </div>
+            </div>
+            <div class="col-9">
+                <p>Here are the rankings for week 18! Below are the PPR rankings for this week. To select other rankings, use the menu to the left.</p>
+                <ng-container *ngIf="playerRankings.length > 0">
+                    <p-table [columns]="rankingsCols" [value]="playerRankings" [tableStyle]="{ 'min-width': '50rem' }" 
+                        [paginator]="true"
+                        [rows]="50"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [rowsPerPageOptions]="[25, 50, 100]"
+                        dataKey="id"
+                        [expandedRowKeys]="keys"
+                         #rankingsTable>
+                        
+                        <!-- <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns">
+                                    {{ col.header }}
+                                </th>
+                            </tr>
+                        </ng-template> -->
+                        <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                            <tr>
+                                <td *ngFor="let col of columns" class="text-center" [hidden]="col.hidden">
+                                    @switch (col.field) {
+                                        @case ("team.abbreviation") {
+                                            {{rowData.team.abbreviation}}
+                                        }
+                                        @case ("name") {
+                                            <div class="d-flex justify-content-start align-items-end">
+                                                <img src="../../assets/images/avatars/{{rowData.photo_url}}" class="me-4" style="width: 60px; height: 60px; object-fit: contain;" alt="Player Image">
+                                                <span (click)="onItemClick(rowData, rankingsTable)" class="fs-2 text-black clickable-text">
+                                                    {{rowData.first_name}} {{rowData.last_name}}
+                                                </span>
+                                            </div>
+                                        }
+                                        @default {
+                                            {{ rowData[col.field] }}
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="rowexpansion" let-rowData>
+                            <tr>
+                                <td [attr.colspan]="rankingsCols.length" class="pb-2">
+                                    Weekly Projection: TEST TEST TEST <br/>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </ng-container>             
+            </div>
+        </div>
+    </div>
 </div>

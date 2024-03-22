@@ -5,17 +5,20 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Player } from './player.model';
 import { PlayersPositionDictionary } from './player.model';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [PrimeNgLightModule, CommonModule, RouterLink],
+  imports: [PrimeNgLightModule, CommonModule, RouterLink, SkeletonModule],
   templateUrl: './players.component.html',
   styleUrl: './players.component.scss'
 })
 export class PlayersComponent {
   playersService = inject(PlayersService);
   players: any = [];
+
+  loading: boolean = false;
 
   playersDict: PlayersPositionDictionary = {
     QB: [],
@@ -27,10 +30,11 @@ export class PlayersComponent {
 
   ngOnInit() {
     // Get the player season list
-    
+    this.loading = true;
     this.playersService.getAllPlayers().subscribe(
       data => {
         this.createPositionDictionary(data);
+        this.loading = false;
       },
       error => {
         console.error('Error fetching player data!', error);

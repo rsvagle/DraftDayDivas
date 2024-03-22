@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NewsArticle } from './news.article.model';
 
@@ -12,8 +12,13 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getNews(): Observable<NewsArticle[]> {
-    return this.http.get<NewsArticle[]>(this.apiUrl);
+  getNews(limit: number | null): Observable<NewsArticle[]> {
+    let params = new HttpParams();
+    if (limit !== null) {
+      params = params.append('limit', limit.toString());
+    }
+
+    return this.http.get<NewsArticle[]>(this.apiUrl, { params });
   }
 
   getNewsArticle(id: number): Observable<NewsArticle> {

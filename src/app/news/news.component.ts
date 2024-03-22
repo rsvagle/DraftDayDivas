@@ -4,11 +4,12 @@ import { NewsArticle } from './news.article.model';
 import { CommonModule } from '@angular/common';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { RouterLink } from '@angular/router';
+import { TopHeadlinesComponent } from '../top-headlines/top-headlines.component';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule, RouterLink],
+  imports: [CommonModule, PrimeNgLightModule, RouterLink, TopHeadlinesComponent],
   templateUrl: './news.component.html',
   styleUrl: './news.component.scss'
 })
@@ -18,7 +19,7 @@ export class NewsComponent implements OnInit{
 
   ngOnInit(): void {
     // pull from backend
-    this.newsService.getNews().subscribe({
+    this.newsService.getNews(null).subscribe({
       next: (data) => this.articles = data,
       error: (error) => console.error('There was an error!', error)
     });
