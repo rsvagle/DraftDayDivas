@@ -21,8 +21,7 @@ export class GameLogsTableComponent {
   constructor(){
     this.positionPlayerCols = [
       { field: 'year', header: 'Year' },
-      { field: 'week', header: 'Wk' },
-      { field: 'home', header: 'Home/Away' },      
+      { field: 'week', header: 'Wk' },   
       { field: 'opponent', header: 'Opponent' },
       { field: 'passing_yards', header: 'Passing Yards' },
       { field: 'passing_tds', header: 'Passing TDs' },
@@ -35,8 +34,7 @@ export class GameLogsTableComponent {
 
     this.kickerCols = [
       { field: 'year', header: 'Year' },
-      { field: 'week', header: 'Wk' },
-      { field: 'home', header: 'Home/Away' },      
+      { field: 'week', header: 'Wk' },    
       { field: 'opponent', header: 'Opponent' },
       { field: 'fgm0_19', header: 'FG 0-19' },
       { field: 'fgm20_39', header: 'FG 20-39' },

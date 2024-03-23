@@ -7,6 +7,8 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { NewsService } from '../news/news.service';
 import { InjuryReportService } from '../injury-report/injury-report-service';
 import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
+import { GameLogsService } from '../game-logs/game-logs.service';
+import { GameLogsTableComponent } from '../game-logs-table/game-logs-table.component';
 
 @Component({
   selector: 'player-details',
@@ -16,6 +18,7 @@ import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stat
     PrimeNgLightModule,
     CommonModule,
     PlayerStatsDisplayComponent,
+    GameLogsTableComponent,
   ],
   templateUrl: './player-details.component.html',
   styleUrl: './player-details.component.scss',
@@ -23,6 +26,7 @@ import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stat
 export class PlayerDetailsComponent {
   newsService = inject(NewsService);
   injuryService = inject(InjuryReportService);
+  gameLogsService = inject(GameLogsService);
 
   player_id: number;
 
@@ -30,6 +34,7 @@ export class PlayerDetailsComponent {
   player_seasons: any;
   injuryReports: any;
   newsItems: any;
+  gameLogs: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +58,16 @@ export class PlayerDetailsComponent {
     }
 
     // Get the player recent gamelogs
-
+    if (this.player_id) {
+      this.gameLogsService.getRecentPlayerGameLogs(this.player_id).subscribe(
+        (data) => {
+          this.gameLogs = data;
+        },
+        (error) => {
+          console.error('Error fetching game logs data!', error);
+        }
+      );
+    }
 
     // Get injury reports related to this player
     if (this.player_id) {

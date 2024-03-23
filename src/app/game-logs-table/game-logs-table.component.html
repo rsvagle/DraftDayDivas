@@ -28,6 +28,15 @@
                         @case ("team.abbreviation") {
                             {{rowData.team.abbreviation}}
                         }
+                        @case ("opponent") {
+                            <ng-container *ngIf="rowData.home; else away">
+                                vs 
+                            </ng-container>
+                            <ng-template #away>
+                                at
+                            </ng-template>
+                            {{rowData.opponent.abbreviation}}
+                        }
                         @case ("player.name") {
                             <a routerLink="/player-details/{{rowData.player.id}}" class="text-black text-decoration-none">{{rowData.player.first_name}} {{rowData.player.last_name}}</a>
                         }
@@ -73,6 +82,15 @@
                     @switch (col.field) {
                         @case ("team.abbreviation") {
                             {{rowData.team.abbreviation}}
+                        }
+                        @case ("opponent") {
+                            <ng-container *ngIf="rowData.home; else away">
+                                vs 
+                            </ng-container>
+                            <ng-template #away>
+                                at
+                            </ng-template>
+                            {{rowData.opponent.abbreviation}}
                         }
                         @case ("player.name") {
                             <a routerLink="/player-details/{{rowData.player.id}}" class="text-black text-decoration-none">{{rowData.player.first_name}} {{rowData.player.last_name}}</a>

@@ -88,6 +88,14 @@ export const routes: Routes = [
         title: 'Players',
       },
       {
+        path: 'game-logs/:player_id',
+        loadComponent: () =>
+          import('./game-logs/game-logs.component').then(
+            (res) => res.GameLogsComponent
+          ),
+        title: 'Game Logs',
+      },
+      {
         path: 'stats',
         loadComponent: () =>
           import('./stats/stats.component').then((res) => res.StatsComponent),

@@ -10,6 +10,12 @@
         <player-stats-display [playerSeasons]="player_seasons"></player-stats-display>
     </div>
 
+    <!-- Game Logs -->
+    <h3 class="mt-5">Game Logs</h3>
+    <div *ngIf="gameLogs != null">
+        <game-logs-table [gameLogs]="gameLogs"></game-logs-table>
+    </div>
+
     <!-- News -->
     <h3 class="mt-3">News</h3>
     <div *ngIf="newsItems != null && newsItems.length > 0; else noNews">
