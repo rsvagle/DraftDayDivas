@@ -12,14 +12,8 @@
             <div class="d-flex p-2">
               <div>
                 <ng-container *ngIf="article.player; else noPlayer">
-                  <a
-                    routerLink="/player-details/{{ article.player.id }}"
-                    class="text-black text-decoration-none"
-                  >
-                    <img
-                      src="../../assets/images/avatars/{{
-                        article.player.photo_url
-                      }}"
+                  <a routerLink="/player-details/{{ article.player.id }}" class="text-black text-decoration-none">
+                    <img src="../../assets/images/avatars/{{article.player.photo_url}}"
                       class="float-left mr-3"
                       style="width: 100px; height: 100px; object-fit: cover"
                       alt="Article Image"
@@ -39,11 +33,7 @@
               <div>
                 <h5>{{ article.title }}</h5>
                 <p>{{ article.description | slice : 0 : 150 }}...</p>
-                <a
-                  routerLink="/injury-report/{{ article.id }}"
-                  class="btn btn-success btn-sm"
-                  >Read More</a
-                >
+                <a routerLink="/injury-report/{{ article.id }}" class="btn btn-success btn-sm">Read More</a>
               </div>
               <div class="ms-auto d-flex flex-column">
                 <div>

@@ -20,13 +20,11 @@
     <ng-container *ngFor="let article of articles.slice(0, 3)">
       <div class="col-4">
         <div class="card h-100">
-          <img
-            class="card-img-top"
-            src="../../assets/images/news-images/{{ article.image_url }}"
-            alt="Card image cap"
-          />
+          <img class="card-img-top" src="../../assets/images/news-images/{{ article.image_url }}" alt="Card image cap" />
           <div class="card-body">
-            <h5 class="card-title">{{ article.title }}</h5>
+            <a routerLink="/news/article/{{article.id}}" class="text-decoration-none">
+              <h5 class="card-title">{{ article.title }}</h5>
+            </a>
             <h6 class="card-subtitle mb-2 text-muted">
               {{ article.author }} - {{ article.created_at | date }}
             </h6>

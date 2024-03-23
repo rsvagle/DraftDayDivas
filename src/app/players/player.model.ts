@@ -16,6 +16,7 @@ export class Player {
     created_at: Date;
     
     team: FootballTeam;
+    season_stats: any;
 }
 
 export interface PlayersPositionDictionary {

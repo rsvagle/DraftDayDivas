@@ -5,6 +5,7 @@ import { NewsService } from '../news/news.service';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { PlayerSummaryComponent } from '../player-summary/player-summary.component';
 import { TopPlayersComponent } from '../top-players/top-players.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -14,6 +15,7 @@ import { TopPlayersComponent } from '../top-players/top-players.component';
     PrimeNgLightModule,
     PlayerSummaryComponent,
     TopPlayersComponent,
+    RouterLink
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

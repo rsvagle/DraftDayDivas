@@ -9,7 +9,7 @@ import { baseDevUrl } from '../globals';
 })
 export class TeamsService {
 
-  private apiUrl = baseDevUrl + '/teams/';
+  private apiUrl = baseDevUrl + 'teams/';
 
   constructor(private http: HttpClient) { }
 
