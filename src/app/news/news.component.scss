@@ -1,0 +1,11 @@
+.card-img-top{
+    height: 15rem;
+    object-fit: cover; /* Cover the container without distorting the aspect ratio */
+    width: 100%; /* Make the image fill the width of its container */
+}
+
+.top-news-card-img-top{
+    object-fit: cover; /* Cover the container without distorting the aspect ratio */
+    width: 100%; /* Make the image fill the width of its container */
+    max-height: 400px;
+}

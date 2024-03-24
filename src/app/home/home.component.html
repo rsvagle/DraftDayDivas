@@ -1,7 +1,7 @@
 <!-- Banner -->
 <div class="home-banner">
   <div class="home--banner-text p-5">
-    <h1 class="text-white">Draft Day Divas</h1>
+    <h1 class="text-white display-1">Draft Day Divas</h1>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
 </div>
 
 <!-- Top Stories -->
-<div class="container py-5">
+<div class="container py-4">
   <h4>Top Stories</h4>
   <hr />
   <div class="row">
@@ -22,13 +22,17 @@
         <div class="card h-100">
           <img class="card-img-top" src="../../assets/images/news-images/{{ article.image_url }}" alt="Card image cap" />
           <div class="card-body">
-            <a routerLink="/news/article/{{article.id}}" class="text-decoration-none">
-              <h5 class="card-title">{{ article.title }}</h5>
-            </a>
-            <h6 class="card-subtitle mb-2 text-muted">
-              {{ article.author }} - {{ article.created_at | date }}
-            </h6>
-            <p class="card-text">{{ article.description }}</p>
+            <div class="d-flex flex-column h-100">
+              <div class="h-50">
+                <a routerLink="/news/article/{{article.id}}" class="text-decoration-none">
+                  <h5 class="card-title">{{ article.title }}</h5>
+                </a>
+                <h6 class="card-subtitle mb-3 text-muted">
+                  {{ article.author }} - {{ article.created_at | date }}
+                </h6>
+              </div>
+              <p class="card-text mt-3">{{ article.description | truncate:90}}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -37,7 +41,7 @@
 </div>
 
 <!-- Player Profile -->
-<div class="container py-5" *ngIf="randomPlayer != null">
+<div class="container py-4" *ngIf="randomPlayer != null">
   <h4>Player Profile</h4>
   <hr />
   <player-summary [player_id]="randomPlayer"></player-summary>

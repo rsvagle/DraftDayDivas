@@ -4,11 +4,12 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { InjuryReportService } from '../injury-report/injury-report-service';
 import { InjuryReportArticle } from '../injury-report/injury-report-article.model';
+import { TopHeadlinesComponent } from '../top-headlines/top-headlines.component';
 
 @Component({
   selector: 'injury-report-article',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule, RouterLink],
+  imports: [CommonModule, PrimeNgLightModule, RouterLink, TopHeadlinesComponent],
   templateUrl: './injury-report-article.component.html',
   styleUrl: './injury-report-article.component.scss',
 })

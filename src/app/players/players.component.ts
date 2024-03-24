@@ -5,12 +5,11 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Player } from './player.model';
 import { PlayersPositionDictionary } from './player.model';
-import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [PrimeNgLightModule, CommonModule, RouterLink, SkeletonModule],
+  imports: [PrimeNgLightModule, CommonModule, RouterLink],
   templateUrl: './players.component.html',
   styleUrl: './players.component.scss'
 })

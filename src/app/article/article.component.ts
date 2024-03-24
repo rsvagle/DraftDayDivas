@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, SimpleChanges, inject } from '@angular/core';
 import { NewsService } from '../news/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { NewsArticle } from '../news/news.article.model';
@@ -15,14 +15,24 @@ import { TopHeadlinesComponent } from '../top-headlines/top-headlines.component'
 export class ArticleComponent {
   newsService = inject(NewsService);
   article: NewsArticle;
+  articleId: string | null;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    const articleId = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.articleId = params['id'];
+      if (this.articleId) {
+        this.getNewsArticle(+this.articleId);
+      }
+    });
+  }
 
-    if (articleId) {
-      this.newsService.getNewsArticle(+articleId).subscribe((article) => {
+  getNewsArticle(id: number) {
+    if (this.articleId) {
+      this.newsService.getNewsArticle(id).subscribe((article) => {
         this.article = article;
       });
     }

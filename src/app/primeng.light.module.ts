@@ -11,6 +11,7 @@ import { ToastModule } from 'primeng/toast';
 import { AccordionModule } from 'primeng/accordion';
 import { MultiSelectModule } from 'primeng/multiselect'
 import { FormsModule } from '@angular/forms';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     AccordionModule,
     MultiSelectModule,
     FormsModule,
+    SkeletonModule,
     // ... add other PrimeNG modules here
   ],
   exports: [
@@ -41,6 +43,7 @@ import { FormsModule } from '@angular/forms';
     AccordionModule,
     MultiSelectModule,
     FormsModule,
+    SkeletonModule,
     // ... also export them here
   ]
 })

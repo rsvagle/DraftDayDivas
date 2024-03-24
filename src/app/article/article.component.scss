@@ -1,0 +1,5 @@
+.article-image {
+    object-fit: cover; /* Cover the container without distorting the aspect ratio */
+    width: 100%; /* Make the image fill the width of its container */
+    max-height: 400px;
+}

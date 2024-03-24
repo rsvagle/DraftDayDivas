@@ -2,24 +2,28 @@
   <div class="row">
   <!-- Article content -->
     <div class="col-md-8">
-      <div class="card">
-        <ng-container *ngIf="article; else loading">
-          <img src="./../assets/images/news-images/{{article.image_url}}" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{ article.title }}</h5>
-            <p class="card-text"><small class="text-muted">{{ article.created_at | date }}</small></p>
-            <p class="card-text">{{ article.description }}</p>
-            <div class="article-content" [innerHTML]="article.article_content"></div>
-          </div>
-        </ng-container>
-        <ng-template #loading>
-          <p class="p-3">Loading article...</p>
-        </ng-template>
-      </div>
+      <ng-container *ngIf="article">
+        <img src="./../assets/images/news-images/{{article.image_url}}" class="article-image" alt="...">
+      </ng-container>
     </div>
     <!-- Top headlines component floated to the right -->
     <div class="col-md-4">
       <top-headlines></top-headlines>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div>
+      <ng-container *ngIf="article; else loading">
+        <div>
+          <h5>{{ article.title }}</h5>
+          <p><small class="text-muted">{{ article.created_at | date }} by {{ article.author }}</small></p>
+          <p>{{ article.description }}</p>
+          <div class="article-content" [innerHTML]="article.article_content"></div>
+        </div>
+      </ng-container>
+      <ng-template #loading>
+        <p class="p-3">Loading article...</p>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -1,9 +1,13 @@
 .home-banner{
-    background-image: url('../../assets/images/news-images/big-football-huddle.jpg');
+    background-image: url('../../assets/images/general/big-football-huddle.jpg');
     height: 400px;
     margin-top: -3rem;
+    object-fit: cover;
+    background-position-x: center;
 }
 
 .card-img-top{
     height: 15rem;
+    object-fit: cover; /* Cover the container without distorting the aspect ratio */
+    width: 100%; /* Make the image fill the width of its container */
 }

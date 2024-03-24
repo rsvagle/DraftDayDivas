@@ -6,6 +6,7 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { PlayerSummaryComponent } from '../player-summary/player-summary.component';
 import { TopPlayersComponent } from '../top-players/top-players.component';
 import { RouterLink } from '@angular/router';
+import { TruncatePipe } from '../pipes/truncate.pipe';
 
 @Component({
   selector: 'home',
@@ -15,7 +16,8 @@ import { RouterLink } from '@angular/router';
     PrimeNgLightModule,
     PlayerSummaryComponent,
     TopPlayersComponent,
-    RouterLink
+    RouterLink,
+    TruncatePipe
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

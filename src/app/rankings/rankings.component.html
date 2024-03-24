@@ -26,7 +26,7 @@
             </div>
             <!-- Rankings table -->
             <div class="col-9">
-                <ng-container *ngIf="playerRankings.length > 0">
+                <ng-container *ngIf="playerRankings.length > 0; else loadingPlayers">
                     <p-table [columns]="rankingsCols" [value]="playerRankings" [tableStyle]="{ 'min-width': '50rem' }" 
                         [paginator]="true"
                         [rows]="50"
@@ -45,7 +45,7 @@
                                         }
                                         @case ("name") {
                                             <div class="d-flex justify-content-start align-items-end">
-                                                <img src="../../assets/images/avatars/{{rowData.photo_url}}" class="me-4" style="width: 60px; height: 60px; object-fit: contain;" alt="Player Image">
+                                                <img src="../../assets/images/avatars/{{rowData.photo_url}}" class="me-4" style="width: 100px; height: 100px; object-fit: contain;" alt="Player Image">
                                                 <span (click)="onItemClick(rowData, rankingsTable)" class="fs-2 text-black clickable-text">
                                                     {{rowData.first_name}} {{rowData.last_name}}
                                                 </span>
@@ -72,7 +72,51 @@
                             </tr>
                         </ng-template>
                     </p-table>
-                </ng-container>             
+                </ng-container>
+                <ng-template #loadingPlayers>
+                    <div class="row mt-3 px-2">
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-6">
+                            <p-skeleton height="4rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                    </div>
+                    <div class="row mt-2 px-2">
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-6">
+                            <p-skeleton height="4rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                    </div>
+                    <div class="row mt-2 px-2">
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-6">
+                            <p-skeleton height="4rem" styleClass="mb-2" borderRadius="16px"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                        <div class="col-2 d-flex justify-content-center">
+                            <p-skeleton shape="circle" size="4rem" styleClass="mr-2"></p-skeleton>
+                        </div>
+                    </div>
+                </ng-template>             
             </div>
         </div>
     </div>
