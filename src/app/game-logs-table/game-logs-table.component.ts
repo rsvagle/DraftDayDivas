@@ -11,12 +11,12 @@ import { RouterLink } from '@angular/router';
   styleUrl: './game-logs-table.component.scss'
 })
 export class GameLogsTableComponent {
-  @Input() gameLogs: any[];
+  @Input() gameLogs: any[] = [];
 
   positionPlayerCols: any[];
   kickerCols: any[];
-  oPlayerGameLogs: any[];
-  kPlayerGameLogs: any[];
+  oPlayerGameLogs: any[] = [];
+  kPlayerGameLogs: any[] = [];
 
   constructor(){
     this.positionPlayerCols = [
@@ -48,16 +48,20 @@ export class GameLogsTableComponent {
 
   ngOnInit(): void{
     // filter
-    this.oPlayerGameLogs = this.gameLogs.filter(x => x.fga == 0 && x.xpa == 0);
-    this.kPlayerGameLogs = this.gameLogs.filter(x => x.fga > 0 || x.xpa > 0)
+    if(this.gameLogs.length > 0){
+      this.oPlayerGameLogs = this.gameLogs.filter(x => x.fga == 0 && x.xpa == 0);
+      this.kPlayerGameLogs = this.gameLogs.filter(x => x.fga > 0 || x.xpa > 0)
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['gameLogs']) {
       // Data in gameLogs has changed
       this.gameLogs = [...this.gameLogs]
-      this.oPlayerGameLogs = this.gameLogs.filter(x => x.fga == 0 && x.xpa == 0);
-      this.kPlayerGameLogs = this.gameLogs.filter(x => x.fga > 0 || x.xpa > 0)
+      if(this.gameLogs.length > 0){
+        this.oPlayerGameLogs = this.gameLogs.filter(x => x.fga == 0 && x.xpa == 0);
+        this.kPlayerGameLogs = this.gameLogs.filter(x => x.fga > 0 || x.xpa > 0)
+      }
     }
   }
 }

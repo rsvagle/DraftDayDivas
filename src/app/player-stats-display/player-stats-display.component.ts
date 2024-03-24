@@ -11,12 +11,12 @@ import { RouterLink } from '@angular/router';
   styleUrl: './player-stats-display.component.scss'
 })
 export class PlayerStatsDisplayComponent {
-  @Input() playerSeasons: any[];
+  @Input() playerSeasons: any[] = [];
 
   positionPlayerCols: any[];
   kickerCols: any[];
-  oPlayerSeasons: any[];
-  kPlayerSeasons: any[];
+  oPlayerSeasons: any[] = [];
+  kPlayerSeasons: any[] = [];
 
   constructor(){
     this.positionPlayerCols = [
@@ -52,16 +52,21 @@ export class PlayerStatsDisplayComponent {
 
   ngOnInit(): void{
     // filter
-    this.oPlayerSeasons = this.playerSeasons.filter(x => x.fga == 0 && x.xpa == 0);
-    this.kPlayerSeasons = this.playerSeasons.filter(x => x.fga > 0 || x.xpa > 0)
+    if(this.playerSeasons.length > 0){
+      this.oPlayerSeasons = this.playerSeasons.filter(x => x.fga == 0 && x.xpa == 0);
+      this.kPlayerSeasons = this.playerSeasons.filter(x => x.fga > 0 || x.xpa > 0)
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['playerSeasons']) {
       // Data in playerSeasons has changed
       this.playerSeasons = [...this.playerSeasons]
-      this.oPlayerSeasons = this.playerSeasons.filter(x => x.fga == 0 && x.xpa == 0);
-      this.kPlayerSeasons = this.playerSeasons.filter(x => x.fga > 0 || x.xpa > 0)
+
+      if(this.playerSeasons.length > 0){
+        this.oPlayerSeasons = this.playerSeasons.filter(x => x.fga == 0 && x.xpa == 0);
+        this.kPlayerSeasons = this.playerSeasons.filter(x => x.fga > 0 || x.xpa > 0)
+      }
     }
   }
 }

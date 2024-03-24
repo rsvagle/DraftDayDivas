@@ -3,6 +3,15 @@
         <h1>Rankings</h1>
         <hr/>
         <div class="row">
+            <p>Here are the rankings for week 18! Below are the PPR rankings for this week. To select other rankings, use the menu to the left.</p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+        <div class="row">
             <!-- Search and Filtering -->
             <div class="col-3 d-flex flex-column">
                 <label>Player Search</label>
@@ -17,7 +26,6 @@
             </div>
             <!-- Rankings table -->
             <div class="col-9">
-                <p>Here are the rankings for week 18! Below are the PPR rankings for this week. To select other rankings, use the menu to the left.</p>
                 <ng-container *ngIf="playerRankings.length > 0">
                     <p-table [columns]="rankingsCols" [value]="playerRankings" [tableStyle]="{ 'min-width': '50rem' }" 
                         [paginator]="true"
@@ -53,7 +61,13 @@
                         <ng-template pTemplate="rowexpansion" let-rowData>
                             <tr>
                                 <td [attr.colspan]="rankingsCols.length" class="pb-2">
-                                    Weekly Projection: TEST TEST TEST <br/>
+                                    <label>Weekly Projection: {{rowData.projected_points}} pts</label>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
                                 </td>
                             </tr>
                         </ng-template>

@@ -26,17 +26,19 @@
                             <p>Points: {{topRB.season_stats.fantasy_points}}</p>
                         }
                         @case ("WR") {
+                            <p>Receptions {{topWR.season_stats.receptions}}</p>
                             <p>Receiving Yards {{topWR.season_stats.receiving_yards}}</p>
                             <p>Receiving TDs {{topWR.season_stats.receiving_tds }}</p>
                             <p>Points: {{topWR.season_stats.fantasy_points}}</p>
                         }
                         @case ("TE") {
+                            <p>Receptions {{topTE.season_stats.receptions}}</p>
                             <p>Receiving Yards {{topTE.season_stats.receiving_yards}}</p>
                             <p>Receiving TDs {{topTE.season_stats.receiving_tds }}</p>
                             <p>Points: {{topTE.season_stats.fantasy_points}}</p>
                         }
                         @case ("K") {
-                            <p>FG Made {{player.season_stats.fgm}}</p>
+                            <p>FG Made {{player.season_stats.fgm0_19 + player.season_stats.fgm20_39 + player.season_stats.fgm40_49 + player.season_stats.fgm50_plus}}</p>
                             <p>FG Attempted {{player.season_stats.fga }}</p>
                             <p>Points: {{player.season_stats.fantasy_points}}</p>                            
                         }

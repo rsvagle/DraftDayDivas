@@ -15,8 +15,8 @@
     </div>
     <div class="p-3">
       <div class="player-details">
-        <div class="player-stats">
-          <h3>2023 SEASON STATS</h3>
+        <div class="player-stats" *ngIf="player.season_stats != null; else rookie">
+          <h3>2024 SEASON STATS</h3>
           @switch (player.position) {
             @case ("QB") {
               <ul>
@@ -50,6 +50,9 @@
             }
         }
         </div>
+        <ng-template #rookie>
+          Rookie
+        </ng-template>
       </div>
     </div>
   </div>
