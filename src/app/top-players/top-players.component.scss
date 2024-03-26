@@ -17,14 +17,14 @@
 }
 
 .player-info-container {
-    height: 250px;
+    max-height: 200px;
     width: 100%;
     display: flex;
     flex-direction: column; /* Stack the image and player info vertically */
     align-items: center; /* Center-align the items horizontally */
-    justify-content: center; /* Center-align the items vertically */
+    justify-content: start; /* Center-align the items vertically */
     text-align: center; /* Center-align the text */
-    padding: 20px; /* Optional: adds some padding inside the boxes */
+    padding: 25px; /* Optional: adds some padding inside the boxes */
 }
 
 .player-info-upper-container{
@@ -63,7 +63,7 @@
 }
 
 .player-info {
-    color:#ffffff;
+    
 }
 
 /* Additional styles for responsiveness */

@@ -10,6 +10,7 @@
                         <div class="col-3 mb-1">
                             <a routerLink="/player-details/{{player.id}}" class="text-black text-decoration-none">
                                 {{player.first_name}} {{player.last_name}} - {{player.team.abbreviation}}
+                                <img src="../../assets/images/logos/nfl_logos/{{player.team.logo_url}}" class="me-4" style="width: 25px; height: 25px; object-fit: contain;" alt="Team Image">
                             </a>
                         </div>
                     </ng-container>

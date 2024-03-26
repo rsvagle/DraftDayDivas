@@ -28,7 +28,7 @@
             <h3>Players</h3>
         </div>
         <div class="mt-3" *ngIf="playerStats.length > 0">
-            <player-stats-display [playerSeasons]="playerStats"></player-stats-display>
+            <player-stats-display [playerSeasons]="playerStats" [sorters]="false"></player-stats-display>
         </div>
     </ng-container>
 </div>

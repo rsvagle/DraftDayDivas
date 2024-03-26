@@ -17,7 +17,7 @@
                         {{ col.header }}
                     </th>
                 </tr>
-                <tr>
+                <tr *ngIf="sorters">
                     <ng-container *ngFor="let col of columns">
                         <th [pSortableColumn]="col.field"><p-sortIcon [field]="col.field"></p-sortIcon></th>
                     </ng-container>
@@ -63,7 +63,7 @@
                         {{ col.header }}
                     </th>
                 </tr>
-                <tr>
+                <tr *ngIf="sorters">
                     <ng-container *ngFor="let col of columns">
                         <th [pSortableColumn]="col.field"><p-sortIcon [field]="col.field"></p-sortIcon></th>
                     </ng-container>
