@@ -4,6 +4,7 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { baseDevUrl } from '../globals';
 
 @Component({
   selector: 'signup',
@@ -35,7 +36,7 @@ export class SignupComponent {
         password: this.password // Assuming the backend handles password hashing
       };
       
-      this.http.post('http://localhost:8000/api/signup/', user).subscribe({
+      this.http.post(baseDevUrl + 'signup/', user).subscribe({
         next: (response) => {
           // Handle successful signup, e.g., navigate to the login page or home page
           this.messageService.add({ key: 'toast1', severity: 'success', summary: 'Success', detail: 'Signup Successful' });
