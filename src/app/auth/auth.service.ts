@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserCredentials, LoggedInUser } from './auth.models';
+import { baseDevUrl } from '../globals';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthService {
   // Login
   login(credentials: UserCredentials): Observable<LoggedInUser | any> {
     return this.http
-      .post<LoggedInUser | any>(`http://localhost:8000/api/login/`, credentials)
+      .post<LoggedInUser | any>(baseDevUrl + `login/`, credentials)
       .pipe(
         map((user) => {
           // Assuming the server responds with the LoggedInUser format

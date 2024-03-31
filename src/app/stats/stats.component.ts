@@ -7,7 +7,7 @@ import { RouterLink } from '@angular/router';
 import { TeamSelectorComponent } from '../team-selector/team-selector.component';
 import { SeasonSelectorComponent } from '../season-selector/season-selector.component';
 import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
-import { FootballPosition } from '../globals';
+import { FootballPosition, baseDevUrl } from '../globals';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -43,7 +43,7 @@ export class StatsComponent {
   }
 
   search(): void {
-    const url = 'http://localhost:8000/api/stats/search/';
+    const url = baseDevUrl + 'stats/search/';
 
     const body = {
       selectedPositions: this.selectedPositions,

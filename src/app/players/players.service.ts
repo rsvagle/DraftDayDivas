@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { baseDevUrl } from '../globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersService {
   
-  private apiUrlPlayer = 'http://localhost:8000/api/player';
+  private apiUrlPlayer = baseDevUrl + 'player';
   
   constructor(private http: HttpClient) {}
   
@@ -24,11 +25,11 @@ export class PlayersService {
   }
   
   getAllPlayers(): Observable<any> {
-    return this.http.get("http://localhost:8000/api/players/");
+    return this.http.get(baseDevUrl + "players/");
   }
 
   getTopPerformers(): Observable<any> {
-    return this.http.get("http://localhost:8000/api/top-performers/");
+    return this.http.get(baseDevUrl + "top-performers/");
   }
   
   filterByPosition(players: any, position: string) {
@@ -36,11 +37,11 @@ export class PlayersService {
   }
   
   getSeasonStats(year: string): Observable<any>  {
-    return this.http.get(`http://localhost:8000/api/stats/${year}`);
+    return this.http.get(baseDevUrl + `stats/${year}`);
   }
 
   getAllTeamPlayers(team_id: number): Observable<any>  {
-    return this.http.get(`http://localhost:8000/api/teams/players/${team_id}`);
+    return this.http.get(baseDevUrl + `teams/players/${team_id}`);
   }
 }
 
