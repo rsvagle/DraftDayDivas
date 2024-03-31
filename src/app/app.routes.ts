@@ -76,7 +76,6 @@ export const routes: Routes = [
           import('./players/players.component').then(
             (res) => res.PlayersComponent
           ),
-        canActivate: [AuthGuard],
         title: 'Players',
       },
       {
@@ -129,7 +128,6 @@ export const routes: Routes = [
           import('./draft/mock-draft.component').then(
             (res) => res.DraftComponent
           ),
-        canActivate: [AuthGuard],
         title: 'Draft',
       },
       {
