@@ -1,4 +1,4 @@
-export const baseDevUrl = 'http://localhost:8000/api/';
+export const baseDevUrl = 'https://draft-day-divas-ii1squpiy-ryan-vagles-projects.vercel.app/api/';
 
 export enum FootballPosition {
   QB = 'QB',

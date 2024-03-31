@@ -8,11 +8,12 @@ import { RouterLink } from '@angular/router';
 import { Table } from 'primeng/table';
 import { PositionSelectorComponent } from '../position-selector/position-selector.component';
 import { FootballPosition } from '../globals';
+import { ScoringParams, ScoringSelectorComponent } from '../scoring-selector/scoring-selector.component';
 
 @Component({
   selector: 'rankings',
   standalone: true,
-  imports: [CommonModule, PrimeNgLightModule, TopPlayersComponent, RouterLink, PositionSelectorComponent],
+  imports: [CommonModule, PrimeNgLightModule, TopPlayersComponent, RouterLink, PositionSelectorComponent, ScoringSelectorComponent],
   templateUrl: './rankings.component.html',
   styleUrl: './rankings.component.scss'
 })
@@ -28,6 +29,7 @@ export class RankingsComponent {
   rankingsCols: any[];
   playerRankings: any[] = [];
   selectedPositions: any;
+  selectedScoringParams = ScoringParams.PPR;
   
   constructor(){
     this.rankingsCols = [
@@ -86,6 +88,10 @@ export class RankingsComponent {
       // Apply the filter with the input value
       this.rankingsTable.filter(this.selectedPositions, 'position', 'in');
     }
+  }
+
+  scoringParamsChange(event: any): void{
+    this.selectedScoringParams = event;
   }
 
   // Row expansion helper

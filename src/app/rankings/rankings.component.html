@@ -5,13 +5,12 @@
         <div class="row">
             <p>Here are the rankings for week 18! Below are the PPR rankings for this week. To select other rankings, use the menu to the left.</p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Each week, we dive deep into player performances, injury reports, and upcoming matchups to compile rankings that reflect the true potential of players in the fantasy landscape. 
+                Whether it's identifying a sleeper quarterback set to exploit a weak defense or deciding between two running backs with similar production levels,
+                our weekly rankings provide invaluable insights to help you dominate the week. 
             </p>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <!-- Search and Filtering -->
             <div class="col-3 d-flex flex-column">
                 <label>Player Search</label>
@@ -22,6 +21,12 @@
                         <label>Positions</label>
                     </div>
                     <position-selector [includeKicker]="true" [(selectedPositions)]="selectedPositions" (selectedPositionsChange)="selectedPositionsChange($event)"></position-selector>
+                </div>
+                <div class="mt-2">
+                    <div>
+                        <label>Scoring</label>
+                    </div>
+                    <scoring-selector [scoringParams]="selectedScoringParams" (onScoringParamsChange)="scoringParamsChange($event)"></scoring-selector>
                 </div>
             </div>
             <!-- Rankings table -->
@@ -63,10 +68,9 @@
                                 <td [attr.colspan]="rankingsCols.length" class="pb-2">
                                     <label>Weekly Projection: {{rowData.projected_points}} pts</label>
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        Wright is our top ranked QB for this week. He's been on fire lately, posting over 300 yards and 2 TDs in each of his last 4 starts.
+                                        His Jaguars have a favorable matchup too in the final week of the season. The Colts have given up the 2nd most points to QBs this season,
+                                        so it's an easy pick to project Wright to have a great box score on Sunday night.
                                     </p>
                                 </td>
                             </tr>
