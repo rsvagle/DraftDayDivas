@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { PlayersService } from '../players/players.service';
 import { CommonModule } from '@angular/common';
+import { PrimeNgLightModule } from '../primeng.light.module';
 
 @Component({
   selector: 'top-players',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PrimeNgLightModule],
   templateUrl: './top-players.component.html',
   styleUrl: './top-players.component.scss'
 })

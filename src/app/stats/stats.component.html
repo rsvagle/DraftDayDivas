@@ -20,7 +20,17 @@
         </div>
     </div>
     <!-- Tables -->
-    <div class="mt-3" *ngIf="season_stats != null">
+    <div class="mt-3" *ngIf="season_stats != null; else loadingStats">
         <player-stats-display [playerSeasons]="season_stats"></player-stats-display>
     </div>
+    <ng-template #loadingStats>
+        <div class="mt-5 w-100 d-flex justify-content-center">
+            <div class="d-flex flex-column">
+                <p class="text-center">Loading...</p>
+                <div>
+                    <p-progressSpinner></p-progressSpinner>
+                </div>
+            </div>            
+        </div>
+    </ng-template>
 </div>

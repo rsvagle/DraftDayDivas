@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   // Top news articles
   newsService = inject(NewsService);
   articles: NewsArticle[] = [];
+  loading: boolean = false;
 
   title = 'DraftDayDivas';
 
@@ -39,9 +40,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // Get the top 10 news articles
-    this.newsService.getNews(10).subscribe({
-      next: (data) => (this.articles = data),
-      error: (error) => console.error('There was an error!', error),
-    });
+    this.loading = true;
+    this.newsService.getNews(10).subscribe(
+      data => {
+        this.articles = data;
+        this.loading = false;
+      },
+      error => {
+        console.error('There was an error!', error);
+        this.loading = false;
+      }
+    );
   }
 }

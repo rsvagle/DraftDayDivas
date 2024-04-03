@@ -29,14 +29,18 @@
         placeholder="Enter password"
       />
     </div>
-    <p-button type="button" class="btn btn-primary" (onClick)="login()">
-      Login</p-button
-    >
-    <button type="button" class="btn btn-secondary" routerLink="/signup">
-      Sign Up
-    </button>
-    <button type="button" class="btn btn-link" routerLink="/reset-password">
-      Reset Password
-    </button>
+    <div class="d-flex flex-column">
+      <div class="d-flex justify-content-between">
+        <p-button class="p-button-success btn-sm" size="small" (onClick)="login()">
+          Login
+        </p-button>
+      </div>
+      <div class="mt-3">
+        No account? <a class="link" routerLink="/signup">Sign Up Here</a>
+      </div>
+      <div>
+        <a class="link" routerLink="/reset-password">Reset Password</a>
+      </div>
+    </div>
   </div>
 </div>

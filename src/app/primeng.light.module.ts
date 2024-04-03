@@ -12,6 +12,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { MultiSelectModule } from 'primeng/multiselect'
 import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     MultiSelectModule,
     FormsModule,
     SkeletonModule,
+    ProgressSpinnerModule,
     // ... add other PrimeNG modules here
   ],
   exports: [
@@ -44,6 +46,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     MultiSelectModule,
     FormsModule,
     SkeletonModule,
+    ProgressSpinnerModule,
     // ... also export them here
   ]
 })

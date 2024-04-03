@@ -1,4 +1,4 @@
-<div *ngIf="show" class="row mt-3 gap-2">
+<div *ngIf="show; else loadingPlayers" class="row mt-3 gap-2">
     <ng-container *ngFor="let player of players">
         <div class="col top-player-container">
             <div class="player-info-upper-container w-100" [ngStyle]="{'background-image': 'url(../../assets/images/logos/nfl_logos/' + player.team.logo_url + ')'}">
@@ -153,3 +153,22 @@
         </div>
     </ng-container>
 </div>
+<ng-template #loadingPlayers>
+    <div class="row mt-3 gap-2">
+        <div class="col">
+            <p-skeleton width="100%" height="300px"></p-skeleton>
+        </div>
+        <div class="col">
+            <p-skeleton width="100%" height="300px"></p-skeleton>
+        </div>
+        <div class="col">
+            <p-skeleton width="100%" height="300px"></p-skeleton>
+        </div>
+        <div class="col">
+            <p-skeleton width="100%" height="300px"></p-skeleton>
+        </div>
+        <div class="col">
+            <p-skeleton width="100%" height="300px"></p-skeleton>     
+        </div>
+    </div>
+</ng-template>
