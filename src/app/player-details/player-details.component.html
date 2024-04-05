@@ -36,7 +36,8 @@
     <div *ngIf="injuryReports != null && injuryReports.length > 0; else noInjuryReports">
         <ng-container *ngFor="let injReport of injuryReports">
             <div class="card p-4 mb-3">
-                <h4>{{injReport.title}}</h4>
+                <h4 routerLink="/injury-report/{{ injReport.id }}" class="clickable-text">{{injReport.title}}</h4>
+                <p class="mb-0">{{injReport.created_at | date}}</p>
             </div>
         </ng-container>
     </div>

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PlayersService } from '../players/players.service';
 import { PlayerSummaryComponent } from '../player-summary/player-summary.component';
 import { PrimeNgLightModule } from '../primeng.light.module';
@@ -19,6 +19,7 @@ import { GameLogsTableComponent } from '../game-logs-table/game-logs-table.compo
     CommonModule,
     PlayerStatsDisplayComponent,
     GameLogsTableComponent,
+    RouterLink,
   ],
   templateUrl: './player-details.component.html',
   styleUrl: './player-details.component.scss',
