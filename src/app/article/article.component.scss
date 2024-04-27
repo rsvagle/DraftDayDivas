@@ -3,3 +3,12 @@
     width: 100%; /* Make the image fill the width of its container */
     max-height: 400px;
 }
+
+.icon-bar {
+    padding-top: 50px;
+    width: 100px;
+    height: 50%;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    z-index: 1000; /* Ensure it's above other content */
+    left: 10px; /* Adjusted to position outside the container */
+}

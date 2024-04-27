@@ -4,8 +4,12 @@
         <player-summary [player_id]="player_id"></player-summary>
     </div>
 
+    <div class="mt-3">
+        <recent-fantasy-scores [player_id]="player_id" [chartHeight]="'250'"></recent-fantasy-scores>
+    </div>
+
     <!-- Player Seasons -->
-    <h3 class="mt-5">Season Stats</h3>
+    <h3 class="mt-3">Season Stats</h3>
     <div *ngIf="player_seasons != null">
         <player-stats-display [playerSeasons]="player_seasons"></player-stats-display>
     </div>

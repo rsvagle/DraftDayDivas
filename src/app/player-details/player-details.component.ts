@@ -9,6 +9,7 @@ import { InjuryReportService } from '../injury-report/injury-report-service';
 import { PlayerStatsDisplayComponent } from '../player-stats-display/player-stats-display.component';
 import { GameLogsService } from '../game-logs/game-logs.service';
 import { GameLogsTableComponent } from '../game-logs-table/game-logs-table.component';
+import { RecentFantasyScoresComponent } from '../recent-fantasy-scores/recent-fantasy-scores.component';
 
 @Component({
   selector: 'player-details',
@@ -19,7 +20,8 @@ import { GameLogsTableComponent } from '../game-logs-table/game-logs-table.compo
     CommonModule,
     PlayerStatsDisplayComponent,
     GameLogsTableComponent,
-    RouterLink,
+    RouterLink,   
+    RecentFantasyScoresComponent
   ],
   templateUrl: './player-details.component.html',
   styleUrl: './player-details.component.scss',
