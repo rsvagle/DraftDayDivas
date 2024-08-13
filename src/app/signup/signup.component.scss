@@ -2,21 +2,29 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
   }
   
   .signup-box {
-    width: 350px;
-    padding: 20px;
+    width: 550px;
+    padding: 50px;
+    border-radius: 5px 0px 0px 5px;
     border: 1px solid #ccc;
-    border-radius: 5px;
     background-color: #f9f9f9;
+    height: 85vh;
+  }
+  
+  .signup-image-box {
+    width: 550px;
+    border-radius: 0px 5px 5px 0px;
+    background-image: url('../../assets/images/general/qb-throw.jpg');
+    background-size: cover;
+    height: 85vh;
   }
   
   .logo {
     display: block;
-    margin: 0 auto 20px auto;
-    width: 100px; /* Adjust as necessary */
+    margin-left:auto;
+    width: 150px;
   }
   
   .form-group {

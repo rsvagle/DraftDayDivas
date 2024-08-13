@@ -139,19 +139,19 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         title: 'Profile',
       },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./login/login.component').then((res) => res.LoginComponent),
+        title: 'Login',
+      },
+      {
+        path: 'signup',
+        loadComponent: () =>
+          import('./signup/signup.component').then((res) => res.SignupComponent),
+        title: 'Signup',
+      },
     ],
-  },
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./login/login.component').then((res) => res.LoginComponent),
-    title: 'Login',
-  },
-  {
-    path: 'signup',
-    loadComponent: () =>
-      import('./signup/signup.component').then((res) => res.SignupComponent),
-    title: 'Signup',
   },
   {
     path: 'logout',

@@ -2,12 +2,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
   }
   
   .login-box {
-    width: 300px;
-    padding: 20px;
+    width: 400px;
+    padding: 50px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -15,8 +17,8 @@
   
   .logo {
     display: block;
-    margin: 0 auto 20px auto;
-    width: 100px; /* Adjust as necessary */
+    margin-left:auto;
+    width: 150px;
   }
   
   .form-group {

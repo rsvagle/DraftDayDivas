@@ -1,8 +1,15 @@
 <p-toast key="toast1"></p-toast>
 <div class="signup-container">
+  <div class="d-flex align-items-center">
     <div class="signup-box">
-      <h2>Sign up</h2>
-      <img src="../assets/images/logos/DDD_logo1_small.png" alt="logo" class="logo">
+      <div class="d-flex">
+        <div>
+          <h2>Sign up</h2>
+        </div>
+        <div class="flex-grow-1">
+          <img src="../assets/images/logos/DDD_logo1_small.png" alt="logo" class="logo">
+        </div>
+      </div>
         <div class="form-group">
           <label for="username">Username</label>
           <input type="text" id="username" class="form-control" [(ngModel)]="username" placeholder="Enter username">
@@ -22,5 +29,8 @@
         <p-button type="button" class="btn btn-primary" (onClick)="signup()">Sign Up</p-button>
         <p class="login-link">Already have an account? <a routerLink="/login">Login here</a></p>
     </div>
+    <div class="signup-image-box">
+    </div>
   </div>
+</div>
   
