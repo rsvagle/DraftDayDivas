@@ -9,7 +9,21 @@
             </ng-container>
         </div>
         <div class="col-6">
-            <p-chart type="bar" [data]="recentGamesData" [options]="recentGamesChartoptions" [height]="chartHeight"></p-chart>
+            <div>
+                <p-button class="p-button-success btn-sm me-3" size="small" (onClick)="changeChartToLast4()">Week by Week</p-button>
+                <p-button class="p-button-success btn-sm" size="small" (onClick)="changeChartToRadar()">Points Breakdown</p-button>
+            </div>
+            <div>
+                @switch (chartMode) {
+                    @case (ChartMode.Last4) {
+                        <p-chart type="bar" [data]="recentGamesData" [options]="recentGamesChartoptions" [height]="chartHeight"></p-chart>
+                    }
+                    @case (ChartMode.Radar){
+                        <div>Total Points: {{statTotals.TotalPoints | number:'1.2-2'}}</div>
+                        <p-chart type="polarArea" [data]="radarGamesData" [options]="radarChartoptions" [height]="chartHeight"></p-chart>
+                    }
+                }
+            </div>
         </div>
     </div>
 </div>
