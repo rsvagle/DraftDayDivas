@@ -5,7 +5,7 @@ import { NewsComponent } from './news/news.component';
 import { InjuryReportComponent } from './injury-report/injury-report.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { DraftComponent } from './draft/mock-draft.component';
+import { DraftComponent } from './mock-draft/mock-draft.component';
 import { PlayersComponent } from './players/players.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -123,9 +123,9 @@ export const routes: Routes = [
         title: 'Rankings',
       },
       {
-        path: 'draft',
+        path: 'mock-draft',
         loadComponent: () =>
-          import('./draft/mock-draft.component').then(
+          import('./mock-draft/mock-draft.component').then(
             (res) => res.DraftComponent
           ),
         title: 'Draft',

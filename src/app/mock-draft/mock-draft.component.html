@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Mock Drafts</h2>
+  <hr />
+  Coming soon!
+  <hr />
+  <p>Start a new mock draft!</p>
+  <p>Draft Position: Select or Random</p>
+  <div class="d-flex flex-wrap gap-3">   
+    <div class="d-flex gap-3">
+      <div *ngFor="let option of draftPositionOptions" class="field-checkbox">
+          <p-radioButton 
+              [inputId]="option.key" 
+              name="option" 
+              [value]="option" 
+              [(ngModel)]="selectedDraftPosition" />
+          <label [for]="option.key" class="ms-2">
+              {{ option.name }}
+          </label>
+      </div>
+  </div>
+</div>
+<div class="mt-4">
+  <p-button class="p-button-primary" (onClick)="launchDraft()" [disabled]="selectedDraftPosition == null">
+    Launch Draft
+  </p-button>
+</div>

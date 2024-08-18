@@ -13,6 +13,7 @@ import { MultiSelectModule } from 'primeng/multiselect'
 import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     FormsModule,
     SkeletonModule,
     ProgressSpinnerModule,
+    RadioButtonModule,
     // ... add other PrimeNG modules here
   ],
   exports: [
@@ -47,6 +49,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     FormsModule,
     SkeletonModule,
     ProgressSpinnerModule,
+    RadioButtonModule
     // ... also export them here
   ]
 })

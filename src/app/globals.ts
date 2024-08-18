@@ -1,4 +1,5 @@
-export const baseDevUrl = 'https://draft-day-divas-ii1squpiy-ryan-vagles-projects.vercel.app/api/';
+export const baseDevUrl = 'http://127.0.0.1:8000/api/';
+export const baseProdUrl = 'https://draft-day-divas-ii1squpiy-ryan-vagles-projects.vercel.app/api/';
 
 export enum FootballPosition {
   QB = 'QB',
