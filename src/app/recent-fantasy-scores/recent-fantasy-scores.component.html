@@ -4,7 +4,14 @@
             <h3 class="mb-3">Recent Performances</h3>
             <ng-container *ngFor="let game of gameLogs">
                 <p>
-                    Week: {{game.week}} -- Points: {{game.points | number:'1.2-2'}}
+                    Week {{game.week}}
+                    <ng-container *ngIf="game.home; else away">
+                        vs 
+                    </ng-container>
+                    <ng-template #away>
+                        at
+                    </ng-template>
+                    {{game.opponent.team_name}} -- Points: {{game.points | number:'1.2-2'}}
                 </p>
             </ng-container>
         </div>
