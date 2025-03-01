@@ -151,6 +151,12 @@ export const routes: Routes = [
           import('./signup/signup.component').then((res) => res.SignupComponent),
         title: 'Signup',
       },
+      {
+        path: 'draft-lobby-demo',
+        loadComponent: () =>
+          import('./draft-lobby-demo/draft-lobby-demo.component').then((res) => res.DraftLobbyDemoComponent),
+        title: 'Signup',
+      },
     ],
   },
   {

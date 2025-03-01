@@ -1,0 +1,24 @@
+<div class="container">
+    <!-- Chat Messages Column -->
+    <div class="chat-column">
+      <h2>Live Chat</h2>
+      <div class="chat-messages">
+        <div *ngFor="let message of messages" class="message">
+          <strong>{{ message.username }}:</strong> {{ message.text }}
+        </div>
+      </div>
+    </div>
+  
+    <!-- Input Column -->
+    <div class="input-column">
+      <h2>Send a Message</h2>
+      <input 
+        type="text" 
+        [(ngModel)]="newMessage" 
+        placeholder="Type your message..." 
+        (keyup.enter)="sendMessage(newMessage)"
+      />
+      <button (click)="sendMessage(newMessage)">Send</button>
+    </div>
+  </div>
+  
