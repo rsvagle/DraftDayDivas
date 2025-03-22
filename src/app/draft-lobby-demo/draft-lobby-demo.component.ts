@@ -13,6 +13,8 @@ import { MessageService } from 'primeng/api';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Player, Team, DraftPick } from './draft-lobby-demo.models';
+import { AuthService } from '../auth/auth.service';
+import { LoggedInUser } from '../auth/auth.models';
 
 @Component({
   selector: 'app-draft-lobby-demo',
@@ -36,6 +38,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   messages: { username: string; text: string; type: string }[] = [];
   newMessage: string = '';
   selectedActivity: string = 'all';
+  username: string | null = null;
   
   // Draft state
   currentRound: number = 1;
@@ -81,6 +84,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   // Service injections
   draftService = inject(DraftService);
   messageService = inject(MessageService);
+  authService = inject(AuthService);
   
   // Subscriptions
   private draftSubscription: Subscription;
@@ -111,6 +115,12 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const currentUser: LoggedInUser | null = this.authService.currentUserValue;
+    console.log(currentUser);
+    if (currentUser) {
+      this.username = currentUser.user.username;
+    }
+    
     // Connect to draft room WebSocket
     this.draftService.connect('draft_room');
     
@@ -119,6 +129,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(
         (message) => {
+          console.log("Received a websocket message!", message);
           this.handleWebSocketMessage(message);
         },
         (error) => {
@@ -152,7 +163,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   // WebSocket message handler
   private handleWebSocketMessage(message: any) {
     switch (message.type) {
-      case 'message':
+      case 'chat_message':
         this.addMessage(message);
         break;
       case 'draft_pick':
@@ -195,7 +206,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     this.messages.push({
       username: message.username,
       text: message.text,
-      type: 'message'
+      type: 'chat_message'
     });
   }
 
@@ -341,28 +352,33 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   // User actions
   sendMessage(text: string) {
     if (!text.trim()) return;
-    
-    this.draftService.sendMessage('message', { 
-      username: this.userTeam?.name || 'Anonymous', 
+    console.log("Sending message");
+    this.draftService.sendMessage('chat_message', { 
+      username: this.username || 'Anonymous', 
       text: text.trim() 
     });
     
     this.newMessage = '';
   }
 
+  tryDraftPlayer(){
+    this.draftPlayer(this.availablePlayers[0]);
+  }
+
   draftPlayer(player: Player) {
-    if (!this.isUserTurn) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Not Your Turn',
-        detail: 'Please wait for your turn to draft a player.'
-      });
-      return;
-    }
+    // if (!this.isUserTurn) {
+    //   this.messageService.add({
+    //     severity: 'error',
+    //     summary: 'Not Your Turn',
+    //     detail: 'Please wait for your turn to draft a player.'
+    //   });
+    //   return;
+    // }
     
     this.draftService.sendMessage('draft_pick', { 
-      player, 
-      teamId: this.userTeam?.id,
+      player,
+      username: this.username,
+      team_id: 5,
       round: this.currentRound,
       pick: this.currentPick
     });

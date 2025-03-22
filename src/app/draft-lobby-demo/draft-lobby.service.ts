@@ -13,12 +13,15 @@ export class DraftService {
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
   private reconnectTimer: any;
+  private authToken: string | null;
 
-  constructor() {}
+  constructor() {
+    this.authToken = localStorage.getItem('authToken');
+  }
 
   connect(roomName: string) {
     this.socket$ = webSocket({
-      url: `ws://127.0.0.1:8000/ws/draft/${roomName}/`,
+      url: `ws://127.0.0.1:8000/ws/draft/${roomName}/?token=${this.authToken}`,
       openObserver: {
         next: () => {
           console.log('WebSocket connection established');

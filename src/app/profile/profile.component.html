@@ -19,7 +19,7 @@
             <input pInputText type="text" [(ngModel)]="model.last_name">
         </div>
         <div class="mt-4">
-            <button pButton pRipple label="Submit" class="btn btn-success"></button>
+            <button pButton pRipple label="Submit" (click)="saveProfile()" class="btn btn-success"></button>
         </div>
     </div>
 </div>

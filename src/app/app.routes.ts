@@ -158,6 +158,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./draft-lobby-demo/draft-lobby-demo.component').then((res) => res.DraftLobbyDemoComponent),
     title: 'Signup',
+    canActivate: [AuthGuard],
   },
   {
     path: 'logout',

@@ -16,6 +16,6 @@ export class ProfileService {
   }
 
   postSaveProfile(data: any): Observable<any>{
-    return this.http.post(baseDevUrl + "save_profile/", data);
+    return this.http.post(this.apiUrl + "save_profile/", data);
   }
 }
