@@ -20,7 +20,35 @@
   </div>
 </div>
 <div class="mt-4">
+  <p-button class="p-button-primary" (onClick)="createDraft()" [disabled]="selectedDraftPosition == null">
+    Create Draft
+  </p-button>
+</div>
+<div class="mt-4">
+  <div class="d-flex flex-column">
+    <div *ngFor="let availableDraft of availableDrafts">
+      <p-radioButton 
+          [inputId]="availableDraft.key" 
+          name="availableDraft" 
+          [value]="availableDraft.id" 
+          [(ngModel)]="selectedDraftOption" />
+      <label [for]="availableDraft.key" class="ms-2">
+          Mock Draft {{availableDraft.id}} - Teams: {{availableDraft.number_teams}} Joined: {{availableDraft.draft_teams?.length}}
+      </label>
+    </div>
+  </div>
+  <p-button class="p-button-primary" (onClick)="joinDraft()" [disabled]="selectedDraftPosition == null">
+    Join Draft
+  </p-button>
+</div>
+<div class="mt-4">
+  <!-- Put any joined drafts here -->
+  <div>
+
+  </div>
   <p-button class="p-button-primary" (onClick)="launchDraft()" [disabled]="selectedDraftPosition == null">
     Launch Draft
   </p-button>
 </div>
+
+<!-- Join Draft popup -->

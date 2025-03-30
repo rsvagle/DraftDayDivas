@@ -10,9 +10,9 @@
   /* Header styles */
   .draft-header {
     padding: 0.5rem 1rem;
-    background-color: #3f7e23; /* ESPN Fantasy green color */
+    background-color: #3f7e23;
     color: white;
-    border-radius: 4px;
+    border-radius: 4px 4px 0px 0px;
   }
   
   .draft-title h2 {
@@ -29,21 +29,19 @@
   /* Draft picks bar */
   .draft-picks-container {
     .draft-toolbar {
-      background-color: #1e1e1e;
-      color: white;
-      padding: 0;
-      border-radius: 4px;
+      background-color: #cfcfcf;
+      color: #000;
+      border-radius: 0px 0px 4px 4px;
     }
   
     .draft-timer {
       background-color: #2d2d2d;
-      padding: 0.5rem 1rem;
-      border-radius: 4px 0 0 4px;
+      padding: 1rem 1rem;
+      border-radius: 4px;
   
       .timer-label {
         color: #ddd;
         font-size: 0.8rem;
-        margin-right: 0.5rem;
       }
   
       .timer-value {
@@ -91,7 +89,7 @@
     .draft-round {
       background-color: #2d2d2d;
       padding: 0.5rem 1rem;
-      border-radius: 0 4px 4px 0;
+      border-radius: 4px 4px;
   
       .round-label {
         color: #ddd;

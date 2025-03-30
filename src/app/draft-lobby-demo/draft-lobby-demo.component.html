@@ -1,31 +1,29 @@
 <div class="draft-container d-flex flex-column">
   <!-- Header with title and help icon -->
-  <div class="draft-header d-flex p-jc-between p-ai-center">
-    <div class="draft-icon">
-      <img src="../../assets/images/logos/DDD_logo1_small.png" alt="Draft Icon" height="60" />
-    </div>
+  <div class="draft-header d-flex justify-content-center align-items-center">
     <div class="draft-title">
       <h2>Fantasy Football Draft - 12-Team PPR Mock</h2>
     </div>
-    <div class="draft-controls">
-      <button pButton pRipple icon="pi pi-volume-up" class="p-button-text"></button>
-      <button pButton pRipple icon="pi pi-question-circle" class="p-button-text"></button>
-    </div>
   </div>
-
+  
   <!-- Draft picks bar -->
-  <div class="draft-picks-container p-mt-2">
-    <p-toolbar styleClass="draft-toolbar">
-      <ng-template pTemplate="left">
-        <div class="draft-timer d-flex p-ai-center">
-          <span class="timer-label">DRAFTING IN</span>
-          <span class="timer-value">1:05</span>
+  <div class="draft-picks-container">
+    <div class="draft-toolbar d-flex justify-content-between p-2">
+      <div>
+        <div class="draft-round d-flex align-items-center justify-content-center h-100">          
+          <div class="draft-icon">
+            <img src="../../assets/images/logos/DDD_logo1_small.png" alt="Draft Icon" height="60" />
+          </div>
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <span class="round-label">ROUND</span>
+            <span class="round-value">2</span>
+          </div>
         </div>
-      </ng-template>
-      <ng-template pTemplate="center">
+      </div>
+      <div>
         <div class="draft-picks d-flex">
           <ng-container *ngFor="let pick of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]; let i = index">
-            <div class="draft-pick-slot" [ngClass]="{'current-pick': i === 2, 'auto-pick': i === 3 || i === 6}">
+            <div class="draft-pick-slot" [ngClass]="{'current-pick': i === 2 }">
               <div class="pick-number">PICK {{pick}}</div>
               <div class="pick-avatar">
                 <p-avatar [shape]="'circle'" [size]="'large'" icon="pi pi-user"></p-avatar>
@@ -34,28 +32,28 @@
             </div>
           </ng-container>
         </div>
-      </ng-template>
-      <ng-template pTemplate="right">
-        <div class="draft-round d-flex flex-column p-ai-center">
-          <span class="round-label">ROUND</span>
-          <span class="round-value">2</span>
+      </div>
+      <div>
+        <div class="draft-timer d-flex flex-column align-items-center justify-content-center h-100">
+          <span class="timer-label">DRAFTING IN</span>
+          <span class="timer-value">1:05</span>
         </div>
-      </ng-template>
-    </p-toolbar>
+      </div>
+    </div>
   </div>
 
   <!-- Main content area -->
-  <div class="draft-main-content p-mt-2">
+  <div class="draft-main-content mt-2">
     <div class="row" style="height: auto;">
       <div class="col-md-3">
         <!-- Left column - Your lineup -->
         <div class="draft-lineup">
-          <p-card styleClass="lineup-card">
+          <p-card styleClass="lineup-card p-3">
             <ng-template pTemplate="header">
-              <div class="d-flex p-jc-between p-ai-center">
+              <div class="d-flex justify-content-between align-items-center">
                 <h3>Pick Queue</h3>
-                <div class="d-flex p-ai-center">
-                  <span class="p-mr-2">Autopick</span>
+                <div class="d-flex align-items-center">
+                  <span class="me-2">Autopick</span>
                   <p-inputSwitch></p-inputSwitch>
                 </div>
               </div>
@@ -77,9 +75,9 @@
             </div>
           </p-card>
     
-          <p-card styleClass="lineup-card p-mt-3">
+          <p-card styleClass="lineup-card mt-3 p-3">
             <ng-template pTemplate="header">
-              <div class="d-flex p-jc-between p-ai-center">
+              <div class="d-flex justify-content-between align-items-center">
                 <h3>Roster</h3>
                 <p-dropdown [options]="[]" placeholder="Team M"></p-dropdown>
               </div>
@@ -103,16 +101,16 @@
             <ng-template pTemplate="footer">
               <div class="roster-limits">
                 <div>Roster Limits</div>
-                <div class="p-mt-1 d-flex p-jc-between p-ai-center">
+                <div class="p-mt-1 d-flex justify-content-between align-items-center">
                   <span>0/16 Players</span>
                 </div>
-                <div class="p-mt-1 d-flex p-jc-between">
+                <div class="p-mt-1 d-flex justify-content-between">
                   <span>QB 0/4</span>
                   <span>RB 0/8</span>
                   <span>WR 0/8</span>
                   <span>TE 0/3</span>
                 </div>
-                <div class="p-mt-1 d-flex p-jc-between">
+                <div class="p-mt-1 d-flex justify-content-between">
                   <span>D/ST 0/3</span>
                   <span>K 0/3</span>
                 </div>
@@ -185,7 +183,7 @@
                   <tr>
                     <td>{{player.rk}}</td>
                     <td>
-                      <div class="player-info d-flex p-ai-center">
+                      <div class="player-info d-flex align-items-center">
                         <p-avatar [shape]="'circle'" [size]="'normal'" icon="pi pi-user"></p-avatar>
                         <div class="p-ml-2">
                           <div>{{player.player}}</div>
@@ -213,11 +211,11 @@
       <div class="col-md-3">
         <!-- Right column - Chat -->
         <div class="draft-chat">
-          <p-card styleClass="chat-card">
+          <p-card styleClass="chat-card p-3">
             <ng-template pTemplate="header">
-              <div class="d-flex p-jc-between p-ai-center">
+              <div class="d-flex justify-content-between align-items-center">
                 <h3>Activity</h3>
-                <div class="d-flex p-ai-center">
+                <div class="d-flex align-items-center gap-3">
                   <p-radioButton name="activity" value="all" label="All" [(ngModel)]="selectedActivity"></p-radioButton>
                   <p-radioButton name="activity" value="messages" label="Messages" [(ngModel)]="selectedActivity" class="p-ml-2"></p-radioButton>
                   <p-radioButton name="activity" value="picks" label="Picks" [(ngModel)]="selectedActivity" class="p-ml-2"></p-radioButton>

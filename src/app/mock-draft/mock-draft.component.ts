@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { CommonModule } from '@angular/common';
+import { MockDraftService } from './mock-draft.service';
 
 @Component({
   selector: 'mock-drafts',
@@ -10,7 +11,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './mock-draft.component.scss',
 })
 export class DraftComponent {
-  selectedDraftPosition: number;
+  selectedDraftPosition: any;
+  selectedDraftOption: number;
+  teamName: string = "Test TeamName"
+
+  availableDrafts: any;
+  joinedDrafts: any;
+
+  mockDraftService = inject(MockDraftService);
 
   draftPositionOptions: any[] = [
     { name: 'Random', key: 99 },
@@ -28,14 +36,50 @@ export class DraftComponent {
 
   ngOnInit(): void{
     this.selectedDraftPosition = this.draftPositionOptions[0];
+    this.getAvailableDrafts();
+  }
+
+  getAvailableDrafts(): void{
+    this.mockDraftService.getAvailableDrafts().subscribe({
+      next: (data) => (this.availableDrafts = data),
+      error: (error) => console.error('There was an error!', error),
+    });
+  }
+
+  getJoinedDrafts(): void{
+    this.mockDraftService.getMyDrafts().subscribe({
+      next: (data) => (this.joinedDrafts = data),
+      error: (error) => console.error('There was an error!', error),
+    });
+  }
+
+  createDraft(): void {
+    this.mockDraftService.postCreateDraft(10).subscribe({
+      next: (data) => (console.log("Created one!")),
+      // Todo: After a draft is created, auto join it
+      error: (error) => console.error('There was an error!', error),
+    });
+  }
+
+  joinDraft(): void{
+
+    let data = {
+      draft_id: this.selectedDraftOption,
+      team_name: this.teamName,
+      draft_position: this.selectedDraftPosition.key
+    }
+
+    this.mockDraftService.postJoinDraft(data).subscribe({
+      next: (data) => (console.log("Created one!")),
+      // Todo: After a draft is created, auto join it
+      error: (error) => console.error('There was an error!', error),
+    });
   }
 
   launchDraft(): void {
-    // give backend request to start draft
-
-    // get back id of newly initialized mock draft
-
-    // navigate to the new mock draft in a new window
-    
+    this.mockDraftService.postLaunchDraft(10).subscribe({
+      next: (data) => (console.log("Created one!")),
+      error: (error) => console.error('There was an error!', error),
+    });
   }
 }

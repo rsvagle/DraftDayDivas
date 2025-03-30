@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 import { Player, Team, DraftPick } from './draft-lobby-demo.models';
 import { AuthService } from '../auth/auth.service';
 import { LoggedInUser } from '../auth/auth.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-draft-lobby-demo',
@@ -38,7 +39,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   messages: { username: string; text: string; type: string }[] = [];
   newMessage: string = '';
   selectedActivity: string = 'all';
-  username: string | null = null;
+  user: LoggedInUser | null = null;
   
   // Draft state
   currentRound: number = 1;
@@ -106,7 +107,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   showPlayerModal: boolean = false;
   draftOrder: number[] = [];
 
-  constructor() {
+  constructor(private router: Router) {    
     // Initialize empty available players
     this.availablePlayers = [];
     
@@ -115,11 +116,12 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const currentUser: LoggedInUser | null = this.authService.currentUserValue;
-    console.log(currentUser);
-    if (currentUser) {
-      this.username = currentUser.user.username;
-    }
+    this.authService.currentUser.subscribe((user) => {
+      this.user = user;
+      if (!user) {
+        this.router.navigate(['/']); // Redirect to home if null
+      }
+    });
     
     // Connect to draft room WebSocket
     this.draftService.connect('draft_room');
@@ -354,7 +356,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     if (!text.trim()) return;
     console.log("Sending message");
     this.draftService.sendMessage('chat_message', { 
-      username: this.username || 'Anonymous', 
+      username: this.user?.user.username || 'Anonymous', 
       text: text.trim() 
     });
     
@@ -377,7 +379,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     
     this.draftService.sendMessage('draft_pick', { 
       player,
-      username: this.username,
+      username: this.user?.user.username,
       team_id: 5,
       round: this.currentRound,
       pick: this.currentPick
