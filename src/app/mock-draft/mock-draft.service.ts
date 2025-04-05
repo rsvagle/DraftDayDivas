@@ -16,7 +16,7 @@ export class MockDraftService {
   }
 
   getMyDrafts(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl + "joined/");
   }
 
   getMyDraftResults(): Observable<any> {
@@ -28,7 +28,7 @@ export class MockDraftService {
   }
 
   postCreateDraft(data: any): Observable<any>{
-    return this.http.post<any>(this.apiUrl, { number_teams: data });
+    return this.http.post<any>(this.apiUrl, { data: data });
   }
 
   postLaunchDraft(data: any): Observable<any>{

@@ -1,54 +1,189 @@
 <div class="container">
   <h2>Mock Drafts</h2>
   <hr />
-  Coming soon!
-  <hr />
-  <p>Start a new mock draft!</p>
-  <p>Draft Position: Select or Random</p>
-  <div class="d-flex flex-wrap gap-3">   
-    <div class="d-flex gap-3">
-      <div *ngFor="let option of draftPositionOptions" class="field-checkbox">
-          <p-radioButton 
-              [inputId]="option.key" 
-              name="option" 
-              [value]="option" 
-              [(ngModel)]="selectedDraftPosition" />
-          <label [for]="option.key" class="ms-2">
-              {{ option.name }}
-          </label>
-      </div>
+  <div class="mt-4">
+    <p>Start a new mock draft!</p>
+    <p-button class="p-button-primary" (onClick)="showCreateDraftDialog()">
+      Create Draft
+    </p-button>
   </div>
-</div>
-<div class="mt-4">
-  <p-button class="p-button-primary" (onClick)="createDraft()" [disabled]="selectedDraftPosition == null">
-    Create Draft
-  </p-button>
-</div>
-<div class="mt-4">
-  <div class="d-flex flex-column">
-    <div *ngFor="let availableDraft of availableDrafts">
-      <p-radioButton 
-          [inputId]="availableDraft.key" 
-          name="availableDraft" 
-          [value]="availableDraft.id" 
-          [(ngModel)]="selectedDraftOption" />
-      <label [for]="availableDraft.key" class="ms-2">
-          Mock Draft {{availableDraft.id}} - Teams: {{availableDraft.number_teams}} Joined: {{availableDraft.draft_teams?.length}}
-      </label>
+  
+  <hr />
+  
+  <div class="mt-4">
+    <p>Join an existing mock draft!</p>
+    <div class="d-flex flex-column">
+      <div *ngFor="let availableDraft of availableDrafts">
+        <p-radioButton 
+            [inputId]="'available_' + availableDraft.id" 
+            name="availableDraft" 
+            [value]="availableDraft" 
+            [(ngModel)]="selectedDraftToJoin" />
+        <label [for]="'available_' + availableDraft.id" class="ms-2">
+            Mock Draft {{availableDraft.id}} - Teams: {{availableDraft.number_teams}} Joined: {{availableDraft.draft_teams?.length}}
+        </label>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p-button class="p-button-primary " (onClick)="showJoinDraftDialog()" [disabled]="!selectedDraftToJoin">
+        Join Draft
+      </p-button>
     </div>
   </div>
-  <p-button class="p-button-primary" (onClick)="joinDraft()" [disabled]="selectedDraftPosition == null">
-    Join Draft
-  </p-button>
-</div>
-<div class="mt-4">
-  <!-- Put any joined drafts here -->
-  <div>
-
+  
+  <hr />
+  
+  <div class="mt-4">
+    <p>Launch your mock drafts!</p>
+    <div class="d-flex flex-column">
+      <div *ngFor="let joinedDraft of joinedDrafts">
+        <p-radioButton 
+            [inputId]="'joined_' + joinedDraft.id" 
+            name="joinedDraft" 
+            [value]="joinedDraft" 
+            [(ngModel)]="selectedJoinedDraft" />
+        <label [for]="'joined_' + joinedDraft.id" class="ms-2">
+            Mock Draft {{joinedDraft.id}} - Teams: {{joinedDraft.number_teams}} Joined: {{joinedDraft.draft_teams?.length}}
+        </label>
+      </div>
+    </div>
+    <div class="mt-4">
+      <p-button class="p-button-primary" (onClick)="showLaunchDraftDialog()" [disabled]="!selectedJoinedDraft">
+        Launch Draft
+      </p-button>
+    </div>
   </div>
-  <p-button class="p-button-primary" (onClick)="launchDraft()" [disabled]="selectedDraftPosition == null">
-    Launch Draft
-  </p-button>
 </div>
 
-<!-- Join Draft popup -->
+<!-- Create Draft Dialog -->
+<p-dialog 
+  header="Create a New Draft" 
+  [(visible)]="createDraftDialogVisible" 
+  [modal]="true" 
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '450px'}">
+  
+  <div class="p-fluid">
+    <div class="field">
+      <label for="numTeams">Number of Teams</label>
+      <div class="d-flex flex-wrap gap-3">
+        <div *ngFor="let option of newDraftTeamsOptions" class="field-checkbox">
+          <p-radioButton 
+            [inputId]="'create_pos_' + option.key" 
+            name="createPosition" 
+            [value]="option.key"
+            [(ngModel)]="createDraftNumTeams" />
+          <label [for]="'create_pos_' + option.key" class="ms-2">
+            {{ option.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="field">
+      <label for="teamName">Your Team Name</label>
+      <input type="text" pInputText id="teamName" [(ngModel)]="createDraftTeamName" />
+    </div>
+    
+    <div class="field">
+      <label>Draft Position</label>
+      <div class="d-flex flex-wrap gap-3">
+        <div *ngFor="let option of draftPositionOptions" class="field-checkbox">
+          <p-radioButton 
+            [inputId]="'create_pos_' + option.key" 
+            name="createPosition" 
+            [value]="option" 
+            [(ngModel)]="createDraftPosition" />
+          <label [for]="'create_pos_' + option.key" class="ms-2">
+            {{ option.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" icon="pi pi-times" (onClick)="createDraftDialogVisible = false" styleClass="p-button-text"></p-button>
+    <p-button label="Create" icon="pi pi-check" (onClick)="createDraft()" [disabled]="!createDraftTeamName"></p-button>
+  </ng-template>
+</p-dialog>
+
+<!-- Join Draft Dialog -->
+<p-dialog 
+  header="Join Draft" 
+  [(visible)]="joinDraftDialogVisible" 
+  [modal]="true" 
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '450px'}">
+  
+  <div class="p-fluid">
+    <div class="field">
+      <label>Selected Draft</label>
+      <p *ngIf="selectedDraftToJoin">
+        Mock Draft {{selectedDraftToJoin.id}} - 
+        Teams: {{selectedDraftToJoin.number_teams}} 
+        Joined: {{selectedDraftToJoin.draft_teams?.length}}
+      </p>
+
+    </div>
+    
+    <div class="field">
+      <label for="joinTeamName">Your Team Name</label>
+      <input type="text" pInputText id="joinTeamName" [(ngModel)]="joinDraftTeamName" />
+    </div>
+    
+    <div class="field">
+      <label>Draft Position</label>
+      <div class="d-flex flex-wrap gap-3">
+        <div *ngFor="let option of availDraftPositionOptions" class="field-checkbox">
+          <p-radioButton 
+            [inputId]="'join_pos_' + option.key" 
+            name="joinPosition" 
+            [value]="option" 
+            [(ngModel)]="joinDraftPosition" />
+          <label [for]="'join_pos_' + option.key" class="ms-2">
+            {{ option.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" icon="pi pi-times" (onClick)="joinDraftDialogVisible = false" styleClass="p-button-text"></p-button>
+    <p-button label="Join" icon="pi pi-check" (onClick)="joinDraft()" [disabled]="!joinDraftTeamName"></p-button>
+  </ng-template>
+</p-dialog>
+
+<!-- Launch Draft Dialog -->
+<p-dialog 
+  header="Launch Draft" 
+  [(visible)]="launchDraftDialogVisible" 
+  [modal]="true" 
+  [draggable]="false"
+  [resizable]="false"
+  [style]="{width: '450px'}">
+  
+  <div class="p-fluid">
+    <div class="field">
+      <label>Selected Draft</label>
+      <p *ngIf="selectedJoinedDraft">
+        Mock Draft {{selectedJoinedDraft.id}} - 
+        Teams: {{selectedJoinedDraft.number_teams}} 
+        Joined: {{selectedJoinedDraft.draft_teams?.length}}
+      </p>
+    </div>
+    
+    <div class="alert alert-warning">
+      <i class="pi pi-exclamation-triangle"></i>
+      <span class="ms-2">Are you sure you want to launch this draft? All teams must be ready.</span>
+    </div>
+  </div>
+  
+  <ng-template pTemplate="footer">
+    <p-button label="Cancel" icon="pi pi-times" (onClick)="launchDraftDialogVisible = false" styleClass="p-button-text"></p-button>
+    <p-button label="Launch" icon="pi pi-check" (onClick)="launchDraft()"></p-button>
+  </ng-template>
+</p-dialog>

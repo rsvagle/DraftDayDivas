@@ -154,13 +154,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'draft-lobby-demo',
-    loadComponent: () =>
-      import('./draft-lobby-demo/draft-lobby-demo.component').then((res) => res.DraftLobbyDemoComponent),
-    title: 'Draft',
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'draft-lobby-demo/:lobby_id',
     loadComponent: () =>
       import('./draft-lobby-demo/draft-lobby-demo.component').then((res) => res.DraftLobbyDemoComponent),

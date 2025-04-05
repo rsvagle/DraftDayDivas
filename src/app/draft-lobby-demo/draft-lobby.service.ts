@@ -19,7 +19,7 @@ export class DraftService {
     this.authToken = localStorage.getItem('authToken');
   }
 
-  connect(roomName: string) {
+  connect(roomName: number) {
     this.socket$ = webSocket({
       url: `ws://127.0.0.1:8000/ws/draft/${roomName}/?token=${this.authToken}`,
       openObserver: {
@@ -91,7 +91,7 @@ export class DraftService {
     });
   }
 
-  private attemptReconnect(roomName: string) {
+  private attemptReconnect(roomName: number) {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
       console.error('Maximum reconnect attempts reached');
       this.messagesSubject.error('Maximum reconnect attempts reached');

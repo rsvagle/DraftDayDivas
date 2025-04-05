@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { PrimeNgLightModule } from '../primeng.light.module';
 import { CommonModule } from '@angular/common';
 import { MockDraftService } from './mock-draft.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mock-drafts',
@@ -12,14 +13,40 @@ import { MockDraftService } from './mock-draft.service';
 })
 export class DraftComponent {
   selectedDraftPosition: any;
-  selectedDraftOption: number;
-  teamName: string = "Test TeamName"
+  selectedDraftOption: any;
+  teamName: string = "Test TeamName";
+  
+  // Dialog visibility controls
+  createDraftDialogVisible: boolean = false;
+  joinDraftDialogVisible: boolean = false;
+  launchDraftDialogVisible: boolean = false;
+  
+  // Create Draft form data
+  createDraftNumTeams: number;
+  createDraftTeamName: string = "";
+  createDraftPosition: any;
+  
+  // Join Draft form data
+  selectedDraftToJoin: any;
+  availDraftPositionOptions: any[] = [];
+  joinDraftTeamName: string = "";
+  joinDraftPosition: any;
+  
+  // Launch Draft data
+  selectedJoinedDraft: any;
 
-  availableDrafts: any;
-  joinedDrafts: any;
+  availableDrafts: any[] = [];
+  joinedDrafts: any[] = [];
 
   mockDraftService = inject(MockDraftService);
 
+  newDraftTeamsOptions: any[] = [
+    { name: '8', key: 8 },
+    { name: '10', key: 10 },
+    { name: '12', key: 12 },
+  ];
+
+  // This should be dynamically pulled based on the number of teams in the selected draft
   draftPositionOptions: any[] = [
     { name: 'Random', key: 99 },
     { name: '1', key: 1 },
@@ -32,11 +59,16 @@ export class DraftComponent {
     { name: '8', key: 8 },
     { name: '9', key: 9 },
     { name: '10', key: 10 },
+    { name: '11', key: 11 },
+    { name: '12', key: 12 },
   ];
+
+  constructor(private router: Router) {  }
 
   ngOnInit(): void{
     this.selectedDraftPosition = this.draftPositionOptions[0];
     this.getAvailableDrafts();
+    this.getJoinedDrafts();
   }
 
   getAvailableDrafts(): void{
@@ -46,6 +78,7 @@ export class DraftComponent {
     });
   }
 
+  // This gets drafts a user could launch
   getJoinedDrafts(): void{
     this.mockDraftService.getMyDrafts().subscribe({
       next: (data) => (this.joinedDrafts = data),
@@ -54,7 +87,13 @@ export class DraftComponent {
   }
 
   createDraft(): void {
-    this.mockDraftService.postCreateDraft(10).subscribe({
+    let data = {
+      num_teams: this.createDraftNumTeams,
+      team_name: this.createDraftTeamName,
+      draft_position: this.createDraftPosition.key
+    }
+
+    this.mockDraftService.postCreateDraft(data).subscribe({
       next: (data) => (console.log("Created one!")),
       // Todo: After a draft is created, auto join it
       error: (error) => console.error('There was an error!', error),
@@ -62,11 +101,18 @@ export class DraftComponent {
   }
 
   joinDraft(): void{
+    // *** These should be inputs from the popup
+
+    let draft_position = this.joinDraftPosition.key;
+    if(this.selectedDraftPosition.key == 99){
+      // Randomly choose from available
+
+    }
 
     let data = {
-      draft_id: this.selectedDraftOption,
-      team_name: this.teamName,
-      draft_position: this.selectedDraftPosition.key
+      draft_id: this.selectedDraftToJoin.id,
+      team_name: this.joinDraftTeamName,
+      draft_position: draft_position
     }
 
     this.mockDraftService.postJoinDraft(data).subscribe({
@@ -77,9 +123,36 @@ export class DraftComponent {
   }
 
   launchDraft(): void {
-    this.mockDraftService.postLaunchDraft(10).subscribe({
-      next: (data) => (console.log("Created one!")),
-      error: (error) => console.error('There was an error!', error),
-    });
+    const draftUrl = window.location.origin + '/draft-lobby-demo/' + this.selectedJoinedDraft.id;
+    window.open(draftUrl, '_blank');    
+  }
+
+  /// 
+  showCreateDraftDialog(): void {
+    this.createDraftNumTeams = 10;
+    this.createDraftTeamName = "";
+    this.createDraftPosition = this.draftPositionOptions[0];
+    this.createDraftDialogVisible = true;
+  }
+
+  showJoinDraftDialog(): void {
+    this.availDraftPositionOptions = [
+      { name: 'Random', key: 99 }
+    ];
+
+    // set available options
+    for(let i = 1; i <= this.selectedDraftToJoin.number_teams; i++){
+      if(this.selectedDraftToJoin.draft_teams.findIndex((x: { draft_position: number; }) => x.draft_position == i) == -1){
+        this.availDraftPositionOptions.push({ name: i.toString(), key: i});
+      }
+    }
+
+    this.joinDraftTeamName = "";
+    this.joinDraftPosition = this.availDraftPositionOptions[0];
+    this.joinDraftDialogVisible = true;
+  }
+
+  showLaunchDraftDialog(): void {
+    this.launchDraftDialogVisible = true;
   }
 }

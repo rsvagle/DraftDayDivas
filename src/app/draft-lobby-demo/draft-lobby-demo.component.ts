@@ -15,7 +15,7 @@ import { Subject } from 'rxjs';
 import { Player, Team, DraftPick } from './draft-lobby-demo.models';
 import { AuthService } from '../auth/auth.service';
 import { LoggedInUser } from '../auth/auth.models';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-draft-lobby-demo',
@@ -42,6 +42,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   user: LoggedInUser | null = null;
   
   // Draft state
+  draftID: number;
   currentRound: number = 1;
   currentPick: number = 1;
   selectedPlayer: Player | null = null;
@@ -107,10 +108,19 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   showPlayerModal: boolean = false;
   draftOrder: number[] = [];
 
-  constructor(private router: Router) {    
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {    
     // Initialize empty available players
     this.availablePlayers = [];
     
+    this.draftID = +(this.route.snapshot.paramMap.get('lobby_id') || 0);
+
+    if(this.draftID == 0){
+      this.router.navigate(['/']); // Redirect to home if null
+    }
+
     // Initialize mock teams
     this.initializeTeams();
   }
@@ -124,7 +134,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     });
     
     // Connect to draft room WebSocket
-    this.draftService.connect('draft_room');
+    this.draftService.connect(this.draftID);
     
     // Subscribe to WebSocket messages
     this.draftSubscription = this.draftService.getMessages()
@@ -689,7 +699,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     // Attempt to reconnect after 3 seconds
     setTimeout(() => {
       try {
-        this.draftService.connect('draft_room');
+        this.draftService.connect(this.draftID);
         
         // Request current state
         this.draftService.sendMessage('request_state', {
