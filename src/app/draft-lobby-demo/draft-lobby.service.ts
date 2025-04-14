@@ -15,6 +15,10 @@ export class DraftService {
   private reconnectTimer: any;
   private authToken: string | null;
 
+  // Here's your custom event emitter for connection failure
+  private connectionFailedSubject = new Subject<void>();
+  connectionFailed$ = this.connectionFailedSubject.asObservable();
+
   constructor() {
     this.authToken = localStorage.getItem('authToken');
   }
@@ -95,6 +99,10 @@ export class DraftService {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
       console.error('Maximum reconnect attempts reached');
       this.messagesSubject.error('Maximum reconnect attempts reached');
+
+      // 🚨 Emit the failure event to subscribers
+      this.connectionFailedSubject.next();
+      
       return;
     }
 

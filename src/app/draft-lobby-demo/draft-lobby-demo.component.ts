@@ -42,6 +42,8 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   user: LoggedInUser | null = null;
   
   // Draft state
+  draftState: any;
+
   draftID: number;
   currentRound: number = 1;
   currentPick: number = 1;
@@ -92,6 +94,9 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
   private draftSubscription: Subscription;
   private timerSubscription: Subscription;
   private unsubscribe$ = new Subject<void>();
+  private connectionFailedSub!: Subscription;
+
+  showCouldNotJoinScreen: boolean = false;
   
   // Draft state properties
   draftStarted: boolean = false;
@@ -120,9 +125,6 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     if(this.draftID == 0){
       this.router.navigate(['/']); // Redirect to home if null
     }
-
-    // Initialize mock teams
-    this.initializeTeams();
   }
 
   ngOnInit() {
@@ -132,29 +134,48 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
         this.router.navigate(['/']); // Redirect to home if null
       }
     });
-    
-    // Connect to draft room WebSocket
+  
+    // Subscribe to connection failure
+    this.connectionFailedSub = this.draftService.connectionFailed$.subscribe(() => {
+      console.warn('WebSocket connection failed completely');
+      this.showCouldNotJoinScreen = true;
+    });
+  
+    // Connect to WebSocket
     this.draftService.connect(this.draftID);
+  
+    setTimeout(() => {
+      // Wait until connection is established before proceeding
+      this.draftService.getConnectionStatus()
+        .pipe(
+          takeUntil(this.unsubscribe$),
+        )
+        .subscribe((isConnected) => {
+          if (isConnected) {
+            // Once connected, perform initial actions
+            this.getDraftState();
+            // this.sendMessage(this.user?.user.username + " joined the draft!"); // This should be a system message pushed on connection
+            this.loadAvailablePlayers();
+            this.startDraftTimer();
+            this.checkUserTurn();
     
-    // Subscribe to WebSocket messages
-    this.draftSubscription = this.draftService.getMessages()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        (message) => {
-          console.log("Received a websocket message!", message);
-          this.handleWebSocketMessage(message);
-        },
-        (error) => {
-          console.error('WebSocket error:', error);
-          this.handleReconnection();
-        }
-      );
-    
-    // Load initial data
-    this.loadAvailablePlayers();
-    this.startDraftTimer();
-    this.checkUserTurn();
-  }
+            // Start listening to incoming messages
+            this.draftSubscription = this.draftService.getMessages()
+              .pipe(takeUntil(this.unsubscribe$))
+              .subscribe(
+                (message) => {
+                  console.log("Received a websocket message!", message);
+                  this.handleWebSocketMessage(message);
+                },
+                (error) => {
+                  console.error('WebSocket error:', error);
+                  this.handleReconnection();
+                }
+              );
+          }
+        });
+      }, 1000);
+  }  
 
   ngOnDestroy() {
     // Clean up subscriptions
@@ -185,7 +206,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
         this.handleDraftStart(message);
         break;
       case 'draft_pause':
-        this.handleDraftPause(message);
+        // this.handleDraftPause(message);
         break;
       case 'user_turn':
         this.handleUserTurn(message);
@@ -208,9 +229,23 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
       case 'system_message':
         this.addSystemMessage(message);
         break;
+      case 'draft_state':
+          this.updateDraftState(message);
+          break;
       default:
         console.warn('Unknown message type:', message.type);
     }
+  }
+
+  updateDraftState(message: any) {
+    this.draftState = message;
+
+    // update pick number
+
+    // update the rosters
+
+    // remove the chosen players
+
   }
 
   // Message handling
@@ -235,6 +270,11 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
       summary: message.summary || 'System Message',
       detail: message.text
     });
+  }
+
+  // Start up the draft
+  private triggerDraftStart() {
+
   }
 
   // Draft pick handling
@@ -281,24 +321,6 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     
     // Start timer
     this.startDraftTimer();
-  }
-
-  private handleDraftPause(message: any) {
-    this.isPaused = message.isPaused;
-    const statusText = this.isPaused ? 'paused' : 'resumed';
-    
-    this.addSystemMessage({
-      text: `The draft has been ${statusText}`,
-      severity: 'info',
-      summary: `Draft ${statusText}`
-    });
-    
-    // Handle timer
-    if (this.isPaused) {
-      this.pauseTimer();
-    } else {
-      this.resumeTimer();
-    }
   }
 
   private handleUserTurn(message: any) {
@@ -571,7 +593,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
       currentDrafterIndex = (teamCount - (this.currentPick % teamCount)) % teamCount;
     }
     
-    const currentDrafterId = this.draftOrder[currentDrafterIndex];
+    const currentDrafterId = 7;  // this.draftOrder[currentDrafterIndex];
     const currentDrafterTeam = this.teams.find(t => t.id === currentDrafterId.toString());
     
     if (currentDrafterTeam && this.userTeam.id === currentDrafterTeam.id) {
@@ -594,7 +616,7 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
       nextDrafterIndex = (currentDrafterIndex - 1 + teamCount) % teamCount;
     }
     
-    const nextDrafterId = this.draftOrder[nextDrafterIndex];
+    const nextDrafterId = 7;// this.draftOrder[nextDrafterIndex];
     const nextDrafterTeam = this.teams.find(t => t.id === nextDrafterId.toString());
     this.nextDrafter = nextDrafterTeam?.name || '';
   }
@@ -723,21 +745,6 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     }, 3000);
   }
 
-  // Initialize mock teams for testing
-  private initializeTeams() {
-    this.teams = Array(12).fill(0).map((_, i) => ({
-      id: `team${i + 1}`,
-      name: `Team ${String.fromCharCode(65 + i)}`,
-      owner: `Owner ${i + 1}`,
-      isAutoPick: false,
-      roster: [],
-      queuedPlayers: []
-    }));
-    
-    // Set user's team
-    this.userTeam = this.teams[0];
-  }
-
   // Load available players
   private loadAvailablePlayers() {
     // In a real implementation, this would come from the backend
@@ -754,13 +761,8 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     this.draftService.sendMessage('request_players', {});
   }
 
-  // Method to pause the timer
-  private pauseTimer() {
-    this.isPaused = true;
-  }
-
-  // Method to resume the timer
-  private resumeTimer() {
-    this.isPaused = false;
+  private getDraftState(){
+    console.log('sending state request');
+    this.draftService.sendMessage('state_request', {});
   }
 }

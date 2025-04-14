@@ -1,4 +1,4 @@
-<div class="draft-container d-flex flex-column">
+<div class="draft-container d-flex flex-column"  *ngIf="!showCouldNotJoinScreen">
   <!-- Header with title and help icon -->
   <div class="draft-header d-flex justify-content-center align-items-center">
     <div class="draft-title">
@@ -227,12 +227,6 @@
               <div *ngFor="let message of messages" class="message">
                 <strong>{{ message.username }}:</strong> {{ message.text }}
               </div>
-              <div class="activity-message">
-                <span>Jack Moore joined the draft</span>
-              </div>
-              <div class="activity-message">
-                <span>hairlessbaldy1 joined the draft</span>
-              </div>
             </div>
             
             <ng-template pTemplate="footer">
@@ -251,5 +245,11 @@
         </div>        
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="showCouldNotJoinScreen">
+  <div>
+    Could not join draft.
   </div>
 </div>

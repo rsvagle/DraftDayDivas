@@ -3,6 +3,7 @@ import { PrimeNgLightModule } from '../primeng.light.module';
 import { CommonModule } from '@angular/common';
 import { MockDraftService } from './mock-draft.service';
 import { Router } from '@angular/router';
+import { AppLayoutService } from '../app-layout/app-layout.service';
 
 @Component({
   selector: 'mock-drafts',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class DraftComponent {
   selectedDraftPosition: any;
   selectedDraftOption: any;
-  teamName: string = "Test TeamName";
+  teamName: string = "";
   
   // Dialog visibility controls
   createDraftDialogVisible: boolean = false;
@@ -39,6 +40,7 @@ export class DraftComponent {
   joinedDrafts: any[] = [];
 
   mockDraftService = inject(MockDraftService);
+  appLayoutService = inject(AppLayoutService);
 
   newDraftTeamsOptions: any[] = [
     { name: '8', key: 8 },
@@ -71,6 +73,7 @@ export class DraftComponent {
     this.getJoinedDrafts();
   }
 
+  // Get the drafts a user could join
   getAvailableDrafts(): void{
     this.mockDraftService.getAvailableDrafts().subscribe({
       next: (data) => (this.availableDrafts = data),
@@ -81,11 +84,14 @@ export class DraftComponent {
   // This gets drafts a user could launch
   getJoinedDrafts(): void{
     this.mockDraftService.getMyDrafts().subscribe({
-      next: (data) => (this.joinedDrafts = data),
-      error: (error) => console.error('There was an error!', error),
+      next: (data) => {this.joinedDrafts = data},
+      error: (error) => {
+        
+      },
     });
   }
 
+  // Create a draft
   createDraft(): void {
     let data = {
       num_teams: this.createDraftNumTeams,
@@ -94,14 +100,19 @@ export class DraftComponent {
     }
 
     this.mockDraftService.postCreateDraft(data).subscribe({
-      next: (data) => (console.log("Created one!")),
-      // Todo: After a draft is created, auto join it
-      error: (error) => console.error('There was an error!', error),
+      next: (data) => {
+        this.createDraftDialogVisible = false;
+        this.getAvailableDrafts();
+        this.getJoinedDrafts();
+      },
+      error: (error) => {
+        console.error('There was an error!', error)
+      },
     });
   }
 
+  // Join a draft
   joinDraft(): void{
-    // *** These should be inputs from the popup
 
     let draft_position = this.joinDraftPosition.key;
     if(this.selectedDraftPosition.key == 99){
@@ -116,9 +127,13 @@ export class DraftComponent {
     }
 
     this.mockDraftService.postJoinDraft(data).subscribe({
-      next: (data) => (console.log("Created one!")),
-      // Todo: After a draft is created, auto join it
-      error: (error) => console.error('There was an error!', error),
+      next: (data) => {
+        this.joinDraftDialogVisible = false;
+        this.getJoinedDrafts();
+      },
+      error: (error) => {
+        this.appLayoutService
+      },
     });
   }
 
