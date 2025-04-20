@@ -765,4 +765,8 @@ export class DraftLobbyDemoComponent implements OnInit, OnDestroy {
     console.log('sending state request');
     this.draftService.sendMessage('state_request', {});
   }
+
+  startDraft(){
+    this.draftService.sendMessage('start_draft', {});
+  }
 }
